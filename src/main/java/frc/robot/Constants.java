@@ -86,12 +86,12 @@ public final class Constants {
 
   public static class ArmConsts {
     public static final int armMotorPort = 14;
-    public static final int armLimitSwitch = 0; // 1 or 2
+    public static final int armLimitSwitch = 2; // false
   }
 
   public static class ClawConsts {
     public static final int wristMotorPort = 15;
-    public static final int wristLimitSwitch = 0; // 1 or 2
+    public static final int wristLimitSwitch = 1;
 
     
   }
