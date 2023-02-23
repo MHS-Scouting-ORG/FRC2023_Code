@@ -11,5 +11,8 @@ public final class Constants {
     public static final int clawReverseChannel = 8;
 
     public static final double wristSpeed = 0.3;
+
+    public static final double rotationTo90Count = 100;
+    public static final double rotationTo180Count = 200;
   }
 }

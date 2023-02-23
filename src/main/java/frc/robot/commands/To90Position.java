@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ClawConsts;
 import frc.robot.subsystems.ClawSubsystem;
 
 public class To90Position extends CommandBase {
@@ -25,6 +26,7 @@ public class To90Position extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return 90 <= clawSubsystem.getEncoder() && clawSubsystem.getEncoder() <= 110;
+    return Math.abs(ClawConsts.rotationTo90Count - clawSubsystem.getEncoder()) <= 10;
+    //return 90 <= clawSubsystem.getEncoder() && clawSubsystem.getEncoder() <= 110;
   }
 }
