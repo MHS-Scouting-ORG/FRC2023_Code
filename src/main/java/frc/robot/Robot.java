@@ -4,7 +4,8 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -19,10 +20,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  private DigitalInput limit1 = new DigitalInput(0);
-  private DigitalInput limit2 = new DigitalInput(3);
 
   private RobotContainer m_robotContainer;
+
+  private Compressor compressor;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -32,6 +33,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    compressor = new Compressor(PneumaticsModuleType.REVPH);
+    compressor.enableDigital();
     m_robotContainer = new RobotContainer();
   }
 
@@ -49,8 +52,6 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putBoolean("limit1", limit1.get());
-    SmartDashboard.putBoolean("limit2", limit2.get());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
