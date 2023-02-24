@@ -21,7 +21,9 @@ public class ToStartingPosition extends CommandBase {
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    clawSubsystem.stopWrist();
+  }
 
   @Override
   public boolean isFinished() {
