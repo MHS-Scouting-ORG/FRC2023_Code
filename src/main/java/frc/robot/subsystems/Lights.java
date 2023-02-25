@@ -22,7 +22,11 @@ public class Lights extends SubsystemBase {
   }
 
   public void off(){
-    lights.stop();
+    //lights.stop();
+    for(int i=0; i<buff.getLength(); i++){
+      buff.setRGB(i, 0, 0, 0);
+    }
+    lights.setData(buff);
   }
 
   public void sunflower(){
