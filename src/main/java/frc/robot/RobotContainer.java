@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 public class RobotContainer {
   private SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
@@ -35,20 +36,31 @@ public class RobotContainer {
 
   private void configureBindings() {
     // NORMAN (XBOX): SWERVE DRIVE, CLAW, ENDGAME
-    // ALAINA (JOYSTICK): ELVATOR, PIVOT, CLAW, LIGHTS
+    // ALAINA (JOYSTICK): ELEVATOR, PIVOT, CLAW, LIGHTS
 
     /* DRIVE */
+    new JoystickButton(xbox, 4).toggleOnTrue(new Endgame(swerveSubsystem, () -> xbox.getLeftY()));
+    new JoystickButton(xbox, 2).onTrue(new Lock(swerveSubsystem));
     
 
     /* CLAW */
-    
+    //Norman's
+    new JoystickButton(xbox, 5).onTrue(new Claw(clawSubsystem));
 
-    /* ELEVATOR */
+    //Alaina's
     
+    /* ELEVATOR */
+    new POVButton(joystick, 0).onTrue(new ManualElevatorDrive(elevatorSubsystem, 0.4));
+    new POVButton(joystick, 180).onTrue(new ManualElevatorDrive(elevatorSubsystem, -0.2));
+    new JoystickButton(joystick, 7).onTrue(new HighPosition(elevatorSubsystem));
+    new JoystickButton(joystick, 11).onTrue(new ZeroPosition(elevatorSubsystem));
 
     /* PIVOT */
+    new JoystickButton(joystick, 12).onTrue(new TuckedIn(pivotSubsystem));
+    new JoystickButton(joystick, 10).onTrue(new PivotLowCommand(pivotSubsystem));
+    new JoystickButton(joystick, 8).onTrue(new PivotHighCommand(pivotSubsystem));
+    new JoystickButton(joystick, 3).onTrue(new PivotArmJoystickCommand(pivotSubsystem, () -> joystick.getY()));
     
-
 
   }
 
