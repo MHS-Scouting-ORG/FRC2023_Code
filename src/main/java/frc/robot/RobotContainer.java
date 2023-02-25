@@ -48,6 +48,8 @@ public class RobotContainer {
 
     /* CLAW */
     new JoystickButton(xbox, 5).onTrue(new Claw(clawSubsystem));
+    new POVButton(xbox, 270).onTrue(new Go90Counterclockwise(clawSubsystem));
+    new POVButton(xbox, 90).onTrue(new Go90Clockwise(clawSubsystem));
     // new JoystickButton(xbox, xbox.getPOV(270)).onTrue(new Go90Counterclockwise(clawSubsystem));
     // new JoystickButton(xbox, xbox.getPOV(90)).onTrue(new Go90Clockwise(clawSubsystem));
 
@@ -58,8 +60,10 @@ public class RobotContainer {
     new JoystickButton(testController, 1).onTrue(new ZeroPosition(elevatorSubsystem)); // starting position
 
     //new JoystickButton(testController, 5).whileTrue(new Test(elevatorSubsystem, () -> testController.getRightY()));
-    // new JoystickButton(testController, testController.getPOV(180)).whileTrue(new ManualElevatorDrive(elevatorSubsystem, -0.3));
-    // new JoystickButton(testController, testController.getPOV(0)).whileTrue(new ManualElevatorDrive(elevatorSubsystem, 0.3));
+    //new JoystickButton(testController, testController.getPOV(180)).whileTrue(new ManualElevatorDrive(elevatorSubsystem, -0.3));
+    //new JoystickButton(testController, testController.getPOV(0)).whileTrue(new ManualElevatorDrive(elevatorSubsystem, 0.3));
+    new POVButton(testController, 180).whileTrue(new ManualElevatorDrive(elevatorSubsystem, -0.3));
+    new POVButton(testController, 0).whileTrue(new ManualElevatorDrive(elevatorSubsystem, 0.3));
 
 
     /* PIVOT */
