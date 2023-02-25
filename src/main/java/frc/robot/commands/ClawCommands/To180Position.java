@@ -28,7 +28,7 @@ public class To180Position extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    //return Math.abs(ClawConsts.rotationTo180Count - clawSubsystem.getEncoder()) <= 10;
-    return 190 <= clawSubsystem.getEncoder() && clawSubsystem.getEncoder() <= 210;
+    return Math.abs(ClawConsts.ROTATION_TO_180_ENC - clawSubsystem.getEncoder()) <= 10;
+    //return 190 <= clawSubsystem.getEncoder() && clawSubsystem.getEncoder() <= 210;
   }
 }
