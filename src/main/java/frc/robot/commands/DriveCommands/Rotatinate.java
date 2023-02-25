@@ -29,7 +29,6 @@ public class Rotatinate extends CommandBase {
 
   @Override
   public void initialize() {
-    
     desiredYaw = Math.atan2(x.getAsDouble(), y.getAsDouble());
   }
 
