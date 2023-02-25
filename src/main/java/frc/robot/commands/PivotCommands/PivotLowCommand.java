@@ -24,7 +24,7 @@ public class PivotLowCommand extends CommandBase{
 
     @Override
     public boolean isFinished(){
-        return false;
+        return p_subs.isAtSetPoint();
     }
 
 }

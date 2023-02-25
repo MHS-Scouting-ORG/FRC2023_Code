@@ -6,7 +6,7 @@ import frc.robot.subsystems.ElevatorSubsystem;
 public class ManualElevatorDrive extends CommandBase {
   double speed;  
   ElevatorSubsystem elevatorSubsystem;
-  public ManualElevatorDrive(ElevatorSubsystem elevSub, double newSpeed) {
+  public ManualElevatorDrive(ElevatorSubsystem elevSub,double newSpeed) {
     elevatorSubsystem = elevSub;
     speed = newSpeed;
     addRequirements(elevatorSubsystem);

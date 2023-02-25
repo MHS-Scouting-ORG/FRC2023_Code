@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.PivotSubsystem;
 
-public class PivotArmJoystickCommand extends CommandBase {
+public class PivotJoystickCommand extends CommandBase {
   /** Creates a new Test. */
   PivotSubsystem pivotarmsubsystem;
   DoubleSupplier speed;
-  public PivotArmJoystickCommand(PivotSubsystem pivotSub, DoubleSupplier speed) {
+  public PivotJoystickCommand(PivotSubsystem pivotSub, DoubleSupplier speed) {
     pivotarmsubsystem = pivotSub;
     this.speed = speed;
     addRequirements(pivotarmsubsystem);

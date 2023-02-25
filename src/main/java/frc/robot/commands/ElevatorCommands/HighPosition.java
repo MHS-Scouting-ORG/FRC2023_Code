@@ -30,7 +30,6 @@ public class HighPosition extends CommandBase {
 
   @Override
   public void end(boolean interrupted){
-
   }
 
   

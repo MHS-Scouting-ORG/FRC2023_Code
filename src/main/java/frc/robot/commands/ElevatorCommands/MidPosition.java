@@ -30,6 +30,7 @@ public class MidPosition extends CommandBase {
 
   @Override
   public void end(boolean interrupted){
+    SmartDashboard.putString("is it working", "yes");
 
   }
 
