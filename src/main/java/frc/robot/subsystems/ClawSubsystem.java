@@ -19,14 +19,14 @@ public class ClawSubsystem extends SubsystemBase {
   private DoubleSolenoid claw;
   
   public ClawSubsystem() {
-    wrist = new CANSparkMax(ClawConsts.wristMotorPort, MotorType.kBrushless);
+    wrist = new CANSparkMax(ClawConsts.WRIST_MOTOR_PORT, MotorType.kBrushless);
     wrist.setIdleMode(IdleMode.kBrake);
 
     wristEnc = wrist.getEncoder();
     wristEnc.setPosition(0);
 
     //  forward=open    reverse=closed
-    claw = new DoubleSolenoid(PneumaticsModuleType.REVPH, ClawConsts.clawForwardChannel, ClawConsts.clawReverseChannel);
+    claw = new DoubleSolenoid(PneumaticsModuleType.REVPH, ClawConsts.CLAW_FORWARD_CHANNEL, ClawConsts.CLAW_REVERSE_CHANNEL);
     claw.set(Value.kForward);
   }
 
@@ -44,11 +44,11 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void clockwise(){
-    wrist.set(ClawConsts.wristSpeed);
+    wrist.set(ClawConsts.WRIST_SPEED);
   }
 
   public void counterclockwise(){
-    wrist.set(-ClawConsts.wristSpeed);
+    wrist.set(-ClawConsts.WRIST_SPEED);
   }
 
   public void stopWrist(){
@@ -66,9 +66,9 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void rotateTo90(){
-    if(getEncoder()<100){
+    if(getEncoder()<ClawConsts.ROTATION_T0_90_ENC){
       clockwise();
-    } else if(getEncoder()>100){
+    } else if(getEncoder()>ClawConsts.ROTATION_T0_90_ENC){
       counterclockwise();
     } else{
       stopWrist();
@@ -76,9 +76,9 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void rotateTo180(){
-    if(getEncoder()<200){
+    if(getEncoder()<ClawConsts.ROTATION_TO_180_ENC){
       clockwise();
-    } else if(getEncoder()>200){
+    } else if(getEncoder()>ClawConsts.ROTATION_TO_180_ENC){
       counterclockwise();
     } else{
       stopWrist();
@@ -86,7 +86,7 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void go90Clockwise(double previousEnc){
-    if( getEncoder() < (previousEnc+100) ){
+    if( getEncoder() < (previousEnc+ClawConsts.ROTATE_90) ){
       clockwise();
     } else{
       stopWrist();
@@ -94,7 +94,7 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void go90Counterclockwise(double previousEnc){
-    if( getEncoder() < (previousEnc-100) ){
+    if( getEncoder() < (previousEnc-ClawConsts.ROTATE_90) ){
       clockwise();
     } else{
       stopWrist();

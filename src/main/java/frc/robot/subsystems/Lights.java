@@ -17,6 +17,8 @@ public class Lights extends SubsystemBase {
     lights.setLength(buff.getLength());
     lights.setData(buff);
 
+    lights.start();
+
   }
 
   public void off(){
@@ -24,7 +26,6 @@ public class Lights extends SubsystemBase {
   }
 
   public void sunflower(){
-    lights.start();
     for(int i=0; i<buff.getLength(); i++){
       buff.setRGB(i, 255, 255, 0);
     }
@@ -32,7 +33,6 @@ public class Lights extends SubsystemBase {
   }
 
   public void lavendar(){
-    lights.start();
     for(int i=0; i<buff.getLength(); i++){
       buff.setRGB(i, 255, 0, 255);
     }
@@ -40,7 +40,6 @@ public class Lights extends SubsystemBase {
   }
 
   public void potOfGold(){
-    lights.start();
     for(int i=0; i<buff.getLength(); i+=6){
       buff.setRGB(i, 255, 0, 0);
     }
