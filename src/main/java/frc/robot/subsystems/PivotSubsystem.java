@@ -19,31 +19,29 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
     ///////////////// 
    //  Variables  //
   /////////////////
-    private final CANSparkMax canspark;
-    private final DigitalInput limitSwitch;;
+    private final CANSparkMax canspark = new CANSparkMax(PivotConsts.PIVOT_MOTOR_PORT, MotorType.kBrushless);
+    private final DigitalInput limitSwitch = new DigitalInput(PivotConsts.PIVOT_LIMIT_PORT);
     private final RelativeEncoder rEnc;
-    private final PIDController pid;
+    private final PIDController pid = new PIDController(0.07, 0, 0);
     private double before;
-    private double setpoint;
+    private double setpoint = 0;
     private boolean pidOn = true;
     private double manualSpeed = 0;
+    private double encoderValue;
+
+
     
     /////////////////////////////////////////
    ///  Pivot Arm Subsystem Constructor  ///
   /////////////////////////////////////////
     public PivotSubsystem(){ // Instantiates the Talon Encoder variable and sets the tolerance for the PID
-        canspark = new CANSparkMax(PivotConsts.PIVOT_MOTOR_PORT, MotorType.kBrushless);
-        limitSwitch = new DigitalInput(PivotConsts.PIVOT_LIMIT_PORT);
-
-        rEnc = canspark.getEncoder();
-
         canspark.setIdleMode(IdleMode.kBrake);
         canspark.setInverted(true);
-
-        pid = new PIDController(0.07, 0, 0);
+        rEnc = canspark.getEncoder();
         setpoint = rEnc.getPosition();
     }
 
+    
     public void enablePid(){
         pidOn = true; 
       }
@@ -57,7 +55,6 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
       public void newSetpoint(double setpoint){
         this.setpoint = setpoint;
     }
-
     /////////////////////////
    ///  Encoder Methods  ///
   /////////////////////////
@@ -175,13 +172,16 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
         compareErrors();
     }*/
     
+
+
+  
     
     ////////////////////////
    ///  Printing Method ///
   ////////////////////////
   
     public void periodic(){
-        double encoderValue = getEncoder();
+        encoderValue = getEncoder();
         compareErrors();
         double calcSpeed = 0;
       
