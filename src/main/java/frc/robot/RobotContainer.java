@@ -1,6 +1,5 @@
 package frc.robot;
 
-import frc.robot.commands.Then;
 import frc.robot.commands.ClawCommands.Claw;
 import frc.robot.commands.ClawCommands.To180Position;
 import frc.robot.commands.ClawCommands.To90Position;
@@ -21,8 +20,6 @@ public class RobotContainer {
   
   public RobotContainer() {
     
-    //clawSubsystem.setDefaultCommand(new InstantCommand(()->clawSubsystem.manualRotate(xbox.getLeftY())));
-    //clawSubsystem.setDefaultCommand(new MoveMotor(clawSubsystem));
     configureBindings(); 
   }
 
@@ -31,9 +28,6 @@ public class RobotContainer {
     new JoystickButton(xbox, 4).onTrue(new ToStartingPosition(clawSubsystem));  // starting position
     new JoystickButton(xbox, 2).onTrue(new To90Position(clawSubsystem));        // to 90 position
     new JoystickButton(xbox, 1).onTrue(new To180Position(clawSubsystem));       // to 180 position
-    new JoystickButton(xbox, 3).onTrue(new Then(clawSubsystem));
-    //new JoystickButton(xbox, 6).whileTrue(new InstantCommand(()->clawSubsystem.clockwise()));
-    //new JoystickButton(xbox, 2).whileTrue(new InstantCommand(()->clawSubsystem.counterclockwise()));
 
     new JoystickButton(xbox, 6).whileTrue(new Yellow(lights));
     new JoystickButton(xbox, 7).whileTrue(new Violet(lights));
