@@ -21,8 +21,7 @@ public class RobotContainer {
   private Lights lights = new Lights();
 
   private XboxController xbox = new XboxController(DriverControlConsts.XBOX_CONTROLLER_PORT);
-  private XboxController testController = new XboxController(1);
-  //private Joystick joystick = new Joystick(DriverControlConsts.JOYSTICK_PORT);
+  private Joystick joystick = new Joystick(DriverControlConsts.JOYSTICK_PORT);
   
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(new DriverControl(swerveSubsystem, 
@@ -35,38 +34,21 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    // CURRENT CONFIG : 
-    // XBOX 1: SWERVE DRIVE, CLAW, WRIST, ENDGAME
-    // WHEN DONE WITH CLAW | XBOX 1: SWERVE DRIVE, ENDGAME, PIVOT
-    // XBOX 2: PIVOT, ELEVATOR
+    // NORMAN (XBOX): SWERVE DRIVE, CLAW, ENDGAME
+    // ALAINA (JOYSTICK): ELVATOR, PIVOT, CLAW, LIGHTS
 
-    /* SWERVE */
-    new JoystickButton(xbox, 3).toggleOnTrue(new Lock(swerveSubsystem)); // to lock in place :: Button Y
-    new JoystickButton(xbox, 4).toggleOnFalse(new Endgame(swerveSubsystem, () -> xbox.getLeftY())); // to deploy endgame
-    /* !!! TEST !!! */ new JoystickButton(xbox, 7).whileTrue(new Rotatinate(swerveSubsystem, () -> xbox.getRightX(),  () -> xbox.getRightY()));
+    /* DRIVE */
+    
 
     /* CLAW */
-    new JoystickButton(xbox, 5).onTrue(new Claw(clawSubsystem));
-    new JoystickButton(xbox, 1).onTrue(new Go90Clockwise(clawSubsystem));
-    new JoystickButton(xbox, 2).onTrue(new Go90Counterclockwise(clawSubsystem));
+    
 
     /* ELEVATOR */
-    new JoystickButton(testController, 4).onTrue(new HighPosition(elevatorSubsystem)); // high position
-    new JoystickButton(testController, 3).onTrue(new MidPosition(elevatorSubsystem)); // mid position
-    new JoystickButton(testController, 1).onTrue(new LowPosition(elevatorSubsystem)); // low position
+    
 
     /* PIVOT */
-    new JoystickButton(testController, 0);
+    
 
-    /* * * PIVOT ROBOT CONTAINER * * *//* 
-    new JoystickButton(xbox, 1).onTrue(new PivotHighCommand(pivotSubsystem));
-    // new JoystickButton(xbox, 2).onTrue(tucked); // Button for the starting position
-    new JoystickButton(xbox, 3).onTrue(new LowPosition(elevatorSubsystem)); // Button for the middle position
-    new JoystickButton(xbox, 4).onTrue(new PivotLowCommand(pivotSubsystem)); // Button for the high position
-    new JoystickButton(xbox, 5).onTrue(new MidPosition(elevatorSubsystem)); 
-    new JoystickButton(xbox, 6).onTrue(new ZeroPosition(elevatorSubsystem)); // Button for driving the motor using the joystick
-    new JoystickButton(xbox, 7).whileTrue(new PivotArmButtonCommand(pivotSubsystem, .3));
-    new JoystickButton(xbox, 8).whileTrue(new PivotArmButtonCommand(pivotSubsystem, -.3));*/
 
   }
 
@@ -75,10 +57,4 @@ public class RobotContainer {
     return null;
   }
 
-  /* * * NORMAN CONTROLS * * *\/
-   *
-   * 
-   * 
-   * 
-   */
 }
