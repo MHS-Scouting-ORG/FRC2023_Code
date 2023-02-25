@@ -48,8 +48,8 @@ public class RobotContainer {
 
     /* CLAW */
     new JoystickButton(xbox, 5).onTrue(new Claw(clawSubsystem));
-    new JoystickButton(xbox, xbox.getPOV(270)).onTrue(new Go90Counterclockwise(clawSubsystem));
-    new JoystickButton(xbox, xbox.getPOV(90)).onTrue(new Go90Clockwise(clawSubsystem));
+    // new JoystickButton(xbox, xbox.getPOV(270)).onTrue(new Go90Counterclockwise(clawSubsystem));
+    // new JoystickButton(xbox, xbox.getPOV(90)).onTrue(new Go90Clockwise(clawSubsystem));
 
     /* ELEVATOR */
     new JoystickButton(testController, 4).onTrue(new HighPosition(elevatorSubsystem)); // high position
@@ -58,8 +58,8 @@ public class RobotContainer {
     new JoystickButton(testController, 1).onTrue(new ZeroPosition(elevatorSubsystem)); // starting position
 
     //new JoystickButton(testController, 5).whileTrue(new Test(elevatorSubsystem, () -> testController.getRightY()));
-    new JoystickButton(testController, testController.getPOV(180)).whileTrue(new ManualElevatorDrive(elevatorSubsystem, -0.3));
-    new JoystickButton(testController, testController.getPOV(0)).whileTrue(new ManualElevatorDrive(elevatorSubsystem, 0.3));
+    // new JoystickButton(testController, testController.getPOV(180)).whileTrue(new ManualElevatorDrive(elevatorSubsystem, -0.3));
+    // new JoystickButton(testController, testController.getPOV(0)).whileTrue(new ManualElevatorDrive(elevatorSubsystem, 0.3));
 
 
     /* PIVOT */
