@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClawConsts;
+import frc.robot.commands.ClawCommands.ToStartingPosition;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -94,8 +95,8 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void go90Counterclockwise(double previousEnc){
-    if( getEncoder() < (previousEnc-ClawConsts.ROTATE_90) ){
-      clockwise();
+    if( getEncoder() > (previousEnc-ClawConsts.ROTATE_90) ){
+      counterclockwise();
     } else{
       stopWrist();
     }
@@ -108,6 +109,11 @@ public class ClawSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+
+    if(wristEnc.getPosition()<0 && wrist.get()<0){
+      stopWrist();
+      startingPosition();
+    }
     SmartDashboard.putString("Claw", claw.get().toString());
 
     SmartDashboard.putNumber("Wirst Enc", wristEnc.getPosition());

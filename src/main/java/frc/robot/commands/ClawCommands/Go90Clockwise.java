@@ -31,7 +31,7 @@ public class Go90Clockwise extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Math.abs((previousEnc+ClawConsts.ROTATE_90) - clawSubsystem.getEncoder()) <= 10;
-    //return ((previousEnc+ClawConsts.ROTATE_90-10) <= clawSubsystem.getEncoder()) && (clawSubsystem.getEncoder() <= (previousEnc+ClawConsts.ROTATE_90+10));
+    //return Math.abs((previousEnc+ClawConsts.ROTATE_90) - clawSubsystem.getEncoder()) <= 5;
+    return ((previousEnc+ClawConsts.ROTATE_90-5) <= clawSubsystem.getEncoder()) && (clawSubsystem.getEncoder() <= (previousEnc+ClawConsts.ROTATE_90+5));
   }
 }

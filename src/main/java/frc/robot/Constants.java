@@ -98,7 +98,7 @@ public final class Constants {
     public static final int CLAW_FORWARD_CHANNEL = 0;
     public static final int CLAW_REVERSE_CHANNEL = 8;
 
-    public static final double WRIST_SPEED = 0.75;
+    public static final double WRIST_SPEED = 1;
 
     public static final double ROTATE_90 = 95;
     public static final double ROTATION_T0_90_ENC = 95;

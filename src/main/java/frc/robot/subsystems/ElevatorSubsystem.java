@@ -42,7 +42,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public boolean isAtSetpoint(){ // RETURNS TRUE IF IT IS AT THE SETPOINT
-    return pid.atSetpoint();
+    double error = setpoint - enc.getPosition();
+    return Math.abs(error) < 2;
   }
 
   public void setManualSpeed(double inputSpeed){

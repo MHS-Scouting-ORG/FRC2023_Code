@@ -39,15 +39,19 @@ public class RobotContainer {
   private void configureBindings() {
 
     /* SWERVE */
-    new JoystickButton(xbox, 7).onTrue(new InstantCommand(() -> swerveSubsystem.resetNavx()));
-    new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem)); // to lock in place :: Button B
-    new JoystickButton(xbox, 4).toggleOnFalse(new Endgame(swerveSubsystem, () -> xbox.getLeftY())); // to deploy endgame
-    new JoystickButton(xbox, 1).onTrue(new LandingGearIn(swerveSubsystem));
+    // new JoystickButton(xbox, 7).onTrue(new InstantCommand(() -> swerveSubsystem.resetNavx()));
+    // new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem)); // to lock in place :: Button B
+    // new JoystickButton(xbox, 4).toggleOnFalse(new Endgame(swerveSubsystem, () -> xbox.getLeftY())); // to deploy endgame
+    // new JoystickButton(xbox, 1).onTrue(new LandingGearIn(swerveSubsystem));
 
-    /* !!! TEST !!! */ new JoystickButton(xbox, 3).whileTrue(new Rotatinate(swerveSubsystem, () -> xbox.getRightX(),  () -> xbox.getRightY()));
+    // /* !!! TEST !!! */ new JoystickButton(xbox, 3).whileTrue(new Rotatinate(swerveSubsystem, () -> xbox.getRightX(),  () -> xbox.getRightY()));
 
     /* CLAW */
     new JoystickButton(xbox, 5).onTrue(new Claw(clawSubsystem));
+    // new JoystickButton(xbox, 4).onTrue(new ToStartingPosition(clawSubsystem));
+    // new JoystickButton(xbox, 3).onTrue(new Go90Clockwise(clawSubsystem));
+    // new JoystickButton(xbox, 2).onTrue(new Go90Counterclockwise(clawSubsystem));
+    new POVButton(xbox, 0).onTrue(new ToStartingPosition(clawSubsystem));
     new POVButton(xbox, 270).onTrue(new Go90Counterclockwise(clawSubsystem));
     new POVButton(xbox, 90).onTrue(new Go90Clockwise(clawSubsystem));
     // new JoystickButton(xbox, xbox.getPOV(270)).onTrue(new Go90Counterclockwise(clawSubsystem));
