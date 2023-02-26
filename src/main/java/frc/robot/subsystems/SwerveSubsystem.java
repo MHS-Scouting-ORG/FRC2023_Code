@@ -61,6 +61,8 @@ public class SwerveSubsystem extends SubsystemBase {
         return ( /* navx.getYaw() */  navx.getAngle() % 360  /*360-navx.getYaw()*/ );
     }
 
+    //public double getYaw(){}
+
     public Rotation2d getRobotRotation(){
         return new Rotation2d(Math.toRadians(navx.getYaw()));
     }

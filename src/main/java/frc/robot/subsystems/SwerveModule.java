@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.*;
@@ -124,10 +125,7 @@ public class SwerveModule extends SubsystemBase{
         turningMotor.set(turningPID.calculate(getAbsoluteEncoder(), state.angle.getRadians()));
 
         // Print to SmartDashboard
-        //SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] desired enc", state.angle.getRadians()); //desired enc 
-        SmartDashboard.putString("Swerve["+absoluteEncoder.getDeviceID()+"] state", state.toString());
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] drive speed", getDriveSpeed());
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] angle", getAbsoluteEncoder());
+        Shuffleboard.getTab(DriverControlConsts.driveTab.toString()).add("Swerve["+absoluteEncoder.getDeviceID()+"] state", state);
     }
 
     public void setAngle(SwerveModuleState state){
@@ -137,10 +135,7 @@ public class SwerveModule extends SubsystemBase{
         // set speed
         drivingMotor.set(0); 
         turningMotor.set(turningPID.calculate(getAbsoluteEncoder(), state.angle.getRadians()));
-
-        // Print to SmartDashboard
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] desired enc", state.angle.getRadians()); //desired enc 
-        SmartDashboard.putString("Swerve["+absoluteEncoder.getDeviceID()+"] state", state.toString());  
+ 
     }
 
     public void stop(){
@@ -160,10 +155,9 @@ public class SwerveModule extends SubsystemBase{
 
         // turningPID.setPID(kp, ki, kd);
 
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] abs deg enc", Math.toDegrees(getAbsoluteEncoder()));
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] angle", getAbsoluteEncoder());
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] drive speed", getDriveSpeed());
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] turning speed", getTurningSpeed());
+        Shuffleboard.getTab(DriverControlConsts.driveTab.toString()).add("Swerve["+absoluteEncoder.getDeviceID()+"] absolute encoder", Math.toDegrees(getAbsoluteEncoder()));
+        Shuffleboard.getTab(DriverControlConsts.driveTab.toString()).add("Swerve["+absoluteEncoder.getDeviceID()+"] drive speed", getDriveSpeed());
+        Shuffleboard.getTab(DriverControlConsts.driveTab.toString()).add("Swerve["+absoluteEncoder.getDeviceID()+"] turning speed", getTurningSpeed());
     }
 
 }
