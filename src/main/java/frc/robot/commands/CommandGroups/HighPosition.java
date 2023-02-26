@@ -1,4 +1,4 @@
-package frc.robot.commands.SequentialElevatorPivotCommands;
+package frc.robot.commands.CommandGroups;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;

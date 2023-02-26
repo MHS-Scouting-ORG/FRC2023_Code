@@ -110,10 +110,6 @@ public class ClawSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
 
-    if(wristEnc.getPosition()<0 && wrist.get()<0){
-      stopWrist();
-      startingPosition();
-    }
     SmartDashboard.putString("Claw", claw.get().toString());
 
     SmartDashboard.putNumber("Wirst Enc", wristEnc.getPosition());

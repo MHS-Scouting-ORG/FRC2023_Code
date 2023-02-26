@@ -141,11 +141,11 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
         if(pid.atSetpoint()){ // If the PID is at the setpoint, return a value of 0
             return 0;
         }
-        if(error > 0.6){ // If the error is greater than a limit of 0.5, return a value of 0.5
-            return 0.6;
+        if(error > 1){ // If the error is greater than a limit of 0.5, return a value of 0.5
+            return 1;
         }
-        else if(error < -0.4){ // If the error is less than a limit of -0.5, return a value of -0.5
-            return -0.4;
+        else if(error < -1){ // If the error is less than a limit of -0.5, return a value of -0.5
+            return -1;
         }
         else{ // If everything else fails, return the error 
             return error;

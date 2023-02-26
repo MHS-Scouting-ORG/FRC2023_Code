@@ -2,16 +2,17 @@ package frc.robot;
 
 import frc.robot.Constants.DriverControlConsts;
 import frc.robot.commands.ClawCommands.*;
+import frc.robot.commands.CommandGroups.*;
 import frc.robot.commands.DriveCommands.*;
 import frc.robot.commands.ElevatorCommands.*;
 import frc.robot.commands.PivotCommands.*;
-import frc.robot.commands.SequentialElevatorPivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ProxyCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
@@ -23,7 +24,7 @@ public class RobotContainer {
   private Lights lights = new Lights();
 
   private XboxController xbox = new XboxController(DriverControlConsts.XBOX_CONTROLLER_PORT);
-  private XboxController testController = new XboxController(1);
+  //private XboxController testController = new XboxController(1);
   //private Joystick joystick = new Joystick(DriverControlConsts.JOYSTICK_PORT);
   
   public RobotContainer() {
@@ -48,35 +49,21 @@ public class RobotContainer {
 
     /* CLAW */
     new JoystickButton(xbox, 5).onTrue(new Claw(clawSubsystem));
-    // new JoystickButton(xbox, 4).onTrue(new ToStartingPosition(clawSubsystem));
-    // new JoystickButton(xbox, 3).onTrue(new Go90Clockwise(clawSubsystem));
-    // new JoystickButton(xbox, 2).onTrue(new Go90Counterclockwise(clawSubsystem));
-    new POVButton(xbox, 0).onTrue(new ToStartingPosition(clawSubsystem));
-    new POVButton(xbox, 270).onTrue(new Go90Counterclockwise(clawSubsystem));
-    new POVButton(xbox, 90).onTrue(new Go90Clockwise(clawSubsystem));
-    // new JoystickButton(xbox, xbox.getPOV(270)).onTrue(new Go90Counterclockwise(clawSubsystem));
-    // new JoystickButton(xbox, xbox.getPOV(90)).onTrue(new Go90Clockwise(clawSubsystem));
-
-    /* ELEVATOR */
-    new JoystickButton(testController, 4).onTrue(new HighPosition(elevatorSubsystem)); // high position
-    //new JoystickButton(testController, 4).onTrue(new MidPosition(elevatorSubsystem)); // mid position
-    new JoystickButton(testController, 7).onTrue(new LowPosition(elevatorSubsystem)); // low position
-    new JoystickButton(testController, 1).onTrue(new ZeroPosition(elevatorSubsystem)); // starting position
-
-    //new JoystickButton(testController, 5).whileTrue(new Test(elevatorSubsystem, () -> testController.getRightY()));
-    //new JoystickButton(testController, testController.getPOV(180)).whileTrue(new ManualElevatorDrive(elevatorSubsystem, -0.3));
-    //new JoystickButton(testController, testController.getPOV(0)).whileTrue(new ManualElevatorDrive(elevatorSubsystem, 0.3));
-    new POVButton(testController, 180).whileTrue(new ManualElevatorDrive(elevatorSubsystem, -0.3));
-    new POVButton(testController, 0).whileTrue(new ManualElevatorDrive(elevatorSubsystem, 0.3));
+    // new POVButton(xbox, 0).onTrue(new ToStartingPosition(clawSubsystem));
+    // new POVButton(xbox, 270).onTrue(new To90Position(clawSubsystem));
+    // new POVButton(xbox, 180).onTrue(new To180Position(clawSubsystem));
 
 
     /* PIVOT */
-    new JoystickButton(testController, 2).onTrue(new PivotHighCommand(pivotSubsystem));
-    new JoystickButton(testController, 3).onTrue(new PivotLowCommand(pivotSubsystem));
-    new JoystickButton(testController, 6).onTrue(new TuckedIn(pivotSubsystem));
-
-    new JoystickButton(testController, 5).whileTrue(new PivotJoystickCommand(pivotSubsystem, () -> testController.getLeftX()));
-
+    new JoystickButton(xbox, 1).onTrue(new LowPickUp(pivotSubsystem, elevatorSubsystem));
+    new JoystickButton(xbox, 4).onTrue(new TopNode(pivotSubsystem, elevatorSubsystem));
+    new JoystickButton(xbox, 3).onTrue(new ProxyCommand(() -> {
+      if (elevatorSubsystem.getEncoder() < 160) {
+        return new TuckedFromBottom(pivotSubsystem, elevatorSubsystem);
+      } else {
+        return new TuckedFromTop(pivotSubsystem, elevatorSubsystem);
+      }}
+    ));
   }
 
   

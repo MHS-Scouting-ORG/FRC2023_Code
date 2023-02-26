@@ -9,7 +9,7 @@ public class TuckedIn extends CommandBase{
 
     public TuckedIn(PivotSubsystem subs){
         p_subs = subs;
-        setpoint = -20;
+        setpoint = -5;
         addRequirements(subs);
     }
 

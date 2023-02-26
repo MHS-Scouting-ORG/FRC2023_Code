@@ -2,20 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.SequentialElevatorPivotCommands;
+package frc.robot.commands.ElevatorCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.PivotSubsystem;
 
-public class BringIn extends CommandBase {
-  /** Creates a new BringIn. */
-  PivotSubsystem pivotSub;
+public class  ElevatorTest extends CommandBase {
   ElevatorSubsystem elevSub;
-  public BringIn(PivotSubsystem pivotSub, ElevatorSubsystem elevSub) {
-    this.pivotSub = pivotSub;
+  /** Creates a new ElevatorTest. */
+  public ElevatorTest(ElevatorSubsystem elevSub) {
     this.elevSub = elevSub;
-    addRequirements(pivotSub, elevSub);
+    addRequirements(elevSub);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -23,18 +20,16 @@ public class BringIn extends CommandBase {
   @Override
   public void initialize() {
     if(elevSub.getEncoder() < 50){
-      new TuckedFromBottom(pivotSub, elevSub);
+      elevSub.changeSetpoint(180);
     }
     else{
-      new TuckedFromTop(pivotSub, elevSub);
+      elevSub.changeSetpoint(120);
     }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-  }
-    
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
@@ -43,6 +38,6 @@ public class BringIn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return elevSub.isAtSetpoint();
   }
 }
