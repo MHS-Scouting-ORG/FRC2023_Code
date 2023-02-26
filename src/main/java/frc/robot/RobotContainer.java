@@ -71,10 +71,4 @@ public class RobotContainer {
     return null;
   }
 
-  /* * * NORMAN CONTROLS * * *\/
-   *
-   * 
-   * 
-   * 
-   */
 }
