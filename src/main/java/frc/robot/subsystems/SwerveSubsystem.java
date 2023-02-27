@@ -53,6 +53,17 @@ public class SwerveSubsystem extends SubsystemBase {
 
     }
 
+    public void resetEnc(){
+        frontLeft.resetEncoders();
+        backLeft.resetEncoders();
+        frontRight.resetEncoders();
+        backRight.resetEncoders();
+    }
+
+    public double getEnc(){
+        return -frontLeft.getDrivePosition();
+    }
+
     public void resetNavx() {
         navx.zeroYaw();
     }
@@ -87,7 +98,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public void lock(){
-        SwerveModuleState fl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(45))); //45, -45, 45, -45
+        SwerveModuleState fl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(45)));
         SwerveModuleState bl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(-45)));
         SwerveModuleState br = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(45)));
         SwerveModuleState fr = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(-45)));
@@ -96,12 +107,6 @@ public class SwerveSubsystem extends SubsystemBase {
         backLeft.setAngle(bl);
         backRight.setAngle(br);
         frontRight.setAngle(fr);
-    }
-
-    // PERIODIC - runs repeatedly (like periodic from timed robot)
-    @Override
-    public void periodic() {
-        SmartDashboard.putNumber("Robot Yaw", getYawAngle());
     }
 
     public void driveForward(){
@@ -133,6 +138,8 @@ public class SwerveSubsystem extends SubsystemBase {
         SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, 0, AutoConsts.DRIVE_ROTATION_SPEED));
         setModuleStates(moduleStates);
     }
+
+
 
 
     /* * * LANDING GEAR * * */
@@ -170,6 +177,12 @@ public class SwerveSubsystem extends SubsystemBase {
 
         wheelinator.set(-backLeft.getDriveSpeed());
 
+    }
+
+    // PERIODIC - runs repeatedly (like periodic from timed robot)
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Robot Yaw", getYawAngle());
     }
 
 }

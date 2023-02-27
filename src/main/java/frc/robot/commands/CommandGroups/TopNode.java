@@ -4,7 +4,8 @@
 
 package frc.robot.commands.CommandGroups;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.ElevatorCommands.HighPosition;
 import frc.robot.commands.PivotCommands.PivotHighCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
@@ -12,7 +13,7 @@ import frc.robot.subsystems.PivotSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class TopNode extends SequentialCommandGroup {
+public class TopNode extends ParallelCommandGroup {
   /** Creates a new TopNode. */
   public TopNode(PivotSubsystem pivotsub, ElevatorSubsystem elevsub) {
     // Add your commands in the addCommands() call, e.g.

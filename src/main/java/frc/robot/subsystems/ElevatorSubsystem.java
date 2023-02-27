@@ -115,11 +115,11 @@ public class ElevatorSubsystem extends SubsystemBase {
       calcSpeed = manualSpeed; // IF PID DISABLED, SETS ELEVATOR SPEED TO SPEED FOR MANUAL DRIVE
     }
     
-    if(calcSpeed > .4){ // IF SPEED CALCULATED IS GREATER THAN 1, SETS MAX SPEED TO 1
-      calcSpeed = .4;
+    if(calcSpeed > .9){ // IF SPEED CALCULATED IS GREATER THAN 1, SETS MAX SPEED TO 1
+      calcSpeed = .9;
     }
-    else if(calcSpeed < -0.2){ // IF SPEED CALCULATED IS LESS THAN -1, SETS MAX SPEED TO -1
-      calcSpeed = -0.2; 
+    else if(calcSpeed < -0.6){ // IF SPEED CALCULATED IS LESS THAN -1, SETS MAX SPEED TO -1
+      calcSpeed = -0.6; 
     }
 
     if(topPressed() && calcSpeed > 0){
@@ -130,12 +130,12 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
     
     elevator.set(calcSpeed);
-    SmartDashboard.putNumber("PID Speed", calcSpeed);
-    SmartDashboard.putBoolean("Top switch pressed" , topPressed()); 
-    SmartDashboard.putBoolean("Bottom switch pressed", bottomPressed());
-    SmartDashboard.putNumber("encoder counts", encoderValue);
-    SmartDashboard.putNumber("Setpoint", setpoint);
-    SmartDashboard.putNumber("error", getError());
-    SmartDashboard.putNumber("tolerance", pid.getPositionTolerance());
+    
+    SmartDashboard.putNumber("[E] PID SPEED", calcSpeed);
+    SmartDashboard.putBoolean("[E] TOP LIMIT" , topPressed()); 
+    SmartDashboard.putBoolean("[E] BOTTOM LIMIT", bottomPressed());
+    SmartDashboard.putNumber("[E] ENCODER", encoderValue);
+    SmartDashboard.putNumber("[E] SETPOINT", setpoint);
+    SmartDashboard.putNumber("[E] ERROR", getError());
   }
 }

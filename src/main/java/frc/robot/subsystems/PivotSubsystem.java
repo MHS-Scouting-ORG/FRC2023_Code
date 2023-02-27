@@ -5,6 +5,8 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.PivotConsts;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -17,8 +19,8 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
     ///////////////// 
    //  Variables  //
   /////////////////
-    private final CANSparkMax canspark = new CANSparkMax(14, MotorType.kBrushless);
-    private final DigitalInput limitSwitch = new DigitalInput(2);
+    private final CANSparkMax canspark = new CANSparkMax(PivotConsts.PIVOT_MOTOR_PORT, MotorType.kBrushless);
+    private final DigitalInput limitSwitch = new DigitalInput(PivotConsts.PIVOT_LIMIT_PORT);
     private final RelativeEncoder rEnc;
     private final PIDController pid = new PIDController(0.07, 0, 0);
     private double before;
@@ -204,9 +206,8 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
         }
         canspark.set(calcSpeed);
 
-        SmartDashboard.putNumber("Pivot Arm Encoder: ", getEncoder()); // Prints out the encoder values
-        SmartDashboard.putBoolean("Limit Switch: ", limitSwitch.get()); // Prints if the limit switch is pressed or not
-        SmartDashboard.putNumber("setpoint PIVOT", setpoint );
-        SmartDashboard.putBoolean("pid", isPIDOn());
+        SmartDashboard.putNumber("[P] ENCODER", getEncoder()); // Prints out the encoder values
+        SmartDashboard.putBoolean("[P] LIMIT PRESSED", limitSwitch.get()); // Prints if the limit switch is pressed or not
+        SmartDashboard.putNumber("[P] SETPOINT", setpoint );
     }
 }

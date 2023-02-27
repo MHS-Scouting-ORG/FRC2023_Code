@@ -112,7 +112,7 @@ public class SwerveModule extends SubsystemBase{
 
     public void setDesiredState(SwerveModuleState state){
         // To make keep robot from going back to 0 position
-        if(Math.abs(state.speedMetersPerSecond) < 0.1){
+        if(Math.abs(state.speedMetersPerSecond) < 0.01){
             stop();
             return;
         }
@@ -125,7 +125,7 @@ public class SwerveModule extends SubsystemBase{
         turningMotor.set(turningPID.calculate(getAbsoluteEncoder(), state.angle.getRadians()));
 
         // Print to SmartDashboard
-        Shuffleboard.getTab(DriverControlConsts.driveTab.toString()).add("Swerve["+absoluteEncoder.getDeviceID()+"] state", state);
+        SmartDashboard.putString("Swerve["+absoluteEncoder.getDeviceID()+"] state", state.toString());
     }
 
     public void setAngle(SwerveModuleState state){
@@ -146,7 +146,7 @@ public class SwerveModule extends SubsystemBase{
 
     @Override
     public void periodic(){
-        // kp = SmartDashboard.getNumber("kP", 0);
+        // kp = SmartDashboard.getNumber("kP", 0);S
         // SmartDashboard.putNumber("kP", kp);
         // ki = SmartDashboard.getNumber("kI", 0);
         // SmartDashboard.putNumber("kI", ki);
@@ -155,9 +155,9 @@ public class SwerveModule extends SubsystemBase{
 
         // turningPID.setPID(kp, ki, kd);
 
-        Shuffleboard.getTab(DriverControlConsts.driveTab.toString()).add("Swerve["+absoluteEncoder.getDeviceID()+"] absolute encoder", Math.toDegrees(getAbsoluteEncoder()));
-        Shuffleboard.getTab(DriverControlConsts.driveTab.toString()).add("Swerve["+absoluteEncoder.getDeviceID()+"] drive speed", getDriveSpeed());
-        Shuffleboard.getTab(DriverControlConsts.driveTab.toString()).add("Swerve["+absoluteEncoder.getDeviceID()+"] turning speed", getTurningSpeed());
+        SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] ABSOLUTE ENCODER", Math.toDegrees(getAbsoluteEncoder()));
+        SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] DRIVE SPEED", getDriveSpeed());
+        SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] TURNING SPEED", getTurningSpeed());
     }
 
 }

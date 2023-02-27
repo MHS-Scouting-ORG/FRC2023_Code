@@ -9,7 +9,7 @@ public class MidPosition extends CommandBase {
   double setPoint;
   public MidPosition(ElevatorSubsystem elevSubystem) {
     elevSub = elevSubystem;
-    setPoint = 120;
+    setPoint = 100;
     addRequirements(elevSub);
   }
 
@@ -25,12 +25,10 @@ public class MidPosition extends CommandBase {
     }
 
     elevSub.changeSetpoint(setPoint);
-    SmartDashboard.putString("Position:", "Mid");
   }
 
   @Override
   public void end(boolean interrupted){
-    SmartDashboard.putString("is it working", "yes");
 
   }
 

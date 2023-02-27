@@ -106,12 +106,18 @@ public class ClawSubsystem extends SubsystemBase {
     claw.toggle();
   }
 
+  public void openClaw(){
+    claw.set(Value.kForward);
+  }
+
+  public void closeClaw(){
+    claw.set(Value.kReverse);
+  }
+
 
   @Override
   public void periodic() {
-
-    SmartDashboard.putString("Claw", claw.get().toString());
-
-    SmartDashboard.putNumber("Wirst Enc", wristEnc.getPosition());
+    SmartDashboard.putBoolean("Claw Closed?", claw.get().toString().equals("kForward"));
+    SmartDashboard.putNumber("Wirst Encoder", wristEnc.getPosition());
   }
 }

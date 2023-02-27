@@ -47,7 +47,10 @@ public class Rotatinate extends CommandBase {
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    SmartDashboard.clearPersistent("Desired Yaw");
+    SmartDashboard.clearPersistent("Current Yaw");
+  }
 
   @Override
   public boolean isFinished() {

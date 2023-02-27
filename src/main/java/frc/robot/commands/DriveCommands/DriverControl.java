@@ -42,9 +42,9 @@ public class DriverControl extends CommandBase{
     @Override
     public void execute() {
         // Get values from joysticks
-        double xSpeed = xSupplier.getAsDouble()*0.75;
-        double ySpeed = ySupplier.getAsDouble()*0.75;
-        double zSpeed = zSupplier.getAsDouble()*0.75;
+        double xSpeed = xSupplier.getAsDouble();
+        double ySpeed = ySupplier.getAsDouble();
+        double zSpeed = zSupplier.getAsDouble();
 
         // Deadzone
         xSpeed = deadzone(xSpeed);
