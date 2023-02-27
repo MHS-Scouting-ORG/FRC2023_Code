@@ -42,9 +42,9 @@ public class DriverControl extends CommandBase{
     @Override
     public void execute() {
         // Get values from joysticks
-        double xSpeed = xSupplier.getAsDouble()*0.75;
-        double ySpeed = ySupplier.getAsDouble()*0.75;
-        double zSpeed = zSupplier.getAsDouble()*0.75;
+        double xSpeed = xSupplier.getAsDouble();
+        double ySpeed = ySupplier.getAsDouble();
+        double zSpeed = zSupplier.getAsDouble();
 
         // Deadzone
         xSpeed = deadzone(xSpeed);
@@ -59,10 +59,10 @@ public class DriverControl extends CommandBase{
         // Chassis Speeds
         ChassisSpeeds chassisSpeeds;
         if(fieldOriented.getAsBoolean()) {
-            xSpeed = xSpeed * Math.cos(swerveSubsystem.getRobotRotation().getDegrees());
-            ySpeed = ySpeed * Math.sin(swerveSubsystem.getRobotRotation().getDegrees());
-            //chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, zSpeed, swerveSubsystem.getRobotRotation());
-            chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, zSpeed);
+            // xSpeed = xSpeed * Math.cos(swerveSubsystem.getRobotRotation().getDegrees());
+            // ySpeed = ySpeed * Math.sin(swerveSubsystem.getRobotRotation().getDegrees());
+            chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, zSpeed, swerveSubsystem.getRobotRotation());
+            // chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, zSpeed);
         } else {
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, zSpeed);
         }

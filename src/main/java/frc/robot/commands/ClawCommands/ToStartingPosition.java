@@ -27,6 +27,6 @@ public class ToStartingPosition extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return -10 <= clawSubsystem.getEncoder() && clawSubsystem.getEncoder() <= 10;
+    return -5 <= clawSubsystem.getEncoder() && clawSubsystem.getEncoder() <= 5;
   }
 }

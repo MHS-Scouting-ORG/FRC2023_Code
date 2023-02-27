@@ -1,12 +1,17 @@
 package frc.robot;
 
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.math.geometry.Translation2d;
 
 public final class Constants {
   public static class DriverControlConsts {
     public static final int XBOX_CONTROLLER_PORT = 0;
     public static final int JOYSTICK_PORT = 1;
+
+    public static final ShuffleboardTab driveTab = Shuffleboard.getTab("SWERVE DRIVE");
+    public static final ShuffleboardTab mechanismsTab = Shuffleboard.getTab("MECHANISMS TAB");
   }
 
   public static class SwerveConsts{
@@ -98,7 +103,7 @@ public final class Constants {
     public static final int CLAW_FORWARD_CHANNEL = 0;
     public static final int CLAW_REVERSE_CHANNEL = 8;
 
-    public static final double WRIST_SPEED = 0.75;
+    public static final double WRIST_SPEED = 0.8;
 
     public static final double ROTATE_90 = 95;
     public static final double ROTATION_T0_90_ENC = 95;
@@ -106,8 +111,8 @@ public final class Constants {
   }
 
   public static class AutoConsts {
-    public static final double DRIVE_TRANSLATION_SPEED = 0.5;
-    public static final double DRIVE_ROTATION_SPEED = 0.3;
+    public static final double DRIVE_TRANSLATION_SPEED = 0.25;
+    public static final double DRIVE_ROTATION_SPEED = 0.1;
   }
 
 }

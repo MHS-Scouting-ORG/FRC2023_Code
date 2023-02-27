@@ -9,7 +9,7 @@ public class HighPosition extends CommandBase {
   double setPoint;
   public HighPosition(ElevatorSubsystem elevSubystem) {
     elevSub = elevSubystem;
-    setPoint = 190;
+    setPoint = 180;
     addRequirements(elevSub);
   }
 
@@ -25,12 +25,10 @@ public class HighPosition extends CommandBase {
     }
 
     elevSub.changeSetpoint(setPoint);
-    SmartDashboard.putString("Position:", "High");
   }
 
   @Override
   public void end(boolean interrupted){
-
   }
 
   

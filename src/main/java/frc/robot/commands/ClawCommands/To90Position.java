@@ -28,7 +28,7 @@ public class To90Position extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Math.abs(ClawConsts.ROTATION_T0_90_ENC - clawSubsystem.getEncoder()) <= 10;
-    //return 90 <= clawSubsystem.getEncoder() && clawSubsystem.getEncoder() <= 110;
+    //return Math.abs(ClawConsts.ROTATION_T0_90_ENC - clawSubsystem.getEncoder()) <= 10;
+    return 90 <= clawSubsystem.getEncoder() && clawSubsystem.getEncoder() <= 100;
   }
 }

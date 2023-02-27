@@ -19,31 +19,29 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
     ///////////////// 
    //  Variables  //
   /////////////////
-    private final CANSparkMax canspark;
-    private final DigitalInput limitSwitch;;
+    private final CANSparkMax canspark = new CANSparkMax(PivotConsts.PIVOT_MOTOR_PORT, MotorType.kBrushless);
+    private final DigitalInput limitSwitch = new DigitalInput(PivotConsts.PIVOT_LIMIT_PORT);
     private final RelativeEncoder rEnc;
-    private final PIDController pid;
+    private final PIDController pid = new PIDController(0.07, 0, 0);
     private double before;
-    private double setpoint;
+    private double setpoint = 0;
     private boolean pidOn = true;
     private double manualSpeed = 0;
+    private double encoderValue;
+
+
     
     /////////////////////////////////////////
    ///  Pivot Arm Subsystem Constructor  ///
   /////////////////////////////////////////
     public PivotSubsystem(){ // Instantiates the Talon Encoder variable and sets the tolerance for the PID
-        canspark = new CANSparkMax(PivotConsts.PIVOT_MOTOR_PORT, MotorType.kBrushless);
-        limitSwitch = new DigitalInput(PivotConsts.PIVOT_LIMIT_PORT);
-
-        rEnc = canspark.getEncoder();
-
         canspark.setIdleMode(IdleMode.kBrake);
         canspark.setInverted(true);
-
-        pid = new PIDController(0.07, 0, 0);
+        rEnc = canspark.getEncoder();
         setpoint = rEnc.getPosition();
     }
 
+    
     public void enablePid(){
         pidOn = true; 
       }
@@ -57,7 +55,6 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
       public void newSetpoint(double setpoint){
         this.setpoint = setpoint;
     }
-
     /////////////////////////
    ///  Encoder Methods  ///
   /////////////////////////
@@ -117,7 +114,9 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
     }
 
     public boolean isAtSetPoint(){
-        return pid.atSetpoint();
+        double error = setpoint - rEnc.getPosition();
+
+        return Math.abs(error) < 5;
     }
     public void setManualSpeed(double inputSpeed){
         manualSpeed = inputSpeed;
@@ -144,11 +143,11 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
         if(pid.atSetpoint()){ // If the PID is at the setpoint, return a value of 0
             return 0;
         }
-        if(error > 0.6){ // If the error is greater than a limit of 0.5, return a value of 0.5
-            return 0.6;
+        if(error > 1){ // If the error is greater than a limit of 0.5, return a value of 0.5
+            return 1;
         }
-        else if(error < -0.4){ // If the error is less than a limit of -0.5, return a value of -0.5
-            return -0.4;
+        else if(error < -1){ // If the error is less than a limit of -0.5, return a value of -0.5
+            return -1;
         }
         else{ // If everything else fails, return the error 
             return error;
@@ -175,13 +174,16 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
         compareErrors();
     }*/
     
+
+
+  
     
     ////////////////////////
    ///  Printing Method ///
   ////////////////////////
   
     public void periodic(){
-        double encoderValue = getEncoder();
+        encoderValue = getEncoder();
         compareErrors();
         double calcSpeed = 0;
       
@@ -204,9 +206,8 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
         }
         canspark.set(calcSpeed);
 
-        SmartDashboard.putNumber("Pivot Arm Encoder: ", getEncoder()); // Prints out the encoder values
-        SmartDashboard.putBoolean("Limit Switch: ", limitSwitch.get()); // Prints if the limit switch is pressed or not
-        SmartDashboard.putNumber("setpoint PIVOT", setpoint );
-        SmartDashboard.putBoolean("pid", isPIDOn());
+        SmartDashboard.putNumber("[P] ENCODER", getEncoder()); // Prints out the encoder values
+        SmartDashboard.putBoolean("[P] LIMIT PRESSED", limitSwitch.get()); // Prints if the limit switch is pressed or not
+        SmartDashboard.putNumber("[P] SETPOINT", setpoint );
     }
 }

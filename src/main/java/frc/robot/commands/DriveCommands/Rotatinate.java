@@ -21,25 +21,21 @@ public class Rotatinate extends CommandBase {
     this.x = x;
     this.y = y;
 
-    pid = new PIDController(0.002, 0, 0);
-    pid.enableContinuousInput(-Math.PI, Math.PI);
-
     addRequirements(subs);
   }
 
   @Override
   public void initialize() {
     desiredYaw = Math.atan2(x.getAsDouble(), y.getAsDouble());
+    desiredYaw = desiredYaw<=-180 ? desiredYaw+360 : desiredYaw;
   }
 
   @Override
   public void execute() {
 
-    double yaw = swerve.getRobotRotation().getDegrees();
+    double yaw = swerve.getYawAngle();
 
-    double rotate = pid.calculate(yaw, desiredYaw);
-
-    ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, 0, rotate);
+    ChassisSpeeds chassisSpeeds = yaw < desiredYaw ? new ChassisSpeeds(0, 0, 0.5) : new ChassisSpeeds(0, 0, -0.5);
     
     SwerveModuleState[] states = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
 
@@ -47,15 +43,17 @@ public class Rotatinate extends CommandBase {
 
     SmartDashboard.putNumber("Desired Yaw", desiredYaw);
     SmartDashboard.putNumber("Current Yaw", swerve.getRobotRotation().getDegrees());
-    SmartDashboard.putNumber("Calculation", rotate);
 
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    SmartDashboard.clearPersistent("Desired Yaw");
+    SmartDashboard.clearPersistent("Current Yaw");
+  }
 
   @Override
   public boolean isFinished() {
-    return Math.abs(desiredYaw-swerve.getYawAngle()) <= 10;
+    return (desiredYaw-5 <= swerve.getYawAngle()) && (swerve.getYawAngle() <= 5) ;
   }
 }

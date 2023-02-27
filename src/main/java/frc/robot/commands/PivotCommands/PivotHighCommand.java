@@ -20,8 +20,7 @@ public class PivotHighCommand extends CommandBase{
 
     @Override
     public void execute(){ // Executes and runs the Pivot Arm PID
-        SmartDashboard.putNumber("Pivot Encoder:", p_subsystem.getEncoder());
-        p_subsystem.newSetpoint(160);
+        p_subsystem.newSetpoint(165);
    
     }
 
@@ -32,6 +31,6 @@ public class PivotHighCommand extends CommandBase{
 
     @Override
     public boolean isFinished(){ // Returns true when the code is finished
-        return false;
+        return p_subsystem.isAtSetPoint();
     }
 }

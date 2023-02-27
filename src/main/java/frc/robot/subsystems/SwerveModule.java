@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.*;
@@ -111,7 +112,7 @@ public class SwerveModule extends SubsystemBase{
 
     public void setDesiredState(SwerveModuleState state){
         // To make keep robot from going back to 0 position
-        if(Math.abs(state.speedMetersPerSecond) < 0.1){
+        if(Math.abs(state.speedMetersPerSecond) < 0.01){
             stop();
             return;
         }
@@ -124,10 +125,7 @@ public class SwerveModule extends SubsystemBase{
         turningMotor.set(turningPID.calculate(getAbsoluteEncoder(), state.angle.getRadians()));
 
         // Print to SmartDashboard
-        //SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] desired enc", state.angle.getRadians()); //desired enc 
         SmartDashboard.putString("Swerve["+absoluteEncoder.getDeviceID()+"] state", state.toString());
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] drive speed", getDriveSpeed());
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] angle", getAbsoluteEncoder());
     }
 
     public void setAngle(SwerveModuleState state){
@@ -137,10 +135,7 @@ public class SwerveModule extends SubsystemBase{
         // set speed
         drivingMotor.set(0); 
         turningMotor.set(turningPID.calculate(getAbsoluteEncoder(), state.angle.getRadians()));
-
-        // Print to SmartDashboard
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] desired enc", state.angle.getRadians()); //desired enc 
-        SmartDashboard.putString("Swerve["+absoluteEncoder.getDeviceID()+"] state", state.toString());  
+ 
     }
 
     public void stop(){
@@ -151,7 +146,7 @@ public class SwerveModule extends SubsystemBase{
 
     @Override
     public void periodic(){
-        // kp = SmartDashboard.getNumber("kP", 0);
+        // kp = SmartDashboard.getNumber("kP", 0);S
         // SmartDashboard.putNumber("kP", kp);
         // ki = SmartDashboard.getNumber("kI", 0);
         // SmartDashboard.putNumber("kI", ki);
@@ -160,10 +155,9 @@ public class SwerveModule extends SubsystemBase{
 
         // turningPID.setPID(kp, ki, kd);
 
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] abs deg enc", Math.toDegrees(getAbsoluteEncoder()));
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] angle", getAbsoluteEncoder());
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] drive speed", getDriveSpeed());
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] turning speed", getTurningSpeed());
+        SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] ABSOLUTE ENCODER", Math.toDegrees(getAbsoluteEncoder()));
+        SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] DRIVE SPEED", getDriveSpeed());
+        SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] TURNING SPEED", getTurningSpeed());
     }
 
 }

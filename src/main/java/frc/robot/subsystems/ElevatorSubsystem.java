@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ElevatorConsts;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -29,7 +30,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevator = new CANSparkMax(ElevatorConsts.ELEVATOR_MOTOR_PORT, MotorType.kBrushless);
     enc = elevator.getEncoder();
     setpoint = enc.getPosition();
-    pid.setTolerance(1);
+    pid.setTolerance(.05);
+  }
+
+  public void zeroEncoder(){
+    
   }
 
   public double getEncoder(){
@@ -37,7 +42,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public boolean isAtSetpoint(){ // RETURNS TRUE IF IT IS AT THE SETPOINT
-    return pid.atSetpoint();
+    double error = setpoint - enc.getPosition();
+    return Math.abs(error) < 2;
   }
 
   public void setManualSpeed(double inputSpeed){
@@ -92,6 +98,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
   } */
 
+  public double getError(){
+    return pid.getPositionError();
+  }
+
   @Override
   public void periodic() {
     double encoderValue = enc.getPosition(); // GETS CURRENT ENC VALUE OF ELEVATOR
@@ -105,11 +115,11 @@ public class ElevatorSubsystem extends SubsystemBase {
       calcSpeed = manualSpeed; // IF PID DISABLED, SETS ELEVATOR SPEED TO SPEED FOR MANUAL DRIVE
     }
     
-    if(calcSpeed > .4){ // IF SPEED CALCULATED IS GREATER THAN 1, SETS MAX SPEED TO 1
-      calcSpeed = .4;
+    if(calcSpeed > .9){ // IF SPEED CALCULATED IS GREATER THAN 1, SETS MAX SPEED TO 1
+      calcSpeed = .9;
     }
-    else if(calcSpeed < -0.2){ // IF SPEED CALCULATED IS LESS THAN -1, SETS MAX SPEED TO -1
-      calcSpeed = -0.2; 
+    else if(calcSpeed < -0.6){ // IF SPEED CALCULATED IS LESS THAN -1, SETS MAX SPEED TO -1
+      calcSpeed = -0.6; 
     }
 
     if(topPressed() && calcSpeed > 0){
@@ -120,10 +130,12 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
     
     elevator.set(calcSpeed);
-    SmartDashboard.putNumber("PID Speed", calcSpeed);
-    SmartDashboard.putBoolean("Top switch pressed" , topPressed()); 
-    SmartDashboard.putBoolean("Bottom switch pressed", bottomPressed());
-    SmartDashboard.putNumber("encoder counts", encoderValue);
-    SmartDashboard.putNumber("Setpoint", setpoint);
+    
+    SmartDashboard.putNumber("[E] PID SPEED", calcSpeed);
+    SmartDashboard.putBoolean("[E] TOP LIMIT" , topPressed()); 
+    SmartDashboard.putBoolean("[E] BOTTOM LIMIT", bottomPressed());
+    SmartDashboard.putNumber("[E] ENCODER", encoderValue);
+    SmartDashboard.putNumber("[E] SETPOINT", setpoint);
+    SmartDashboard.putNumber("[E] ERROR", getError());
   }
 }
