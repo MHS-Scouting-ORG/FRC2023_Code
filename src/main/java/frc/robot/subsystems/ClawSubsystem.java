@@ -118,6 +118,6 @@ public class ClawSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("Claw Closed?", claw.get().toString().equals("kForward"));
-    SmartDashboard.putNumber("Wirst Encoder", wristEnc.getPosition());
+    SmartDashboard.putNumber("[C] ENCODER", wristEnc.getPosition());
   }
 }

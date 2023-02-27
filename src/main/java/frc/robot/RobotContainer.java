@@ -12,6 +12,8 @@ import frc.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -29,6 +31,12 @@ public class RobotContainer {
   private XboxController xbox = new XboxController(DriverControlConsts.XBOX_CONTROLLER_PORT);
   private Joystick joystick = new Joystick(DriverControlConsts.JOYSTICK_PORT);
 
+  /* * * AUTONOMOUS COMMANDS * * */
+  private final Command rainbowLights = new InstantCommand(() -> lights.potOfGold());
+  private final Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  public SendableChooser<Command> autoChooser = new SendableChooser<>();
+  
+
   //private XboxController testController = new XboxController(2);
   
   public RobotContainer() {
@@ -38,8 +46,8 @@ public class RobotContainer {
       () -> -xbox.getRightX()*0.75, 
       () -> xbox.getRightBumper())); // for field oriented drive
 
-    lights.setDefaultCommand(new Off(lights));
-    configureBindings(); 
+    configureBindings();
+    selectAuto();
   }
 
   private void configureBindings() {
@@ -81,8 +89,7 @@ public class RobotContainer {
       }}));
 
     // MANUAL
-    new JoystickButton(joystick, 3).whileTrue(new PivotJoystickCommand(pivotSubsystem, ()->-
-    joystick.getY()));
+    new JoystickButton(joystick, 3).whileTrue(new PivotJoystickCommand(pivotSubsystem, () -> -joystick.getY()));
 
     /* MANUAL ELEVATOR */
     new POVButton(joystick, 0).whileTrue(new ManualElevatorDrive(elevatorSubsystem, 0.5));
@@ -96,7 +103,15 @@ public class RobotContainer {
 
   
   public Command getAutonomousCommand() {
-    return new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+    return autoChooser.getSelected();
+    //return new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  }
+
+  public void selectAuto(){
+    autoChooser.setDefaultOption("Simple Auto", rainbowLights);
+    autoChooser.addOption("Complex Auto", hybrid);
+
+    SmartDashboard.putData(autoChooser);
   }
 
 }
