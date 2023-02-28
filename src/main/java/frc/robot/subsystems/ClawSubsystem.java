@@ -115,8 +115,8 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void display(){
-    // SmartDashboard.putNumber("[C] ENCODER", wristEnc.getPosition());
-    DriverControlConsts.mechanismsTab.add("[C] ENCODER", wristEnc.getPosition());
+    SmartDashboard.putNumber("[C] ENCODER", wristEnc.getPosition());
+    // DriverControlConsts.mechanismsTab.add("[C] ENCODER", wristEnc.getPosition());
   }
 
   @Override

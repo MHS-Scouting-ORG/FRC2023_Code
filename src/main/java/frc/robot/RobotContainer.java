@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.ProxyCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
@@ -33,6 +32,7 @@ public class RobotContainer {
 
   /* * * AUTONOMOUS COMMANDS * * */
   private final Command rainbowLights = new InstantCommand(() -> lights.potOfGold());
+  private final Command yellowLights = new Yellow(lights);
   private final Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
   
@@ -62,7 +62,7 @@ public class RobotContainer {
     );
     new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem)); // to lock in place :: Button B
     new JoystickButton(xbox, 4).toggleOnFalse(new Endgame(swerveSubsystem, () -> xbox.getLeftY())); // to deploy endgame
-    ///* !!! TEST !!! */ new JoystickButton(xbox, 1).whileTrue(new Rotatinate(swerveSubsystem, () -> xbox.getRightX(),  () -> xbox.getRightY()));
+    /* !!! TEST !!! */ new JoystickButton(xbox, 1).whileTrue(new Rotatinate(swerveSubsystem, () -> xbox.getRightX(),  () -> xbox.getRightY()));
     
     // FOR TESTING
     new JoystickButton(xbox, 7).onTrue(new InstantCommand(() -> swerveSubsystem.resetNavx()));
@@ -77,7 +77,7 @@ public class RobotContainer {
     new JoystickButton(joystick, 12).onTrue(new To180Position(clawSubsystem));
 
     // FOR TESTING 
-    new JoystickButton(joystick, 1).whileTrue(new InstantCommand(() -> clawSubsystem.manualRotate(joystick.getZ())));
+    new JoystickButton(joystick, 1).whileTrue(new InstantCommand(() -> clawSubsystem.clockwise()));
 
 
     /* PIVOT */
@@ -106,8 +106,8 @@ public class RobotContainer {
   }
 
   public void selectAuto(){
-    autoChooser.setDefaultOption("Simple Auto", rainbowLights);
-    autoChooser.addOption("Complex Auto", hybrid);
+    autoChooser.setDefaultOption("Rainbow", rainbowLights);
+    autoChooser.addOption("Yellow", yellowLights);
 
     SmartDashboard.putData(autoChooser);
   }
