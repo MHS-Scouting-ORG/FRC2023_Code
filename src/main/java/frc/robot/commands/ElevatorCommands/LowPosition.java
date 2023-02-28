@@ -29,6 +29,7 @@ public class LowPosition extends CommandBase {
     }
 
     elevSub.changeSetpoint(setPoint);
+    SmartDashboard.putString("Position:", "low");
   }
 
   @Override

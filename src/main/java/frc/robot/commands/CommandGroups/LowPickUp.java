@@ -10,7 +10,6 @@ import frc.robot.commands.ElevatorCommands.MidPosition;
 import frc.robot.commands.PivotCommands.PivotLowCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
-import frc.robot.subsystems.PivotSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

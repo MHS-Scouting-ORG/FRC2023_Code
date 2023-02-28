@@ -10,7 +10,7 @@ public class PivotMiddleCommand extends CommandBase{
     public PivotMiddleCommand(PivotSubsystem p_subs){ // Pivot PID Constructor 
         p_subsystem = p_subs;
         addRequirements(p_subs);
-        setpoint = 160;
+        setpoint = 106;
     }
 
     @Override

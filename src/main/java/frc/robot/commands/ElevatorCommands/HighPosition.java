@@ -25,6 +25,7 @@ public class HighPosition extends CommandBase {
     }
 
     elevSub.changeSetpoint(setPoint);
+    SmartDashboard.putString("Position:", "High");
   }
 
   @Override

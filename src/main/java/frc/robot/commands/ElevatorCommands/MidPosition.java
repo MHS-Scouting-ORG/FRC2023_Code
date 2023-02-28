@@ -25,10 +25,12 @@ public class MidPosition extends CommandBase {
     }
 
     elevSub.changeSetpoint(setPoint);
+    SmartDashboard.putString("Position:", "Mid");
   }
 
   @Override
   public void end(boolean interrupted){
+    SmartDashboard.putString("is it working", "yes");
 
   }
 

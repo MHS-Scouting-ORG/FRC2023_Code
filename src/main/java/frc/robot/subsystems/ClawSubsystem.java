@@ -95,7 +95,7 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void go90Counterclockwise(double previousEnc){
-    if( getEncoder() > (previousEnc-ClawConsts.ROTATE_90) ){
+    if( getEncoder() > (previousEnc-ClawConsts.ROTATE_90) && getEncoder() > 90){
       counterclockwise();
     } else{
       stopWrist();

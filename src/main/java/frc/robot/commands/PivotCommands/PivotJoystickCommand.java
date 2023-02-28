@@ -26,6 +26,7 @@ public class PivotJoystickCommand extends CommandBase {
   @Override
   public void execute() {
     pivotarmsubsystem.setManualSpeed(speed.getAsDouble());
+    SmartDashboard.getNumber("Manual Speed", speed.getAsDouble());
   }
 
   @Override

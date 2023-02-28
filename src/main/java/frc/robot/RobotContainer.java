@@ -63,25 +63,23 @@ public class RobotContainer {
     /* CLAW */
     new JoystickButton(xbox, 5).onTrue(new Claw(clawSubsystem));
 
-    new JoystickButton(joystick, 8).onTrue(new ToStartingPosition(clawSubsystem));
-    new JoystickButton(joystick, 10).onTrue(new To90Position(clawSubsystem));
-    new JoystickButton(joystick, 12).onTrue(new To180Position(clawSubsystem));
+    new JoystickButton(joystick, 8).onTrue(new Go90Clockwise(clawSubsystem));
+    new JoystickButton(joystick, 10).onTrue(new ToStartingPosition(clawSubsystem));
+    new JoystickButton(joystick, 12).onTrue(new Go90Counterclockwise(clawSubsystem));
+
+    new JoystickButton(joystick, 2).whileTrue(new ManualClaw(clawSubsystem, ()->joystick.getX()));
 
 
     /* PIVOT */
     new JoystickButton(joystick, 11).onTrue(new LowPickUp(pivotSubsystem, elevatorSubsystem));
     new JoystickButton(joystick, 9).onTrue(new ParallelCommandGroup(new PivotMiddleCommand(pivotSubsystem), new MidPosition(elevatorSubsystem)));
     new JoystickButton(joystick, 7).onTrue(new TopNode(pivotSubsystem, elevatorSubsystem));
-    new JoystickButton(joystick, 5).onTrue(new ProxyCommand(() -> {
-      if (elevatorSubsystem.getEncoder() < 160) {
-        return new TuckedFromBottom(pivotSubsystem, elevatorSubsystem);
-      } else {
-        return new TuckedFromTop(pivotSubsystem, elevatorSubsystem);
-      }}));
+    new JoystickButton(joystick, 1).onTrue(Tucked.getCommand(pivotSubsystem, elevatorSubsystem));
 
     // MANUAL
-    new JoystickButton(joystick, 3).whileTrue(new PivotJoystickCommand(pivotSubsystem, ()->-
-    joystick.getY()));
+    new JoystickButton(joystick, 3).whileTrue(new PivotJoystickCommand(pivotSubsystem, ()-> -joystick.getY()));
+    // new JoystickButton(joystick, 3).whileTrue(new PivotArmButtonCommand(pivotSubsystem, -0.2));
+    // new JoystickButton(joystick, 5).whileTrue(new PivotArmButtonCommand(pivotSubsystem, 0.2));
 
     /* MANUAL ELEVATOR */
     new POVButton(joystick, 0).whileTrue(new ManualElevatorDrive(elevatorSubsystem, 0.5));
