@@ -76,6 +76,9 @@ public class RobotContainer {
     new JoystickButton(joystick, 10).onTrue(new To90Position(clawSubsystem));
     new JoystickButton(joystick, 12).onTrue(new To180Position(clawSubsystem));
 
+    // FOR TESTING 
+    new JoystickButton(joystick, 1).whileTrue(new InstantCommand(() -> clawSubsystem.manualRotate(joystick.getZ())));
+
 
     /* PIVOT */
     new JoystickButton(joystick, 11).onTrue(new LowPickUp(pivotSubsystem, elevatorSubsystem));

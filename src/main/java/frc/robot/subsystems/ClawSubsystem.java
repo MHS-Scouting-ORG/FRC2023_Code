@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClawConsts;
-import frc.robot.commands.ClawCommands.ToStartingPosition;
+import frc.robot.Constants.DriverControlConsts;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -114,10 +114,14 @@ public class ClawSubsystem extends SubsystemBase {
     claw.set(Value.kReverse);
   }
 
+  public void display(){
+    // SmartDashboard.putNumber("[C] ENCODER", wristEnc.getPosition());
+    DriverControlConsts.mechanismsTab.add("[C] ENCODER", wristEnc.getPosition());
+  }
 
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("Claw Closed?", claw.get().toString().equals("kForward"));
-    SmartDashboard.putNumber("[C] ENCODER", wristEnc.getPosition());
+    display();
   }
 }
