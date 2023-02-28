@@ -130,12 +130,12 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
     
     elevator.set(calcSpeed);
-    
-    SmartDashboard.putNumber("[E] PID SPEED", calcSpeed);
-    SmartDashboard.putBoolean("[E] TOP LIMIT" , topPressed()); 
-    SmartDashboard.putBoolean("[E] BOTTOM LIMIT", bottomPressed());
-    SmartDashboard.putNumber("[E] ENCODER", encoderValue);
-    SmartDashboard.putNumber("[E] SETPOINT", setpoint);
-    SmartDashboard.putNumber("[E] ERROR", getError());
+    SmartDashboard.putNumber("PID Speed", calcSpeed);
+    SmartDashboard.putBoolean("Top switch pressed" , topPressed()); 
+    SmartDashboard.putBoolean("Bottom switch pressed", bottomPressed());
+    SmartDashboard.putNumber("encoder counts", encoderValue);
+    SmartDashboard.putNumber("Setpoint", setpoint);
+    SmartDashboard.putNumber("error", getError());
+    SmartDashboard.putNumber("tolerance", pid.getPositionTolerance());
   }
 }

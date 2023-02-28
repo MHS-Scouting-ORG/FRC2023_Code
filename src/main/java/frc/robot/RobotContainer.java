@@ -84,12 +84,7 @@ public class RobotContainer {
     new JoystickButton(joystick, 11).onTrue(new LowPickUp(pivotSubsystem, elevatorSubsystem));
     new JoystickButton(joystick, 9).onTrue(new ParallelCommandGroup(new PivotMiddleCommand(pivotSubsystem), new MidPosition(elevatorSubsystem)));
     new JoystickButton(joystick, 7).onTrue(new TopNode(pivotSubsystem, elevatorSubsystem));
-    new JoystickButton(joystick, 5).onTrue(new ProxyCommand(() -> {
-      if (elevatorSubsystem.getEncoder() < 160) {
-        return new TuckedFromBottom(pivotSubsystem, elevatorSubsystem);
-      } else {
-        return new TuckedFromTop(pivotSubsystem, elevatorSubsystem);
-      }}));
+    new JoystickButton(joystick, 5).onTrue(Tucked.getCommand(pivotSubsystem, elevatorSubsystem));
 
     // MANUAL
     new JoystickButton(joystick, 3).whileTrue(new PivotJoystickCommand(pivotSubsystem, () -> -joystick.getY()));
