@@ -1,10 +1,12 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.ClawCommands.Claw;
+import frc.robot.commands.PivotCommands.*;
+import frc.robot.commands.PivotCommands.*;
+import frc.robot.commands.ClawCommands.*;
 import frc.robot.commands.CommandGroups.LowPickUp;
 import frc.robot.commands.CommandGroups.TuckedFromBottom;
-import frc.robot.commands.ElevatorCommands.MidPosition;
+import frc.robot.commands.PivotCommands.*;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
@@ -25,16 +27,12 @@ public class Hybrid extends SequentialCommandGroup {
       // Open claw 
       new Claw(claw),
 
-      // Move forward 
-      //new DriveForwardCommand(swerve, 100), 
-
-
      // Arm in resting position (pivot in, elevator down) 
       new TuckedFromBottom(pivot, elevator),
 
 
       // Move backward
-      new DriveBackward(swerve, 20)
+      new DriveBackward(swerve, 30)
     );
   }
 }

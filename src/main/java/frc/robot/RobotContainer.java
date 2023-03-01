@@ -12,6 +12,8 @@ import frc.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -29,7 +31,10 @@ public class RobotContainer {
   private XboxController xbox = new XboxController(DriverControlConsts.XBOX_CONTROLLER_PORT);
   private Joystick joystick = new Joystick(DriverControlConsts.JOYSTICK_PORT);
 
-  //private XboxController testController = new XboxController(2);
+  private final Command rainbowLights = new InstantCommand(() -> lights.potOfGold());
+  private final Command yellowLights = new Yellow(lights);
+  private final Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  public SendableChooser<Command> autoChooser = new SendableChooser<>();
   
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(new DriverControl(swerveSubsystem, 
@@ -39,6 +44,7 @@ public class RobotContainer {
       () -> xbox.getRightBumper())); // for field oriented drive
 
     lights.setDefaultCommand(new Off(lights));
+    selectAuto();
     configureBindings(); 
   }
 
@@ -54,7 +60,7 @@ public class RobotContainer {
     );
     new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem)); // to lock in place :: Button B
     new JoystickButton(xbox, 4).toggleOnFalse(new Endgame(swerveSubsystem, () -> xbox.getLeftY())); // to deploy endgame
-    ///* !!! TEST !!! */ new JoystickButton(xbox, 1).whileTrue(new Rotatinate(swerveSubsystem, () -> xbox.getRightX(),  () -> xbox.getRightY()));
+    /* !!! TEST !!! */ new JoystickButton(xbox, 1).whileTrue(new Rotatinate(swerveSubsystem, () -> xbox.getRightX(),  () -> xbox.getRightY()));
     
     // FOR TESTING
     new JoystickButton(xbox, 7).onTrue(new InstantCommand(() -> swerveSubsystem.resetNavx()));
@@ -74,7 +80,7 @@ public class RobotContainer {
     new JoystickButton(joystick, 11).onTrue(new LowPickUp(pivotSubsystem, elevatorSubsystem));
     new JoystickButton(joystick, 9).onTrue(new ParallelCommandGroup(new PivotMiddleCommand(pivotSubsystem), new MidPosition(elevatorSubsystem)));
     new JoystickButton(joystick, 7).onTrue(new TopNode(pivotSubsystem, elevatorSubsystem));
-    new JoystickButton(joystick, 1).onTrue(Tucked.getCommand(pivotSubsystem, elevatorSubsystem));
+    new JoystickButton(joystick, 5).onTrue(Tucked.getCommand(pivotSubsystem, elevatorSubsystem, clawSubsystem));
 
     // MANUAL
     new JoystickButton(joystick, 3).whileTrue(new PivotJoystickCommand(pivotSubsystem, ()-> -joystick.getY()));
@@ -91,9 +97,17 @@ public class RobotContainer {
 
   }
 
-  
   public Command getAutonomousCommand() {
-    return new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+    return autoChooser.getSelected();
+    //return new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  }
+
+  public void selectAuto(){
+    autoChooser.setDefaultOption("Rainbow", rainbowLights);
+    autoChooser.addOption("Yellow", yellowLights);
+    autoChooser.addOption("Hybrid", hybrid);
+
+    SmartDashboard.putData(autoChooser);
   }
 
 }

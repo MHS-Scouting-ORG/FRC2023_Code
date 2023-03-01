@@ -138,6 +138,7 @@ public class SwerveModule extends SubsystemBase{
  
     }
 
+
     public void stop(){
         drivingMotor.set(0);
         turningMotor.set(0);
@@ -160,7 +161,7 @@ public class SwerveModule extends SubsystemBase{
         // SmartDashboard.putNumber("kD", kd);
 
         // turningPID.setPID(kp, ki, kd);
-
+        SmartDashboard.putNumber("Front left["+absoluteEncoder.getDeviceID()+"]", drivingEnc.getPosition());
         SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] ABSOLUTE ENCODER", Math.toDegrees(getAbsoluteEncoder()));
         SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] DRIVE SPEED", getDriveSpeed());
         SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] TURNING SPEED", getTurningSpeed());

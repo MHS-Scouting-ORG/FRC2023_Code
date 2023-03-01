@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.SwerveConsts;
 import frc.robot.subsystems.SwerveSubsystem;
 
-public class Rotatinate extends CommandBase {
+public class Rotate180 extends CommandBase {
   private SwerveSubsystem swerve;
   private DoubleSupplier x, y;
   private PIDController pid;
   private double desiredYaw;
 
-  public Rotatinate(SwerveSubsystem subs, DoubleSupplier x, DoubleSupplier y) {
+  public Rotate180(SwerveSubsystem subs, DoubleSupplier x, DoubleSupplier y) {
     swerve = subs;
     this.x = x;
     this.y = y;
