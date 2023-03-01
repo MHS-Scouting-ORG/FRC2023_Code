@@ -28,11 +28,11 @@ public class Hybrid extends SequentialCommandGroup {
       new Claw(claw),
 
      // Arm in resting position (pivot in, elevator down) 
-      new TuckedFromBottom(pivot, elevator),
+      new TuckedFromBottom(pivot, elevator)
 
 
       // Move backward
-      new DriveBackward(swerve, 30)
+      //new DriveBackward(swerve, 30)
     );
   }
 }

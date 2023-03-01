@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.Constants.DriverControlConsts;
+import frc.robot.commands.Autonomous.High;
 import frc.robot.commands.Autonomous.Hybrid;
 import frc.robot.commands.ClawCommands.*;
 import frc.robot.commands.CommandGroups.*;
@@ -34,6 +35,7 @@ public class RobotContainer {
   private final Command rainbowLights = new InstantCommand(() -> lights.potOfGold());
   private final Command yellowLights = new Yellow(lights);
   private final Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private final Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
   
   public RobotContainer() {
@@ -106,6 +108,8 @@ public class RobotContainer {
     autoChooser.setDefaultOption("Rainbow", rainbowLights);
     autoChooser.addOption("Yellow", yellowLights);
     autoChooser.addOption("Hybrid", hybrid);
+    autoChooser.addOption("High", high);
+
 
     SmartDashboard.putData(autoChooser);
   }

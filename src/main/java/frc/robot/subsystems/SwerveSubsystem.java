@@ -201,4 +201,6 @@ public class SwerveSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Robot Yaw", getYawAngle());
     }
 
+    // bevels face right (absolute enc = offset), forward = negative
+    // bevels face left (absolute enc = 0ish/6.28ish), forward = positive
 }
