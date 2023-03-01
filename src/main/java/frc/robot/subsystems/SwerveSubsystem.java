@@ -109,37 +109,35 @@ public class SwerveSubsystem extends SubsystemBase {
         frontRight.setAngle(fr);
     }
 
-    public void driveForward(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(AutoConsts.DRIVE_TRANSLATION_SPEED, 0, 0));
+    public void driveForward(double speed){
+        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(speed, 0, 0));
         setModuleStates(moduleStates);
     }
 
-    public void driveBackward(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(-AutoConsts.DRIVE_TRANSLATION_SPEED, 0, 0));
+    public void driveBackward(double speed){
+        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(-speed, 0, 0));
         setModuleStates(moduleStates);
     }
 
-    public void strafeLeft(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, -AutoConsts.DRIVE_TRANSLATION_SPEED, 0));
+    public void strafeLeft(double speed){
+        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, -speed, 0));
         setModuleStates(moduleStates);
     }
 
-    public void strafeRight(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, AutoConsts.DRIVE_TRANSLATION_SPEED, 0));
+    public void strafeRight(double speed){
+        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, speed, 0));
         setModuleStates(moduleStates);
     }
 
-    public void rotateLeft(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, 0, -AutoConsts.DRIVE_ROTATION_SPEED));
+    public void rotateLeft(double speed){
+        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, 0, -speed));
         setModuleStates(moduleStates);
     }
 
-    public void rotateRight(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, 0, AutoConsts.DRIVE_ROTATION_SPEED));
+    public void rotateRight(double speed){
+        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, 0, speed));
         setModuleStates(moduleStates);
     }
-
-
 
 
     /* * * LANDING GEAR * * */

@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClawConsts;
-import frc.robot.commands.ClawCommands.ToStartingPosition;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -118,6 +117,6 @@ public class ClawSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("Claw Closed?", claw.get().toString().equals("kForward"));
-    SmartDashboard.putNumber("Wirst Encoder", wristEnc.getPosition());
+    SmartDashboard.putNumber("[C] Wirst Encoder", wristEnc.getPosition());
   }
 }

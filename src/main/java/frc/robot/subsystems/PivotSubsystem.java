@@ -196,17 +196,17 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
        // forceStop(calcSpeed);
         
         
-        if(calcSpeed > .5){ 
-          calcSpeed = .5;
+        if(calcSpeed > .7){ 
+          calcSpeed = .7;
         }
-        else if(calcSpeed < -0.3){ 
-          calcSpeed = -0.3;
+        else if(calcSpeed < -0.4){ 
+          calcSpeed = -0.4;
         }
         canspark.set(calcSpeed);
 
-        SmartDashboard.putNumber("Pivot Arm Encoder: ", getEncoder()); // Prints out the encoder values
-        SmartDashboard.putBoolean("Limit Switch: ", limitSwitch.get()); // Prints if the limit switch is pressed or not
-        SmartDashboard.putNumber("setpoint PIVOT", setpoint );
-        SmartDashboard.putBoolean("pid", isPIDOn());
+        SmartDashboard.putNumber("[P] ENCODER", getEncoder()); // Prints out the encoder values
+        SmartDashboard.putBoolean("[P] LIMIT SWITCH", limitSwitch.get()); // Prints if the limit switch is pressed or not
+        SmartDashboard.putNumber("[P] SETPOINT", setpoint );
+        SmartDashboard.putBoolean("[P] PID", isPIDOn());
     }
 }
