@@ -62,7 +62,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public double getFrontLeftEncoder() {
-        return Math.copySign(frontLeft.getDrivePosition(), frontLeft.getDrivePosition());
+        return Math.copySign(frontLeft.getDrivePosition(), frontLeft.getDriveSpeed());
     }
 
     public boolean moveUntil(double enc){
