@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.AutoConsts;
 import frc.robot.Constants.LandingGearConsts;
 import frc.robot.Constants.SwerveConsts;
 
@@ -61,25 +60,9 @@ public class SwerveSubsystem extends SubsystemBase {
         backRight.resetEncoders();
     }
 
-    public double getFrontLeftEncoder() {
-        return Math.copySign(frontLeft.getDrivePosition(), frontLeft.getDriveSpeed());
+    public double getLeftEncoder(){
+        return frontLeft.getDrivePosition();
     }
-
-    public boolean moveUntil(double enc){
-        if(frontLeft.getDrivePosition() < 0){
-            return getFrontLeftEncoder() > -enc;
-        } else {
-            return getFrontLeftEncoder() < enc;
-        }
-    }
-
-    // public boolean rotateUntil(double yaw){
-    //     if(getYaw() < 0) {
-
-    //     } else {
-
-    //     }
-    // }
 
     public void resetNavx() {
         navx.zeroYaw();
@@ -130,6 +113,18 @@ public class SwerveSubsystem extends SubsystemBase {
         SwerveModuleState bl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(-45)));
         SwerveModuleState br = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(45)));
         SwerveModuleState fr = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(-45)));
+
+        frontLeft.setAngle(fl);
+        backLeft.setAngle(bl);
+        backRight.setAngle(br);
+        frontRight.setAngle(fr);
+    }
+
+    public void straightenWheels(){
+        SwerveModuleState fl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(0)));
+        SwerveModuleState bl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(0)));
+        SwerveModuleState br = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(0)));
+        SwerveModuleState fr = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(0)));
 
         frontLeft.setAngle(fl);
         backLeft.setAngle(bl);
