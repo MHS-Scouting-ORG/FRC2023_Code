@@ -34,6 +34,6 @@ public class DriveBackward extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return swerve.getEnc() < -desiredEnc;
+    return swerve.moveUntil(desiredEnc);
   }
 }

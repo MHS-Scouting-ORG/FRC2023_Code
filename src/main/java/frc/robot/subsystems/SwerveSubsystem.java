@@ -61,9 +61,25 @@ public class SwerveSubsystem extends SubsystemBase {
         backRight.resetEncoders();
     }
 
-    public double getEnc() {
-        return frontLeft.getDrivePosition();
+    public double getFrontLeftEncoder() {
+        return Math.copySign(frontLeft.getDrivePosition(), frontLeft.getDrivePosition());
     }
+
+    public boolean moveUntil(double enc){
+        if(frontLeft.getDrivePosition() < 0){
+            return getFrontLeftEncoder() > -enc;
+        } else {
+            return getFrontLeftEncoder() < enc;
+        }
+    }
+
+    // public boolean rotateUntil(double yaw){
+    //     if(getYaw() < 0) {
+
+    //     } else {
+
+    //     }
+    // }
 
     public void resetNavx() {
         navx.zeroYaw();
@@ -73,16 +89,18 @@ public class SwerveSubsystem extends SubsystemBase {
         return ( /* navx.getYaw() */ navx.getAngle() % 360 /* 360-navx.getYaw() */ );
     }
 
-
-    public double getAngle() {
+    public double getAngle(){
         return navx.getAngle();
+    }
+
+    public double getYaw(){
+        return navx.getYaw();
     }
 
     public double getRoll(){
         return navx.getRoll() - 3;
     }
 
-    // public double getYaw(){}
 
     public Rotation2d getRobotRotation() {
         return new Rotation2d(Math.toRadians(navx.getYaw()));
@@ -187,11 +205,16 @@ public class SwerveSubsystem extends SubsystemBase {
 
         // wheelinator.set(speed*1.25);
 
-        frontLeft.setAngle(fl);
-        backLeft.setDesiredState(bl);
-        backRight.setDesiredState(br);
-        frontRight.setAngle(fr);
-        wheelinator.set(backLeft.getDriveSpeed() * 1.5);
+        if(fl.speedMetersPerSecond>0.1){
+            frontLeft.setAngle(fl);
+            backLeft.setDesiredState(bl);
+            backRight.setDesiredState(br);
+            frontRight.setAngle(fr);
+            wheelinator.set(backLeft.getDriveSpeed() * 1.5);
+        } else {
+            stopModules();
+            stopWheels();
+        }
 
     }
 
