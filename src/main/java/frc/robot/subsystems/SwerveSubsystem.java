@@ -51,6 +51,8 @@ public class SwerveSubsystem extends SubsystemBase {
 
         landinator.set(Value.kReverse);
 
+        straightenWheels();
+
     }
 
     public void resetEnc() {
@@ -218,7 +220,4 @@ public class SwerveSubsystem extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("Robot Yaw", getYawAngle());
     }
-
-    // bevels face right (absolute enc = offset), forward = negative
-    // bevels face left (absolute enc = 0ish/6.28ish), forward = positive
 }
