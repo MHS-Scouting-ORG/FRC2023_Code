@@ -28,6 +28,8 @@ public class SwerveSubsystem extends SubsystemBase {
     private DoubleSolenoid landinator;
     private CANSparkMax wheelinator;
 
+    private double yawOffset; 
+
     public SwerveSubsystem() {
         frontLeft = new SwerveModule(SwerveConsts.FL_TURN_PORT, SwerveConsts.FL_DRIVE_PORT,
                 SwerveConsts.FL_ABSOLUTE_ENCODER_PORT, SwerveConsts.FL_OFFSET, false, true, true);
@@ -53,6 +55,8 @@ public class SwerveSubsystem extends SubsystemBase {
 
         straightenWheels();
 
+        yawOffset = 0; 
+
     }
 
     public void resetEnc() {
@@ -70,6 +74,10 @@ public class SwerveSubsystem extends SubsystemBase {
         navx.zeroYaw();
     }
 
+    public void resetAutoYaw() {
+        yawOffset = navx.getYaw();
+    }
+
     public double getYawAngle() {
         return ( /* navx.getYaw() */ navx.getAngle() % 360 /* 360-navx.getYaw() */ );
     }
@@ -80,6 +88,10 @@ public class SwerveSubsystem extends SubsystemBase {
 
     public double getYaw(){
         return navx.getYaw();
+    }
+
+    public double getAutoYaw() {
+        return navx.getYaw() - yawOffset; 
     }
 
     public double getRoll(){

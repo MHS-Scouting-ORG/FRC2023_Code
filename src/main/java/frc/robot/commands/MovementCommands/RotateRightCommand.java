@@ -18,7 +18,7 @@ public class RotateRightCommand extends CommandBase {
 
   @Override
   public void initialize() {
-    swerve.resetNavx();
+    swerve.resetAutoYaw();
   }
 
   @Override
@@ -34,6 +34,6 @@ public class RotateRightCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return (swerve.getAngle() >= desiredAngle-2) && (swerve.getAngle() <= desiredAngle+2); 
+    return (swerve.getAutoYaw() >= desiredAngle-2) && (swerve.getAutoYaw() <= desiredAngle+2); 
   }
 }
