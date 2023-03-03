@@ -1,12 +1,13 @@
 package frc.robot.commands.ElevatorCommands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 public class MidPosition extends CommandBase {
   ElevatorSubsystem elevSub;
   double setPoint;
+
+  // ELEV TO MID POSITION 
   public MidPosition(ElevatorSubsystem elevSubystem) {
     elevSub = elevSubystem;
     setPoint = 100;
@@ -25,10 +26,12 @@ public class MidPosition extends CommandBase {
     }
 
     elevSub.changeSetpoint(setPoint);
+    //SmartDashboard.putString("Position:", "Mid");
   }
 
   @Override
   public void end(boolean interrupted){
+    //SmartDashboard.putString("is it working", "yes");
 
   }
 

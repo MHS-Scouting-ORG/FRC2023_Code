@@ -1,21 +1,14 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.AutoConsts;
-import frc.robot.Constants.LandingGearConsts;
 import frc.robot.Constants.SwerveConsts;
 
 public class SwerveSubsystem extends SubsystemBase {
@@ -24,64 +17,101 @@ public class SwerveSubsystem extends SubsystemBase {
     private SwerveModule backRight;
     private SwerveModule frontRight;
 
+    //private SwerveModuleState states;
+
     private AHRS navx;
 
-    private DoubleSolenoid landinator;
-    private CANSparkMax wheelinator;
+  /////////////////////
+  //   CONSTRUCTOR   //
+  /////////////////////
 
     public SwerveSubsystem() {
-        frontLeft = new SwerveModule(SwerveConsts.FL_TURN_PORT, SwerveConsts.FL_DRIVE_PORT, 
-            SwerveConsts.FL_ABSOLUTE_ENCODER_PORT, SwerveConsts.FL_OFFSET , false, true, true);
+        frontLeft = new SwerveModule(SwerveConsts.FL_turningMotorPort, SwerveConsts.FL_driveMotorPort, 
+            SwerveConsts.FL_absoluteEncoderPort, SwerveConsts.FL_offset , false, true, true);
         
-        backLeft = new SwerveModule(SwerveConsts.BL_TURN_PORT, SwerveConsts.BL_DRIVE_PORT, 
-            SwerveConsts.BL_ABSOLUTE_ENCODER_PORT, SwerveConsts.BL_OFFSET , false, true, true);
+        backLeft = new SwerveModule(SwerveConsts.BL_turningMotorPort, SwerveConsts.BL_driveMotorPort, 
+            SwerveConsts.BL_absoluteEncoderPort, SwerveConsts.BL_offset , false, true, true);
 
-        backRight = new SwerveModule(SwerveConsts.BR_TURN_PORT, SwerveConsts.BR_DRIVE_PORT, 
-            SwerveConsts.BR_ABSOLUTE_ENCODER_PORT, SwerveConsts.BR_OFFSET , false, true, true);
+        backRight = new SwerveModule(SwerveConsts.BR_turningMotorPort, SwerveConsts.BR_driveMotorPort, 
+            SwerveConsts.BR_absoluteEncoderPort, SwerveConsts.BR_offset , false, true, true);
 
-        frontRight = new SwerveModule(SwerveConsts.FR_TURN_PORT, SwerveConsts.FR_DRIVE_PORT, 
-            SwerveConsts.FR_ABSOLUTE_ENCODER_PORT, SwerveConsts.FR_OFFSET , false, true, true);
+        frontRight = new SwerveModule(SwerveConsts.FR_turningMotorPort, SwerveConsts.FR_driveMotorPort, 
+            SwerveConsts.FR_absoluteEncoderPort, SwerveConsts.FR_offset , false, true, true);
 
         navx = new AHRS(SPI.Port.kMXP);
 
+        navx.zeroYaw();
 
-        /* * * Landing Gear * * */
-        landinator = new DoubleSolenoid(PneumaticsModuleType.REVPH, LandingGearConsts.LANDING_GEAR_PISTON_FORWARD_CHANNEL, LandingGearConsts.LANDING_GEAR_PISTON_REVERSE_CHANNEL);
-        wheelinator = new CANSparkMax(LandingGearConsts.LANDING_GEAR_MOTOR_PORT, MotorType.kBrushless);
-
-        landinator.set(Value.kReverse);
-
+        straightenWheels();
     }
 
-    public void resetEnc(){
-        frontLeft.resetEncoders();
-        backLeft.resetEncoders();
-        frontRight.resetEncoders();
-        backRight.resetEncoders();
-    }
-
-    public double getEnc(){
-        return -frontLeft.getDrivePosition();
-    }
+  /////////////////////
+  //  RESET METHODS  //
+  /////////////////////
 
     public void resetNavx() {
         navx.zeroYaw();
     }
 
+    public void resetEnc(){
+        frontLeft.resetEncoders();
+        backLeft.resetEncoders();
+        backRight.resetEncoders();
+        frontRight.resetEncoders();
+    }
+
+  /////////////////////
+  //   GET METHODS   //
+  /////////////////////
+
+    public double getDriveEnc() {
+        return frontLeft.getDrivePosition(); 
+    }
+
+    public double getTurningPos() {
+        return frontLeft.getTurningPosition();
+    }
+
+    //returns yaw in degrees, 0-360
     public double getYawAngle(){
-        return ( /* navx.getYaw() */  navx.getAngle() % 360  /*360-navx.getYaw()*/ );
+        return ( /*navx.getYaw()*/ navx.getAngle() % 360 );
     }
 
-    //public double getYaw(){}
+    //returns yaw in degrees, number line form 
+    public double getAngle(){
+        return navx.getAngle(); 
+    }
 
+    //MAKE NAVX OFFSET 
+    //returns roll in degrees 
+    public double getRoll() {
+        return navx.getRoll()-3; 
+    }
+
+    public double getPitch() {
+        return navx.getPitch();
+    }
+
+    //returns robot's rotation (yaw) in radians 
     public Rotation2d getRobotRotation(){
-        return new Rotation2d(Math.toRadians(navx.getYaw()));
+      return new Rotation2d(Math.toRadians(navx.getYaw()));
     }
 
+    //returns robot's rotation (yaw) in degrees
     public Rotation2d getRotation2d() {
         return Rotation2d.fromDegrees(getYawAngle());
+    } 
+
+    //return the speed of the drive motor 
+    public double getDriveVelocity() {
+        return frontLeft.getDriveSpeed();
     }
 
+  /////////////////////
+  //   SET MODULES   //
+  /////////////////////
+
+    //stop modules  
     public void stopModules() {
         frontLeft.stop();
         backLeft.stop();
@@ -89,14 +119,17 @@ public class SwerveSubsystem extends SubsystemBase {
         frontRight.stop();
     }
 
+    //sets the modules to a certain desired state (used in DriverControl)
     public void setModuleStates(SwerveModuleState[] desiredStates) {
-        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, SwerveConsts.MAX_SPEED);
+        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, SwerveConsts.maxSpeed_mps);
         frontLeft.setDesiredState(desiredStates[0]);
         backLeft.setDesiredState(desiredStates[1]);
         backRight.setDesiredState(desiredStates[2]);
         frontRight.setDesiredState(desiredStates[3]);
     }
 
+    //lock method for Charge Station 
+    //wheels in X-formation so they don't roll 
     public void lock(){
         SwerveModuleState fl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(45)));
         SwerveModuleState bl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(-45)));
@@ -109,80 +142,76 @@ public class SwerveSubsystem extends SubsystemBase {
         frontRight.setAngle(fr);
     }
 
-    public void driveForward(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(AutoConsts.DRIVE_TRANSLATION_SPEED, 0, 0));
+    public void straightenWheels() {
+        SwerveModuleState fl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(0)));
+        SwerveModuleState bl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(0)));
+        SwerveModuleState br = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(0)));
+        SwerveModuleState fr = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(0)));
+    }
+
+  ///////////////////////////
+  //   AUTONOMOUS BASICS   //
+  ///////////////////////////
+
+    public void driveForward(double xSpeed){
+        SwerveModuleState[] moduleStates = SwerveConsts.driveKinematics.toSwerveModuleStates(new ChassisSpeeds(xSpeed, 0, 0));
         setModuleStates(moduleStates);
     }
 
-    public void driveBackward(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(-AutoConsts.DRIVE_TRANSLATION_SPEED, 0, 0));
+    public void driveBackward(double xSpeed){
+        SwerveModuleState[] moduleStates = SwerveConsts.driveKinematics.toSwerveModuleStates(new ChassisSpeeds(-xSpeed, 0, 0));
         setModuleStates(moduleStates);
     }
 
-    public void strafeLeft(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, -AutoConsts.DRIVE_TRANSLATION_SPEED, 0));
+    public void strafeLeft(double ySpeed){
+        SwerveModuleState[] moduleStates = SwerveConsts.driveKinematics.toSwerveModuleStates(new ChassisSpeeds(0, ySpeed, 0));
         setModuleStates(moduleStates);
     }
 
-    public void strafeRight(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, AutoConsts.DRIVE_TRANSLATION_SPEED, 0));
+    public void strafeRight(double ySpeed){
+        SwerveModuleState[] moduleStates = SwerveConsts.driveKinematics.toSwerveModuleStates(new ChassisSpeeds(0, -ySpeed, 0));
         setModuleStates(moduleStates);
     }
 
-    public void rotateLeft(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, 0, -AutoConsts.DRIVE_ROTATION_SPEED));
+    public void rotateLeft(double rotationSpeed){
+        SwerveModuleState[] moduleStates = SwerveConsts.driveKinematics.toSwerveModuleStates(new ChassisSpeeds(0, 0, -rotationSpeed));
         setModuleStates(moduleStates);
     }
 
-    public void rotateRight(){
-        SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(new ChassisSpeeds(0, 0, AutoConsts.DRIVE_ROTATION_SPEED));
+    public void rotateRight(double rotationSpeed){
+        SwerveModuleState[] moduleStates = SwerveConsts.driveKinematics.toSwerveModuleStates(new ChassisSpeeds(0, 0, rotationSpeed));
         setModuleStates(moduleStates);
     }
 
-
-
-
-    /* * * LANDING GEAR * * */
-
-    public void wheelsIn(){
-        landinator.set(Value.kReverse);
+    //set x, y, and z axes 
+    //used in the PID Balance  
+    public void pidDrive(double y, double x, double z) {
+        SwerveModuleState[] moduleStates = SwerveConsts.driveKinematics.toSwerveModuleStates(new ChassisSpeeds(y, x, z)); 
+        setModuleStates(moduleStates);
+    }
+    
+    public void setTank(double lSpeed, double rSpeed){
+        frontLeft.setDrivingMotor(lSpeed);
+        backLeft.setDrivingMotor(lSpeed);
+        backRight.setDrivingMotor(rSpeed);
+        frontRight.setDrivingMotor(rSpeed);
     }
 
-    public void wheelsOut(){
-        SwerveModuleState fl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(45)));
-        SwerveModuleState bl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(-90)));
-        SwerveModuleState br = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(90)));
-        SwerveModuleState fr = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(-45)));
-
-        frontLeft.setAngle(fl);
-        backLeft.setAngle(bl);
-        backRight.setAngle(br);
-        frontRight.setAngle(fr);
-
-        landinator.set(Value.kForward);
+    /* * * DISPLAY * * */
+    public void display() {
+        SmartDashboard.putNumber("[S] yaw 0-360", getYawAngle());
+        SmartDashboard.putNumber("[S] Pitch", getPitch());
+        SmartDashboard.putNumber("[S] Roll", getRoll());
+        SmartDashboard.putNumber("[S] Drive Enc", Math.abs(getDriveEnc()));
+        SmartDashboard.putNumber("[S] Turn Pos", getTurningPos());
+    
     }
-
-    public void setEndgame(double speed){
-        SwerveModuleState fl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(45)));
-        SwerveModuleState bl = new SwerveModuleState(speed, new Rotation2d(Math.toRadians(90)));
-        SwerveModuleState br = new SwerveModuleState(speed, new Rotation2d(Math.toRadians(90)));
-        SwerveModuleState fr = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(-45)));
-
-        //wheelinator.set(speed*1.25);
-
-        frontLeft.setAngle(fl);
-        backLeft.setDesiredState(bl);
-        backRight.setDesiredState(br);
-        frontRight.setAngle(fr);
-
-        wheelinator.set(-backLeft.getDriveSpeed());
-
-    }
-
+ 
     // PERIODIC - runs repeatedly (like periodic from timed robot)
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Robot Yaw", getYawAngle());
+        display();
     }
+    
 
 }

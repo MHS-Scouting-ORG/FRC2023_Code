@@ -4,17 +4,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClawSubsystem;
 
 //TOGGLE CLAW (CLOSE AND OPEN)
-public class Claw extends CommandBase {
+public class OpenClaw extends CommandBase {
   private ClawSubsystem clawSubsystem;
 
-  public Claw(ClawSubsystem claw) {
+  public OpenClaw(ClawSubsystem claw) {
     clawSubsystem = claw;
     addRequirements(claw);
   }
 
   @Override
   public void initialize() {
-    clawSubsystem.toggle();
+    clawSubsystem.openClaw();
   }
 
   @Override

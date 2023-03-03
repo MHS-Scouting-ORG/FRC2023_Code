@@ -18,17 +18,21 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.DriverControl;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
 
 public class RobotContainer {
-  public static SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
-  public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-  public static PivotSubsystem pivotSubsystem = new PivotSubsystem();
-  public static ClawSubsystem clawSubsystem = new ClawSubsystem();
-  public static Lights lights = new Lights();
 
-  private XboxController xbox = new XboxController(DriverControlConsts.XBOX_CONTROLLER_PORT);
-  private Joystick joystick = new Joystick(DriverControlConsts.JOYSTICK_PORT);
+  //INIT OBJECTS
+  private final SwerveSubsystem swerve = new SwerveSubsystem();
+  private final ClawSubsystem claw = new ClawSubsystem(); 
+  private final ElevatorSubsystem elev = new ElevatorSubsystem(); 
+  private final PivotSubsystem pivot = new PivotSubsystem();
+  private final Timer timer = new Timer(); 
+
+  private final XboxController m_Controller = new XboxController(0); 
 
   /* * * AUTONOMOUS COMMANDS * * */
   private final Command rainbowLights = new InstantCommand(() -> lights.potOfGold());
@@ -40,11 +44,12 @@ public class RobotContainer {
   //private XboxController testController = new XboxController(2);
   
   public RobotContainer() {
-    swerveSubsystem.setDefaultCommand(new DriverControl(swerveSubsystem, 
-      () -> -xbox.getLeftY()*0.75, 
-      () -> -xbox.getLeftX()*0.75, 
-      () -> -xbox.getRightX()*0.75, 
-      () -> xbox.getRightBumper())); // for field oriented drive
+    /* * * Driver Control Default * * */
+    swerve.setDefaultCommand(new DriverControl(swerve, 
+    () -> -m_Controller.getLeftY(), 
+    () -> -m_Controller.getLeftX(),
+    () -> -m_Controller.getRightX(), 
+    () -> m_Controller.getRightBumper()));
 
     configureBindings();
     selectAuto();
@@ -99,7 +104,6 @@ public class RobotContainer {
 
   }
 
-  
   public Command getAutonomousCommand() {
     return autoChooser.getSelected();
     //return new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
@@ -111,5 +115,4 @@ public class RobotContainer {
 
     SmartDashboard.putData(autoChooser);
   }
-
 }

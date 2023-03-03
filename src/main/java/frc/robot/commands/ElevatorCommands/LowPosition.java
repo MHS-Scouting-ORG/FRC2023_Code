@@ -7,6 +7,8 @@ import frc.robot.subsystems.ElevatorSubsystem;
 public class LowPosition extends CommandBase {
   ElevatorSubsystem elevSub;
   double setPoint;
+
+  // ELEV TO LOW POSITION 
   public LowPosition(ElevatorSubsystem elevSubystem) {
     elevSub = elevSubystem;
     setPoint = 6;
@@ -29,6 +31,7 @@ public class LowPosition extends CommandBase {
     }
 
     elevSub.changeSetpoint(setPoint);
+    SmartDashboard.putString("Position:", "low");
   }
 
   @Override
@@ -39,9 +42,11 @@ public class LowPosition extends CommandBase {
   @Override
   public boolean isFinished() {
     if(elevSub.bottomPressed() || elevSub.isAtSetpoint()){ // stops if the elevator is at the given point
+      //SmartDashboard.putBoolean("LowPos fin?", true);
       return true;
     }
      else{ 
+      //SmartDashboard.putBoolean("LowPos fin?", false);
       return false;
     }  
   }  

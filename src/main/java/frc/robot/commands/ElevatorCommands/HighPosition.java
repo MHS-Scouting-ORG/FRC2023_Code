@@ -7,6 +7,8 @@ import frc.robot.subsystems.ElevatorSubsystem;
 public class HighPosition extends CommandBase {
   ElevatorSubsystem elevSub;
   double setPoint;
+
+  // ELEV TO HIGH POSITION 
   public HighPosition(ElevatorSubsystem elevSubystem) {
     elevSub = elevSubystem;
     setPoint = 180;
@@ -25,6 +27,7 @@ public class HighPosition extends CommandBase {
     }
 
     elevSub.changeSetpoint(setPoint);
+    SmartDashboard.putString("Position:", "High");
   }
 
   @Override
