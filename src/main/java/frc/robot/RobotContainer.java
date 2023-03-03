@@ -39,11 +39,11 @@ public class RobotContainer {
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
   
   public RobotContainer() {
-    // swerveSubsystem.setDefaultCommand(new DriverControl(swerveSubsystem, 
-    //   () -> -xbox.getLeftY()*0.75, 
-    //   () -> -xbox.getLeftX()*0.75, 
-    //   () -> -xbox.getRightX()*0.75, 
-    //   () -> xbox.getRightBumper())); // for field oriented drive
+    swerveSubsystem.setDefaultCommand(new DriverControl(swerveSubsystem, 
+      () -> -xbox.getLeftY()*0.75, 
+      () -> -xbox.getLeftX()*0.75, 
+      () -> -xbox.getRightX()*0.75, 
+      () -> xbox.getRightBumper())); // for field oriented drive
 
     lights.setDefaultCommand(new Off(lights));
     selectAuto();
