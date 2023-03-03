@@ -92,7 +92,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public Rotation2d getRotation2d() {
-        return Rotation2d.fromDegrees(getYawAngle());
+        return Rotation2d.fromDegrees(360.0 - navx.getYaw());
     }
 
     public void stopModules() {

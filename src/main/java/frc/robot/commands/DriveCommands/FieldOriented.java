@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.SwerveConsts;
 import frc.robot.subsystems.SwerveSubsystem;
 
-public class DriverControl extends CommandBase{
+public class FieldOriented extends CommandBase{
     private SwerveSubsystem swerveSubsystem;
     private DoubleSupplier xSupplier, ySupplier, zSupplier;
     // private SlewRateLimiter xLimiter, yLimiter, zLimiter;
 
-    public DriverControl(SwerveSubsystem subs, DoubleSupplier xSupplier, DoubleSupplier ySupplier, DoubleSupplier zSupplier) {
+    public FieldOriented(SwerveSubsystem subs, DoubleSupplier xSupplier, DoubleSupplier ySupplier, DoubleSupplier zSupplier) {
             swerveSubsystem = subs;
             this.xSupplier = xSupplier;
             this.ySupplier = ySupplier;
@@ -54,7 +54,7 @@ public class DriverControl extends CommandBase{
         zSpeed = modifyAxis(zSpeed); //zLimiter.calculate(zSpeed) * SwerveConsts.maxRotation;
 
         // Chassis Speeds
-        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, zSpeed);
+        ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, zSpeed, swerveSubsystem.getRotation2d());
 
         // Convert chassis speeds to individual module states
         SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);

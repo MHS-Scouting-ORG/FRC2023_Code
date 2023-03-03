@@ -20,7 +20,7 @@ public class PivotHighCommand extends CommandBase{
 
     @Override
     public void execute(){ // Executes and runs the Pivot Arm PID
-        p_subsystem.newSetpoint(110);
+        p_subsystem.newSetpoint(106);
    
     }
 

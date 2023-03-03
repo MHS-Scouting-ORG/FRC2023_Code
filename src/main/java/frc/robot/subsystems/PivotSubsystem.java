@@ -108,7 +108,7 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
     }
                 
     public boolean isTucked(){ // Returns if the limit switch is pressed or not
-        return limitSwitch.get();
+        return !limitSwitch.get();
     }
 
     public boolean isAtSetPoint(){
@@ -205,7 +205,7 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
         canspark.set(calcSpeed);
 
         SmartDashboard.putNumber("[P] ENCODER", getEncoder()); // Prints out the encoder values
-        SmartDashboard.putBoolean("[P] LIMIT SWITCH", limitSwitch.get()); // Prints if the limit switch is pressed or not
+        SmartDashboard.putBoolean("[P] LIMIT SWITCH", isTucked()); // Prints if the limit switch is pressed or not
         SmartDashboard.putNumber("[P] SETPOINT", setpoint );
         SmartDashboard.putBoolean("[P] PID", isPIDOn());
     }
