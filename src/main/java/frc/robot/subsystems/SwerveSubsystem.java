@@ -86,6 +86,14 @@ public class SwerveSubsystem extends SubsystemBase {
         return navx.getRoll() - 3;
     }
 
+    public double getPitch() {
+        return navx.getPitch();
+    }
+
+    public double getDriveEnc() {
+        return frontLeft.getDrivePosition();
+    }
+
 
     public Rotation2d getRobotRotation() {
         return new Rotation2d(Math.toRadians(navx.getYaw()));

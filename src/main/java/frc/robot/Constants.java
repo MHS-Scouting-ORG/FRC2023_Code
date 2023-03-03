@@ -94,8 +94,8 @@ public final class Constants {
   }
 
   public static class PivotConsts {
-    public static int PIVOT_MOTOR_PORT = 14;
-    public static int PIVOT_LIMIT_PORT = 2;
+    public static final int PIVOT_MOTOR_PORT = 14;
+    public static final int PIVOT_LIMIT_PORT = 2;
   }
 
   public static class ClawConsts {
@@ -111,8 +111,8 @@ public final class Constants {
   }
 
   public static class AutoConsts {
-    public static final double DRIVE_TRANSLATION_SPEED = 0.25;
-    public static final double DRIVE_ROTATION_SPEED = 0.1;
+    public static final double DRIVE_TRANSLATION_SPEED = 0.16;
+    public static final double DRIVE_ROTATION_SPEED = 0.3;
   }
 
 }
