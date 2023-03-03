@@ -54,6 +54,7 @@ public class SwerveSubsystem extends SubsystemBase {
         landinator.set(Value.kReverse);
 
         straightenWheels();
+        resetNavx();
 
         yawOffset = 0; 
 

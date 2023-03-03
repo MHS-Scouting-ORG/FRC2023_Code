@@ -21,7 +21,6 @@ public class RotateRight extends CommandBase {
 
   @Override
   public void execute() {
-    SmartDashboard.putString("Current Command", getName());
     swerve.rotateRight(AutoConsts.DRIVE_ROTATION_SPEED);
   }
 

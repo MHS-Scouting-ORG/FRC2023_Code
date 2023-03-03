@@ -34,19 +34,19 @@ public class RobotContainer {
 
   private final Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private final Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private final Command fwd = new DriveForward(swerveSubsystem, 20);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
-    swerveSubsystem.setDefaultCommand(new DriverControl(swerveSubsystem,
-        () -> -xbox.getLeftY() * 0.75,
-        () -> -xbox.getLeftX() * 0.75,
+    swerveSubsystem.setDefaultCommand(new FieldOriented(swerveSubsystem,
+        () -> xbox.getLeftY() * 0.75,
+        () -> xbox.getLeftX() * 0.75,
         () -> -xbox.getRightX() * 0.75)); // for field oriented drive
 
     lights.setDefaultCommand(new Off(lights));
     selectAuto();
     configureBindings();
   }
+
 
   private void configureBindings() {
 
@@ -57,7 +57,7 @@ public class RobotContainer {
             () -> -xbox.getLeftX() * 0.35,
             () -> -xbox.getRightX() * 0.35));
     new JoystickButton(xbox, 6).toggleOnTrue(
-        new FieldOriented(swerveSubsystem,
+        new DriverControl(swerveSubsystem,
             () -> -xbox.getLeftY() * 0.75,
             () -> -xbox.getLeftX() * 0.75,
             () -> -xbox.getRightX() * 0.75));
@@ -108,7 +108,6 @@ public class RobotContainer {
   public void selectAuto() {
     autoChooser.addOption("Hybrid", hybrid);
     autoChooser.addOption("High", high);
-    autoChooser.addOption("Forward", fwd);
 
     SmartDashboard.putData(autoChooser);
   }

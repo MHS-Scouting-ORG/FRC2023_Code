@@ -31,7 +31,7 @@ public class High extends SequentialCommandGroup {
 
       new ParallelCommandGroup(
       // Move backward
-      new DriveBackward(swerve, 100),
+      new DriveBackward(swerve, 324),
 
       // Arm in resting position (pivot in, elevator down) 
       new TuckedFromTop(pivot, elevator)
