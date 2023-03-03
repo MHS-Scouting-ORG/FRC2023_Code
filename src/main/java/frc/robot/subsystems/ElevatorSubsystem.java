@@ -1,11 +1,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.ElevatorConsts;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.ElevatorConsts;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -24,9 +24,9 @@ public class ElevatorSubsystem extends SubsystemBase {
   double manualSpeed = 0;
 
   public ElevatorSubsystem() {
-    topLim = new DigitalInput(ElevatorConsts.TOP_LIMIT_PORT);
-    bottomLim = new DigitalInput(ElevatorConsts.BOTTOM_LIMIT_PORT);
-    elevator = new CANSparkMax(ElevatorConsts.ELEVATOR_MOTOR_PORT, MotorType.kBrushless);
+    topLim = new DigitalInput(ElevatorConsts.TOP_LIMIT_SWITCH);
+    bottomLim = new DigitalInput(ElevatorConsts.BOTTOM_LIMIT_SWITCH);
+    elevator = new CANSparkMax(ElevatorConsts.ELEVATOR_ID, MotorType.kBrushless);
     enc = elevator.getEncoder();
     setpoint = enc.getPosition();
     pid.setTolerance(.05);
@@ -114,8 +114,8 @@ public class ElevatorSubsystem extends SubsystemBase {
       calcSpeed = manualSpeed; // IF PID DISABLED, SETS ELEVATOR SPEED TO SPEED FOR MANUAL DRIVE
     }
     
-    if(calcSpeed > .9){ // IF SPEED CALCULATED IS GREATER THAN 1, SETS MAX SPEED TO 1
-      calcSpeed = .9;
+    if(calcSpeed > 0.9){ // IF SPEED CALCULATED IS GREATER THAN 1, SETS MAX SPEED TO 1
+      calcSpeed = 0.9;
     }
     else if(calcSpeed < -0.6){ // IF SPEED CALCULATED IS LESS THAN -1, SETS MAX SPEED TO -1
       calcSpeed = -0.6; 
@@ -129,11 +129,12 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
     
     elevator.set(calcSpeed);
-    SmartDashboard.putNumber("[E] PID SPEED", calcSpeed);
-    SmartDashboard.putBoolean("[E] TOP LIMIT" , topPressed()); 
-    SmartDashboard.putBoolean("[E] BOTTOM LIMIT", bottomPressed());
-    SmartDashboard.putNumber("[E] ENCODER", encoderValue);
-    SmartDashboard.putNumber("[E] SETPOINT", setpoint);
-    SmartDashboard.putNumber("[E] ERROR", getError());
+    //SmartDashboard.putNumber("PID Speed", calcSpeed);
+    //SmartDashboard.putBoolean("Top switch pressed" , topPressed()); 
+    //SmartDashboard.putBoolean("Bottom switch pressed", bottomPressed());
+    SmartDashboard.putNumber("encoder counts", encoderValue);
+    //SmartDashboard.putNumber("Setpoint", setpoint);
+    //SmartDashboard.putNumber("error", getError());
+    //SmartDashboard.putNumber("tolerance", pid.getPositionTolerance());  
   }
 }

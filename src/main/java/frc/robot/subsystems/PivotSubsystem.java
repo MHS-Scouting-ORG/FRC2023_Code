@@ -20,9 +20,9 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
     private final CANSparkMax canspark = new CANSparkMax(14, MotorType.kBrushless);
     private final DigitalInput limitSwitch = new DigitalInput(2);
     private final RelativeEncoder rEnc;
-    private final PIDController pid = new PIDController(0.1, 0, 0);
+    private final PIDController pid = new PIDController(0.07, 0, 0);
     private double before;
-    private double setpoint;
+    private double setpoint = 0;
     private boolean pidOn = true;
     private double manualSpeed = 0;
     private double encoderValue;
@@ -108,7 +108,7 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
     }
                 
     public boolean isTucked(){ // Returns if the limit switch is pressed or not
-        return !limitSwitch.get();
+        return limitSwitch.get();
     }
 
     public boolean isAtSetPoint(){
@@ -144,8 +144,8 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
         if(error > 1){ // If the error is greater than a limit of 0.5, return a value of 0.5
             return 1;
         }
-        else if(error < -.9){ // If the error is less than a limit of -0.5, return a value of -0.5
-            return -.9;
+        else if(error < -1){ // If the error is less than a limit of -0.5, return a value of -0.5
+            return -1;
         }
         else{ // If everything else fails, return the error 
             return error;
@@ -196,17 +196,17 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
        // forceStop(calcSpeed);
         
         
-        if(calcSpeed > .7){ 
-          calcSpeed = .7;
+        if(calcSpeed > .5){ 
+          calcSpeed = .5;
         }
-        else if(calcSpeed < -0.4){ 
-          calcSpeed = -0.4;
+        else if(calcSpeed < -0.3){ 
+          calcSpeed = -0.3;
         }
         canspark.set(calcSpeed);
 
-        SmartDashboard.putNumber("[P] ENCODER", getEncoder()); // Prints out the encoder values
-        SmartDashboard.putBoolean("[P] LIMIT SWITCH", isTucked()); // Prints if the limit switch is pressed or not
-        SmartDashboard.putNumber("[P] SETPOINT", setpoint );
-        SmartDashboard.putBoolean("[P] PID", isPIDOn());
+        SmartDashboard.putNumber("Pivot Arm Encoder: ", getEncoder()); // Prints out the encoder values
+        //SmartDashboard.putBoolean("Limit Switch: ", limitSwitch.get()); // Prints if the limit switch is pressed or not
+        //SmartDashboard.putNumber("setpoint PIVOT", setpoint );
+        //SmartDashboard.putBoolean("pid", isPIDOn());
     }
 }

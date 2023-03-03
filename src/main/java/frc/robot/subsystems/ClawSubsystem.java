@@ -94,29 +94,30 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void go90Counterclockwise(double previousEnc){
-    if( getEncoder() > (previousEnc-ClawConsts.ROTATE_90) && getEncoder() > 90){
+    if( getEncoder() < (previousEnc-ClawConsts.ROTATE_90) ){
       counterclockwise();
     } else{
       stopWrist();
     }
   }
 
-  public void toggle(){
-    claw.toggle();
-  }
-
   public void openClaw(){
-    claw.set(Value.kForward);
+    claw.set(Value.kReverse);
   }
 
   public void closeClaw(){
-    claw.set(Value.kReverse);
+    claw.set(Value.kForward);
+  }
+
+  public void toggle(){
+    claw.toggle();
   }
 
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Claw Closed?", claw.get().toString().equals("kForward"));
-    SmartDashboard.putNumber("[C] Wirst Encoder", wristEnc.getPosition());
+    SmartDashboard.putBoolean("Closed?", claw.get().toString().equals("kForward"));
+
+    SmartDashboard.putNumber("Wrist Enc", wristEnc.getPosition());
   }
 }

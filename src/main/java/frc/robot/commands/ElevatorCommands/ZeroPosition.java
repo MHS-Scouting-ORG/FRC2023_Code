@@ -6,6 +6,8 @@ import frc.robot.subsystems.ElevatorSubsystem;
 public class ZeroPosition extends CommandBase {
   ElevatorSubsystem elevSub;
   double setPoint;
+
+  // ELEV TO RESTING POSITION (OLD STARTING CONFIGURATION)
   public ZeroPosition(ElevatorSubsystem elevSubystem) {
     elevSub = elevSubystem;
     setPoint = 0;
