@@ -17,7 +17,7 @@ public class FieldForward extends CommandBase{
     public FieldForward(SwerveSubsystem newSwerve, double newDesiredEnc){
         swerve = newSwerve;
         desiredEnc = newDesiredEnc; 
-        turningPID = new PIDController(SwerveConsts.KP_TURNING, SwerveConsts.KI_TURNING, SwerveConsts.KD_TURNING);
+        turningPID = new PIDController(0.05, 0, 0);
         turningPID.enableContinuousInput(-Math.PI, Math.PI); // System is circular;  Goes from -Math.PI to 0 to Math.PI
 
         addRequirements(swerve);
@@ -33,6 +33,7 @@ public class FieldForward extends CommandBase{
         SmartDashboard.putString("CurrentCommand", getName());
 
         double turningSpeed = turningPID.calculate(swerve.getYaw(), 0);
+        SmartDashboard.putNumber("turning speed", turningSpeed);
 
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(AutoConsts.DRIVE_TRANSLATION_SPEED, 0, turningSpeed, swerve.getRotation2d());
 

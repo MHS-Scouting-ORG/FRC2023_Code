@@ -1,5 +1,6 @@
 package frc.robot.commands.ClawCommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClawSubsystem;
 
@@ -17,6 +18,7 @@ public class ToStartingPosition extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putString("Current Command", getName());
     clawSubsystem.startingPosition();
   }
 
@@ -27,6 +29,6 @@ public class ToStartingPosition extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return -5 <= clawSubsystem.getEncoder() && clawSubsystem.getEncoder() <= 5;
+    return -2 <= clawSubsystem.getEncoder() && clawSubsystem.getEncoder() <= 2;
   }
 }

@@ -23,7 +23,6 @@ public class ClawSubsystem extends SubsystemBase {
     wrist.setIdleMode(IdleMode.kBrake);
 
     wristEnc = wrist.getEncoder();
-    wristEnc.setPosition(0);
 
     //  forward=open    reverse=closed
     claw = new DoubleSolenoid(PneumaticsModuleType.REVPH, ClawConsts.CLAW_FORWARD_CHANNEL, ClawConsts.CLAW_REVERSE_CHANNEL);
@@ -86,7 +85,7 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void go90Clockwise(double previousEnc){
-    if( getEncoder() < (previousEnc+ClawConsts.ROTATE_90) ){
+    if( getEncoder() <= (previousEnc+ClawConsts.ROTATE_90) ){
       clockwise();
     } else{
       stopWrist();
@@ -94,7 +93,7 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void go90Counterclockwise(double previousEnc){
-    if( getEncoder() > (previousEnc-ClawConsts.ROTATE_90)){
+    if( getEncoder() >= (previousEnc-ClawConsts.ROTATE_90)){
       counterclockwise();
     } else{
       stopWrist();

@@ -8,6 +8,7 @@ import frc.robot.commands.DriveCommands.*;
 import frc.robot.commands.ElevatorCommands.*;
 import frc.robot.commands.PivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
+import frc.robot.commands.MovementCommands.FieldForward;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -33,7 +34,7 @@ public class RobotContainer {
   private Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
-  private Command launchinator = new Launchinator(pivotSubsystem, clawSubsystem);
+  private Command fieldForward = new FieldForward(swerveSubsystem, 5000);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
@@ -66,7 +67,8 @@ public class RobotContainer {
 
     // FOR TESTING
     new JoystickButton(xbox, 7).onTrue(new InstantCommand(() -> swerveSubsystem.resetNavx()));
-    new JoystickButton(xbox, 3).onTrue(new LandingGearIn(swerveSubsystem));
+    //new JoystickButton(xbox, 3).onTrue(new LandingGearIn(swerveSubsystem));
+    new JoystickButton(xbox, 3).onTrue(new Launchinator(pivotSubsystem, clawSubsystem));
 
     /* CLAW */
     new JoystickButton(xbox, 5).onTrue(new Claw(clawSubsystem));
@@ -79,8 +81,7 @@ public class RobotContainer {
 
     /* PIVOT */
     new JoystickButton(joystick, 11).onTrue(new LowPickUp(pivotSubsystem, elevatorSubsystem));
-    new JoystickButton(joystick, 9)
-        .onTrue(new ParallelCommandGroup(new PivotMiddleCommand(pivotSubsystem), new MidPosition(elevatorSubsystem)));
+    new JoystickButton(joystick, 9).onTrue(new ParallelCommandGroup(new PivotMiddleCommand(pivotSubsystem), new MidPosition(elevatorSubsystem)));
     new JoystickButton(joystick, 7).onTrue(new TopNode(pivotSubsystem, elevatorSubsystem));
     new JoystickButton(joystick, 5).onTrue(Tucked.getCommand(pivotSubsystem, elevatorSubsystem, clawSubsystem));
     new JoystickButton(joystick, 3).whileTrue(new PivotJoystickCommand(pivotSubsystem, () -> -joystick.getY()));
@@ -106,7 +107,7 @@ public class RobotContainer {
     autoChooser.setDefaultOption("Do Nothing", doNothing);
     autoChooser.addOption("High", high);
     autoChooser.addOption("Hybrid", hybrid);
-    autoChooser.addOption("Launchinator", launchinator);
+    autoChooser.addOption("Launchinator", fieldForward);
 
     SmartDashboard.putData(autoChooser);
   }

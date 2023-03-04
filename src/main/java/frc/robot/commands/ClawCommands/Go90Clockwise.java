@@ -1,5 +1,6 @@
 package frc.robot.commands.ClawCommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ClawConsts;
 import frc.robot.subsystems.ClawSubsystem;
@@ -21,6 +22,7 @@ public class Go90Clockwise extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putString("Current Command", getName());
     clawSubsystem.go90Clockwise(previousEnc);
   }
 
@@ -32,6 +34,6 @@ public class Go90Clockwise extends CommandBase {
   @Override
   public boolean isFinished() {
     //return Math.abs((previousEnc+ClawConsts.ROTATE_90) - clawSubsystem.getEncoder()) <= 5;
-    return ((previousEnc+ClawConsts.ROTATE_90-5) <= clawSubsystem.getEncoder()) && (clawSubsystem.getEncoder() <= (previousEnc+ClawConsts.ROTATE_90+5));
+    return ((previousEnc+ClawConsts.ROTATE_90-2) <= clawSubsystem.getEncoder()) && (clawSubsystem.getEncoder() <= (previousEnc+ClawConsts.ROTATE_90+2));
   }
 }

@@ -13,11 +13,9 @@ public class Launchinator extends SequentialCommandGroup {
 
     // LAUNCH-INATE (RELEASE) RUBBER BAND 
     addCommands(
-      new PivotLowCommand(pivot), 
+      new PivotLowCommand(pivot) 
 
-      new ToStartingPosition(claw), 
-
-      new TuckedIn(pivot)
+      //new ToStartingPosition(claw)
     );
   }
 }
