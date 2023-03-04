@@ -33,6 +33,8 @@ public class RobotContainer {
   //AUTONOMOUS CHOICES 
   private Command high = new HighMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command hybridMobility = new HybridMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command hybridBal = new HybridBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
@@ -106,6 +108,8 @@ public class RobotContainer {
     autoChooser.setDefaultOption("Do Nothing", doNothing);
     autoChooser.addOption("High", high);
     autoChooser.addOption("Hybrid", hybrid);
+    autoChooser.addOption("Hybrid Mobility", hybridMobility);
+    autoChooser.addOption("Hybrid Balance", hybridBal);
 
     SmartDashboard.putData(autoChooser);
   }
