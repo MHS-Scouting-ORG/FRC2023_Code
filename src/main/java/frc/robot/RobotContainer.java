@@ -38,7 +38,6 @@ public class RobotContainer {
   //AUTONOMOUS CHOICES 
   private final Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command hybridMiddle = new HybridMiddle(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private Command balance = new PitchBalance(swerveSubsystem, 0);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
@@ -110,7 +109,6 @@ public class RobotContainer {
     //autoChooser.addOption("Hybrid", hybrid);
     autoChooser.addOption("High", high);
     autoChooser.addOption("Hybrid Middle", hybridMiddle);
-    autoChooser.addOption("Balance", balance);
 
     SmartDashboard.putData(autoChooser);
   }

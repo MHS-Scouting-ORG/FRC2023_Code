@@ -11,10 +11,10 @@ public class PitchBalance extends CommandBase {
   private double time;
 
   // MOVE UNTIL 13.5 IS READ A SECOND TIME (WHEN IT'S GOING DOWN FROM 15 DEGREES)
-  public PitchBalance(SwerveSubsystem newSwerve, double newTime) {
+  public PitchBalance(SwerveSubsystem newSwerve/* , double newTime */) {
     swerve = newSwerve;
     readyToEnd = false;
-    time = newTime; 
+    //time = newTime; 
 
     addRequirements(swerve);
   }
@@ -54,6 +54,6 @@ public class PitchBalance extends CommandBase {
   @Override
   public boolean isFinished() {
     // Checks a second time if pitch is greater than -13.5, ends if true
-    return (readyToEnd && swerve.getPitch() > -11) || time > 14;
+    return (readyToEnd && swerve.getPitch() > -11)/*  || time > 14 */;
   }
 }

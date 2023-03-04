@@ -25,23 +25,10 @@ public class HybridMiddle extends SequentialCommandGroup {
 
     // start elev in mid position 
 
-      // Arm in hybrid goal position (pivot out, elevator down) 
-      new LowPickUp(pivot, elevator),
-
-      // Open claw 
-       new Claw(claw)
-
-    //  // Arm in resting position (pivot in, elevator down) 
-    //   new TuckedFromBottom(pivot, elevator),
-
-    //   // Move backward
-    //   new DriveBackwardCommand(swerve, 50), 
-
-    //   // Rotate 90 degrees right so we can strafe right onto Charge Station 
-    //   new RotateRightCommand(swerve, 90)
+      new HybridMiddle(swerve, claw, pivot, elevator),
 
       // Balance on Charge Station 
-      //new PitchBalance(swerve, time.get())
+      new PitchBalance(swerve/* , time.get() */)
     );
   }
 }
