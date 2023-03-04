@@ -33,6 +33,8 @@ public class FieldRotateRight extends CommandBase{
 
         double turningSpeed = Math.abs(turningPID.calculate(swerve.getYaw(), desiredAngle));
 
+        SmartDashboard.putNumber("Turning Speed", turningSpeed);
+
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, turningSpeed, swerve.getRotation2d());
 
         // Convert chassis speeds to individual module states

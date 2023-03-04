@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.AutoConsts;
@@ -54,6 +55,6 @@ public class PitchBalance extends CommandBase {
   @Override
   public boolean isFinished() {
     // Checks a second time if pitch is greater than -13.5, ends if true
-    return (readyToEnd && swerve.getPitch() > -11)/*  || time > 14 */;
+    return (readyToEnd && swerve.getPitch() > -11 || Timer.getMatchTime() < 1)/*  || time > 14 */;
   }
 }

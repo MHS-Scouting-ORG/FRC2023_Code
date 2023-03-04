@@ -9,6 +9,7 @@ import frc.robot.commands.ElevatorCommands.*;
 import frc.robot.commands.PivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
 import frc.robot.commands.MovementCommands.FieldForward;
+import frc.robot.commands.MovementCommands.FieldRotateRight;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -34,6 +35,7 @@ public class RobotContainer {
   private Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
+  private Command fieldRotateRight = new FieldRotateRight(swerveSubsystem, 90);
   private Command fieldForward = new FieldForward(swerveSubsystem, 5000);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
@@ -108,6 +110,7 @@ public class RobotContainer {
     autoChooser.addOption("High", high);
     autoChooser.addOption("Hybrid", hybrid);
     autoChooser.addOption("Launchinator", fieldForward);
+    autoChooser.addOption("FieldRotateRight", fieldRotateRight);
 
     SmartDashboard.putData(autoChooser);
   }
