@@ -31,6 +31,6 @@ public class RotateRightCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return desiredAngle-2 < swerve.getYaw() && swerve.getYaw() < desiredAngle + 2; 
+    return desiredAngle-2 < swerve.getYawAngle() && swerve.getYawAngle() < desiredAngle + 2; 
   }
 }

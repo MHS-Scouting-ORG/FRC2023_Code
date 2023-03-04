@@ -238,8 +238,10 @@ public class SwerveSubsystem extends SubsystemBase {
     // PERIODIC - runs repeatedly (like periodic from timed robot)
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Robot Yaw", getYawAngle());
-        SmartDashboard.putNumber("Auto Yaw", getAutoYaw());
-        SmartDashboard.putNumber("offset%", yawOffset);
+        SmartDashboard.putNumber("[S] Yaw", getYawAngle());
+        SmartDashboard.putNumber("[S] Yaw", getAutoYaw());
+        SmartDashboard.putNumber("[S] Yaw Offset", yawOffset);
+        SmartDashboard.putNumber("[S] Encoder", getLeftEncoder());
+        SmartDashboard.putNumber("[S] Pitch", getPitch());
     }
 }

@@ -16,9 +16,9 @@ import frc.robot.subsystems.SwerveSubsystem;
 public class HybridMiddle extends SequentialCommandGroup {
 
   public HybridMiddle(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator)  {
-    Timer time = new Timer(); 
-    time.restart();
-    time.start();
+    // Timer time = new Timer(); 
+    // time.restart();
+    // time.start();
 
     //SCORE CONE IN HYBRID GOAL 
     addCommands(
@@ -35,13 +35,13 @@ public class HybridMiddle extends SequentialCommandGroup {
       new TuckedFromBottom(pivot, elevator),
 
       // Move backward
-      new DriveBackwardCommand(swerve, 10), 
+      new DriveBackwardCommand(swerve, 13), 
 
       // Rotate 90 degrees right so we can strafe right onto Charge Station 
-      new RotateRightCommand(swerve, 90),
+      new RotateRightCommand(swerve, 90)
 
       // Balance on Charge Station 
-      new PitchBalance(swerve, time.get())
+      //new PitchBalance(swerve, time.get())
     );
   }
 }

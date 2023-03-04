@@ -24,7 +24,7 @@ public class DriveForwardCommand extends CommandBase{
     @Override
     public void execute(){
         SmartDashboard.putString("CurrentCommand", getName());
-        swerve.driveForward(AutoConsts.DRIVE_TRANSLATION_SPEED);
+        swerve.driveForward(AutoConsts.DRIVE_TRANSLATION_SPEED * 0.8);
     }
 
     @Override

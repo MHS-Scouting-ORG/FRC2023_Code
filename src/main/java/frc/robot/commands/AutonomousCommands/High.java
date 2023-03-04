@@ -25,14 +25,16 @@ public class High extends SequentialCommandGroup {
       new HighAutoPositionParallel(pivot, elevator),
 
       // Move forward
-      new DriveForwardCommand(swerve, 25),
+      new DriveForwardCommand(swerve, 27),
 
       // Open claw
       new Claw(claw),
 
+      new DriveBackwardCommand(swerve, 5),
+
       new ParallelCommandGroup(
       // Move backward
-      new DriveBackwardCommand(swerve, 300),
+      new DriveBackwardCommand(swerve, 260),
 
       // Arm in resting position (pivot in, elevator down) 
       new TuckedFromTop(pivot, elevator)

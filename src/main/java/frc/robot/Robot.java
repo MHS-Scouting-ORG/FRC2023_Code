@@ -67,6 +67,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     RobotContainer.swerveSubsystem.resetNavx();
+    RobotContainer.swerveSubsystem.straightenWheels();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)

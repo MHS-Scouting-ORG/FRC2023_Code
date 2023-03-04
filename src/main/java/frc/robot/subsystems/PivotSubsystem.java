@@ -108,7 +108,7 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
     }
                 
     public boolean isTucked(){ // Returns if the limit switch is pressed or not
-        return !limitSwitch.get();
+        return limitSwitch.get();
     }
 
     public boolean isAtSetPoint(){
