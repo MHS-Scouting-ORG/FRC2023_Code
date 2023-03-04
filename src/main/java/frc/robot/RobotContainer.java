@@ -32,8 +32,10 @@ public class RobotContainer {
   private Joystick joystick = new Joystick(DriverControlConsts.JOYSTICK_PORT);
 
   //AUTONOMOUS CHOICES 
-  private Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command high = new HighMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command hybridMobility = new HybridMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command hybridBal = new HybridBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
   private Command fieldRotateRight = new FieldRotateRight(swerveSubsystem, 90);
   private Command fieldForward = new FieldForward(swerveSubsystem, 5000);
@@ -111,6 +113,8 @@ public class RobotContainer {
     autoChooser.addOption("Hybrid", hybrid);
     autoChooser.addOption("Launchinator", fieldForward);
     autoChooser.addOption("FieldRotateRight", fieldRotateRight);
+    autoChooser.addOption("Hybrid Mobility", hybridMobility);
+    autoChooser.addOption("Hybrid Balance", hybridBal);
 
     SmartDashboard.putData(autoChooser);
   }

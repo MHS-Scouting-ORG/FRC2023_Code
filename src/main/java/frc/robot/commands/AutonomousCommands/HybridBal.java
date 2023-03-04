@@ -22,7 +22,7 @@ public class HybridBal extends SequentialCommandGroup {
 
       new Hybrid(swerve, claw, pivot, elevator),
 
-      new DriveBackwardCommand(swerve, 20),
+      new DriveBackwardCommand(swerve, 15),
 
       new RotateRightCommand(swerve, 90),
 
