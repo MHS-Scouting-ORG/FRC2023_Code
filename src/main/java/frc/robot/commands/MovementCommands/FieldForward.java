@@ -9,12 +9,12 @@ import frc.robot.Constants.AutoConsts;
 import frc.robot.Constants.SwerveConsts;
 import frc.robot.subsystems.SwerveSubsystem;
 
-public class ForwardStraight extends CommandBase{
+public class FieldForward extends CommandBase{
     private final SwerveSubsystem swerve;
     private double desiredEnc; 
     private PIDController turningPID; 
 
-    public ForwardStraight(SwerveSubsystem newSwerve, double newDesiredEnc){
+    public FieldForward(SwerveSubsystem newSwerve, double newDesiredEnc){
         swerve = newSwerve;
         desiredEnc = newDesiredEnc; 
         turningPID = new PIDController(SwerveConsts.KP_TURNING, SwerveConsts.KI_TURNING, SwerveConsts.KD_TURNING);
