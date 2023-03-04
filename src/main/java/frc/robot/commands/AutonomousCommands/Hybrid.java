@@ -12,9 +12,9 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
-public class HybridSide extends SequentialCommandGroup {
+public class Hybrid extends SequentialCommandGroup {
 
-  public HybridSide(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator)  {
+  public Hybrid(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator)  {
 
     //SCORE CONE IN HYBRID GOAL 
     addCommands(

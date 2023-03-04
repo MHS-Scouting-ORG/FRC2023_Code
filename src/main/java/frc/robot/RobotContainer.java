@@ -36,8 +36,9 @@ public class RobotContainer {
   private Joystick joystick = new Joystick(DriverControlConsts.JOYSTICK_PORT);
 
   //AUTONOMOUS CHOICES 
-  private final Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private Command hybridMiddle = new HybridMiddle(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command hybridMiddle = new HybridBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command doNothing = new DoNothing();
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
@@ -107,6 +108,7 @@ public class RobotContainer {
 
   public void selectAuto() {
     //autoChooser.addOption("Hybrid", hybrid);
+    autoChooser.setDefaultOption("Do Nothing", doNothing);
     autoChooser.addOption("High", high);
     autoChooser.addOption("Hybrid Middle", hybridMiddle);
 

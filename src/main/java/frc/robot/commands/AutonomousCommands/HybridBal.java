@@ -13,9 +13,9 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
-public class HybridMiddle extends SequentialCommandGroup {
+public class HybridBal extends SequentialCommandGroup {
 
-  public HybridMiddle(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator)  {
+  public HybridBal(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator)  {
     // Timer time = new Timer(); 
     // time.restart();
     // time.start();
@@ -25,7 +25,7 @@ public class HybridMiddle extends SequentialCommandGroup {
 
     // start elev in mid position 
 
-      new HybridMiddle(swerve, claw, pivot, elevator),
+      new HybridBal(swerve, claw, pivot, elevator),
 
       // Balance on Charge Station 
       new PitchBalance(swerve/* , time.get() */)
