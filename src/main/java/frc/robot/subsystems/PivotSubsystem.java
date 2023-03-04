@@ -200,7 +200,7 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
           calcSpeed = .7;
         }
         else if(calcSpeed < -0.4){ 
-          calcSpeed = -0.4;
+          calcSpeed = -0.5;
         }
         canspark.set(calcSpeed);
 

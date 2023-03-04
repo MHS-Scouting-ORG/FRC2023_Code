@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.Constants.DriverControlConsts;
+import frc.robot.commands.PitchBalance;
 import frc.robot.commands.AutonomousCommands.*;
 import frc.robot.commands.ClawCommands.*;
 import frc.robot.commands.CommandGroups.*;
@@ -34,17 +35,17 @@ public class RobotContainer {
   private XboxController xbox = new XboxController(DriverControlConsts.XBOX_CONTROLLER_PORT);
   private Joystick joystick = new Joystick(DriverControlConsts.JOYSTICK_PORT);
 
-  //private final Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  //AUTONOMOUS CHOICES 
   private final Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private Command rotation = new RotateRightCommand(swerveSubsystem, 90);
-  private Command back = new DriveBackwardCommand(swerveSubsystem, 324);
+  private Command hybridMiddle = new HybridMiddle(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command balance = new PitchBalance(swerveSubsystem, 0);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(new FieldOriented(swerveSubsystem,
-        () -> xbox.getLeftY() * 0.75,
-        () -> xbox.getLeftX() * 0.75,
-        () -> -xbox.getRightX() * 0.75)); // for field oriented drive
+        () -> xbox.getLeftY() * 0.85,
+        () -> xbox.getLeftX() * 0.85,
+        () -> -xbox.getRightX() * 0.85)); // for field oriented drive
 
     lights.setDefaultCommand(new Off(lights));
     selectAuto();
@@ -108,8 +109,8 @@ public class RobotContainer {
   public void selectAuto() {
     //autoChooser.addOption("Hybrid", hybrid);
     autoChooser.addOption("High", high);
-    autoChooser.addOption("Rotate", rotation);
-    autoChooser.addOption("Backwards", back);
+    autoChooser.addOption("Hybrid Middle", hybridMiddle);
+    autoChooser.addOption("Balance", balance);
 
     SmartDashboard.putData(autoChooser);
   }

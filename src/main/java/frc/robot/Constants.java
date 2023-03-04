@@ -111,7 +111,7 @@ public final class Constants {
   }
 
   public static class AutoConsts {
-    public static final double DRIVE_TRANSLATION_SPEED = 0.2;
+    public static final double DRIVE_TRANSLATION_SPEED = 0.16;
     public static final double DRIVE_ROTATION_SPEED = 0.5;
   }
 

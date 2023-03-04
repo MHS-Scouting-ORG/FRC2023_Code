@@ -169,13 +169,13 @@ public class SwerveSubsystem extends SubsystemBase {
 
     public void strafeLeft(double speed) {
         SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS
-                .toSwerveModuleStates(new ChassisSpeeds(0, -speed, 0));
+                .toSwerveModuleStates(new ChassisSpeeds(0, speed, 0));
         setModuleStates(moduleStates);
     }
 
     public void strafeRight(double speed) {
         SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS
-                .toSwerveModuleStates(new ChassisSpeeds(0, speed, 0));
+                .toSwerveModuleStates(new ChassisSpeeds(0, -speed, 0));
         setModuleStates(moduleStates);
     }
 

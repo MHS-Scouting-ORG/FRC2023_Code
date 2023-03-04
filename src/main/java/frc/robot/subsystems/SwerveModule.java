@@ -126,7 +126,7 @@ public class SwerveModule extends SubsystemBase{
     //sets the desired state of the module (for left joystick)
     public void setDesiredState(SwerveModuleState state){
         // To make keep robot from going back to 0 position
-        if(Math.abs(state.speedMetersPerSecond) < 0.1){
+        if(Math.abs(state.speedMetersPerSecond) < 0.01){
             stop();
             return;
         }
