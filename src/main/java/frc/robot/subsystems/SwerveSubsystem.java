@@ -249,6 +249,5 @@ public class SwerveSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("[S] Encoder", getLeftEncoder());
         SmartDashboard.putNumber("[S] Pitch", getPitch());
         SmartDashboard.putNumber("[S] Timer Class", Timer.getMatchTime());
-        SmartDashboard.putNumber("[S] Timer Obj", timer.getMatchTime());
     }
 }
