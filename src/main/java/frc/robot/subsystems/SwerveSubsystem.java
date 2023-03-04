@@ -11,6 +11,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -29,6 +30,8 @@ public class SwerveSubsystem extends SubsystemBase {
     private CANSparkMax wheelinator;
 
     private double yawOffset; 
+
+    private Timer timer; 
 
     public SwerveSubsystem() {
         frontLeft = new SwerveModule(SwerveConsts.FL_TURN_PORT, SwerveConsts.FL_DRIVE_PORT,
@@ -52,6 +55,8 @@ public class SwerveSubsystem extends SubsystemBase {
         wheelinator = new CANSparkMax(LandingGearConsts.LANDING_GEAR_MOTOR_PORT, MotorType.kBrushless);
 
         landinator.set(Value.kReverse);
+
+        timer = new Timer(); 
 
         straightenWheels();
 
@@ -243,5 +248,7 @@ public class SwerveSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("[S] Yaw Offset", yawOffset);
         SmartDashboard.putNumber("[S] Encoder", getLeftEncoder());
         SmartDashboard.putNumber("[S] Pitch", getPitch());
+        SmartDashboard.putNumber("[S] Timer Class", Timer.getMatchTime());
+        SmartDashboard.putNumber("[S] Timer Obj", timer.getMatchTime());
     }
 }
