@@ -21,6 +21,8 @@ public class TuckedIn extends CommandBase{
 
     @Override
     public void execute(){
+        SmartDashboard.putString("Current Command", getName());
+
         SmartDashboard.putBoolean("tuckedIn", false);
         if(!p_subs.isTucked()){
         p_subs.newSetpoint(p_subs.getEncoder());

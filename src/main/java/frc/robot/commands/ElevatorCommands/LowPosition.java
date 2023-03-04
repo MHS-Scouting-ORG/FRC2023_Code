@@ -22,6 +22,8 @@ public class LowPosition extends CommandBase {
 
   @Override
   public void execute(){
+    SmartDashboard.putString("Current Command", getName());
+
     if(elevSub.topPressed()){
       elevSub.changeSetpoint(setPoint);
     }
