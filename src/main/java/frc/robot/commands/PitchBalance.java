@@ -8,7 +8,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 public class PitchBalance extends CommandBase {
   private final SwerveSubsystem swerve;
   private boolean readyToEnd;
-  private double time;
+  //private double time;
 
   // MOVE UNTIL 13.5 IS READ A SECOND TIME (WHEN IT'S GOING DOWN FROM 15 DEGREES)
   public PitchBalance(SwerveSubsystem newSwerve/* , double newTime */) {

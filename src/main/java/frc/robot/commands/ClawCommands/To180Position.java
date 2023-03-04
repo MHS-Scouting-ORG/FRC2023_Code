@@ -1,7 +1,6 @@
 package frc.robot.commands.ClawCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.ClawConsts;
 import frc.robot.subsystems.ClawSubsystem;
 
 public class To180Position extends CommandBase {

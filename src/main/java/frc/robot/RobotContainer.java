@@ -1,7 +1,6 @@
 package frc.robot;
 
 import frc.robot.Constants.DriverControlConsts;
-import frc.robot.commands.PitchBalance;
 import frc.robot.commands.AutonomousCommands.*;
 import frc.robot.commands.ClawCommands.*;
 import frc.robot.commands.CommandGroups.*;
@@ -9,10 +8,6 @@ import frc.robot.commands.DriveCommands.*;
 import frc.robot.commands.ElevatorCommands.*;
 import frc.robot.commands.PivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
-import frc.robot.commands.MovementCommands.DriveBackwardCommand;
-import frc.robot.commands.MovementCommands.RotateLeftCommand;
-import frc.robot.commands.MovementCommands.RotateRightCommand;
-import frc.robot.commands.MovementCommands.RotateToAngle;
 import frc.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.Joystick;

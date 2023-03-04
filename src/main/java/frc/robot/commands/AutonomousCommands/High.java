@@ -6,7 +6,6 @@ import frc.robot.commands.CommandGroups.*;
 import frc.robot.commands.ClawCommands.Claw;
 import frc.robot.commands.MovementCommands.DriveBackwardCommand;
 import frc.robot.commands.MovementCommands.DriveForwardCommand;
-import frc.robot.commands.MovementCommands.RotateRightCommand;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
@@ -14,7 +13,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 public class High extends SequentialCommandGroup {
 
-  //SCORE CONE ON HIGH NODE 
+  //SCORE CONE ON HIGH NODE THEN RETURN TO TUCKED POSITION
   public High(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator) {
 
     addCommands(
@@ -37,13 +36,7 @@ public class High extends SequentialCommandGroup {
         new DriveBackwardCommand(swerve, 27), //260
         // Arm in resting position (pivot in, elevator down) 
         new TuckedFromTop(pivot, elevator)
-      ), 
-
-      new DriveBackwardCommand(swerve, 230),
-
-      new RotateRightCommand(swerve, 180)
-
-
+      )
     );
   }
 }
