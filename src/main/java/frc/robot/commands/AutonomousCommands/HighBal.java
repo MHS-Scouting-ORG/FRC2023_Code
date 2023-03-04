@@ -14,6 +14,7 @@ public class HighBal extends SequentialCommandGroup {
   public HighBal(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator) {
 
     addCommands(
+
       new High(swerve, claw, pivot, elevator),
 
       new RotateRightCommand(swerve, 90), 

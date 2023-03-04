@@ -17,6 +17,7 @@ public class HighMobility extends SequentialCommandGroup {
   public HighMobility(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator) {
 
     addCommands(
+
       new High(swerve, claw, pivot, elevator), 
 
       new DriveBackwardCommand(swerve, 230), 

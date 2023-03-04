@@ -10,6 +10,8 @@ import frc.robot.commands.PivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
 import frc.robot.subsystems.*;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -32,8 +34,9 @@ public class RobotContainer {
 
   //AUTONOMOUS CHOICES 
   private Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private Command hybridMiddle = new HybridBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
+  private Command launchinator = new Launchinator(pivotSubsystem, clawSubsystem);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
@@ -105,7 +108,8 @@ public class RobotContainer {
     //autoChooser.addOption("Hybrid", hybrid);
     autoChooser.setDefaultOption("Do Nothing", doNothing);
     autoChooser.addOption("High", high);
-    autoChooser.addOption("Hybrid Middle", hybridMiddle);
+    autoChooser.addOption("Hybrid", hybrid);
+    autoChooser.addOption("Launchinator", launchinator);
 
     SmartDashboard.putData(autoChooser);
   }

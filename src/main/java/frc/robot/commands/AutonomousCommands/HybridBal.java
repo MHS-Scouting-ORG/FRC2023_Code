@@ -17,8 +17,6 @@ public class HybridBal extends SequentialCommandGroup {
     //SCORE CONE IN HYBRID GOAL 
     addCommands(
 
-    // start elev in mid position 
-
       new Hybrid(swerve, claw, pivot, elevator),
 
       // Balance on Charge Station 

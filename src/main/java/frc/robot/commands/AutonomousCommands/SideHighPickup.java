@@ -3,9 +3,7 @@ package frc.robot.commands.AutonomousCommands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.CommandGroups.*;
 import frc.robot.commands.ClawCommands.Claw;
-import frc.robot.commands.MovementCommands.DriveBackwardCommand;
 import frc.robot.commands.MovementCommands.DriveForwardCommand;
-import frc.robot.commands.MovementCommands.RotateRightCommand;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
@@ -15,31 +13,17 @@ public class SideHighPickup extends SequentialCommandGroup {
 
   public SideHighPickup(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator) {
 
-    // SCORE CONE ON HIGH NODE, PICK UP CUBE 
+    // SCORE CONE ON HIGH NODE, PICK UP CONE 
     addCommands(
-      // High goal position (elevator up, pivot out) (parallel cmd)
-      new HighAutoPositionParallel(pivot, elevator),
+      new HighMobility(swerve, claw, pivot, elevator), 
 
-      // Move forward
-      new DriveForwardCommand(swerve, 0),
+      new LowPickUp(pivot, elevator), 
 
-      // Open claw
-      new Claw(claw),
+      new DriveForwardCommand(swerve, 20), 
 
-      // Move backward
-      new DriveBackwardCommand(swerve, 0),
-
-      // Arm in pickup position (pivot in, elevator down)
-      new LowPickUp(pivot, elevator),
-
-      // Turn 180
-      new RotateRightCommand(swerve, 0),
-
-      // Move forward while tracking cube
-      new DriveForwardCommand(swerve, 0),
-
-      // Claw close
-      new Claw(claw)
+      new Claw(claw), 
+      
+      new TuckedFromBottom(pivot, elevator)
 
     );
   }

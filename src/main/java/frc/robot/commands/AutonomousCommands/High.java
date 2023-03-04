@@ -18,6 +18,8 @@ public class High extends SequentialCommandGroup {
 
     addCommands(
 
+      //new Launchinator(pivot, claw),
+
       new TuckedFromBottom(pivot, elevator),
 
       // High goal position (elevator up, pivot out) (parallel cmd)

@@ -15,8 +15,10 @@ public class HybridMobility extends SequentialCommandGroup {
 
     addCommands(
       new Hybrid(swerve, claw, pivot, elevator), 
+      
       new DriveBackwardCommand(swerve, 306), 
-      new RotateRightCommand(swerve, 180)
+      
+      new RotateRightCommand(swerve, 160)
     );
   }
 }
