@@ -19,7 +19,7 @@ public class HybridBal extends SequentialCommandGroup {
 
     // start elev in mid position 
 
-      new HybridBal(swerve, claw, pivot, elevator),
+      new Hybrid(swerve, claw, pivot, elevator),
 
       // Balance on Charge Station 
       new PitchBalance(swerve/* , time.get() */)
