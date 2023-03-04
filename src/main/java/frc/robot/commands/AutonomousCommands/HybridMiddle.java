@@ -26,10 +26,10 @@ public class HybridMiddle extends SequentialCommandGroup {
     // start elev in mid position 
 
       // Arm in hybrid goal position (pivot out, elevator down) 
-      new LowPickUp(pivot, elevator)
+      new LowPickUp(pivot, elevator),
 
       // Open claw 
-    //   new Claw(claw),
+       new Claw(claw)
 
     //  // Arm in resting position (pivot in, elevator down) 
     //   new TuckedFromBottom(pivot, elevator),
