@@ -9,9 +9,6 @@ import frc.robot.commands.ElevatorCommands.*;
 import frc.robot.commands.PivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
 import frc.robot.subsystems.*;
-
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
