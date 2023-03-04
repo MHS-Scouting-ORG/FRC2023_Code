@@ -1,8 +1,6 @@
 package frc.robot.commands.CommandGroups;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.ClawCommands.Claw;
 import frc.robot.commands.ClawCommands.ToStartingPosition;
 import frc.robot.commands.PivotCommands.PivotLowCommand;
 import frc.robot.commands.PivotCommands.TuckedIn;
