@@ -2,8 +2,7 @@ package frc.robot.commands.AutonomousCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.PitchBalance;
-import frc.robot.commands.ArmCommands.LowPickup;
-import frc.robot.commands.ArmCommands.TuckedFromBottom;
+import frc.robot.commands.CommandGroups.*;
 import frc.robot.commands.ClawCommands.Claw;
 import frc.robot.commands.MovementCommands.DriveBackwardCommand;
 import frc.robot.commands.MovementCommands.RotateLeftCommand;
@@ -22,7 +21,7 @@ public class Hybrid extends SequentialCommandGroup {
     // start elev in mid position 
 
       // Arm in hybrid goal position (pivot out, elevator down) 
-      new LowPickup(pivot, elevator),
+      new LowPickUp(pivot, elevator),
 
       // Open claw 
       new Claw(claw),

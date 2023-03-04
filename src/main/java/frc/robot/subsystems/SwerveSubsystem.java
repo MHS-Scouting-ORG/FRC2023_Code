@@ -80,11 +80,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public double getYawAngle() {
-        return ( /* navx.getYaw() */ navx.getAngle() % 360 /* 360-navx.getYaw() */ );
-    }
-
-    public double getAngle(){
-        return navx.getAngle();
+        return ( /* navx.getYaw() */ Math.abs(navx.getAngle()) % 360 /* 360-navx.getYaw() */ );
     }
 
     public double getYaw(){
@@ -92,7 +88,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public double getAutoYaw() {
-        return navx.getYaw() - yawOffset; 
+        return Math.abs(getYawAngle() - yawOffset); 
     }
 
     public double getRoll(){
@@ -240,5 +236,7 @@ public class SwerveSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Robot Yaw", getYawAngle());
+        SmartDashboard.putNumber("Auto Yaw", getAutoYaw());
+        SmartDashboard.putNumber("offset%", yawOffset);
     }
 }

@@ -1,9 +1,7 @@
 package frc.robot.commands.AutonomousCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.ArmCommands.HighAutoPositionParallel;
-import frc.robot.commands.ArmCommands.LowPickup;
-import frc.robot.commands.ArmCommands.TuckedFromBottom;
+import frc.robot.commands.CommandGroups.*;
 import frc.robot.commands.ClawCommands.Claw;
 import frc.robot.commands.MovementCommands.DriveBackwardCommand;
 import frc.robot.commands.MovementCommands.DriveForwardCommand;
@@ -33,7 +31,7 @@ public class SideHighBal extends SequentialCommandGroup {
       new DriveBackwardCommand(swerve, 100),
 
       // Arm in grabbing position (pivot in, elevator down) 
-      new LowPickup(pivot, elevator),
+      new LowPickUp(pivot, elevator),
 
       // Turn to face cube 
       new RotateRightCommand(swerve, 100),

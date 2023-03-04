@@ -1,15 +1,16 @@
 package frc.robot;
 
 import frc.robot.Constants.DriverControlConsts;
-import frc.robot.commands.Autonomous.DriveForward;
-import frc.robot.commands.Autonomous.High;
-import frc.robot.commands.Autonomous.Hybrid;
+import frc.robot.commands.AutonomousCommands.*;
 import frc.robot.commands.ClawCommands.*;
 import frc.robot.commands.CommandGroups.*;
 import frc.robot.commands.DriveCommands.*;
 import frc.robot.commands.ElevatorCommands.*;
 import frc.robot.commands.PivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
+import frc.robot.commands.MovementCommands.DriveBackwardCommand;
+import frc.robot.commands.MovementCommands.RotateLeftCommand;
+import frc.robot.commands.MovementCommands.RotateToAngle;
 import frc.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -32,8 +33,10 @@ public class RobotContainer {
   private XboxController xbox = new XboxController(DriverControlConsts.XBOX_CONTROLLER_PORT);
   private Joystick joystick = new Joystick(DriverControlConsts.JOYSTICK_PORT);
 
-  private final Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  //private final Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private final Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command rotation = new RotateLeftCommand(swerveSubsystem, 90);
+  private Command back = new DriveBackwardCommand(swerveSubsystem, 54);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
@@ -63,10 +66,6 @@ public class RobotContainer {
             () -> -xbox.getRightX() * 0.75));
     new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem)); // to lock in place :: Button B
     new JoystickButton(xbox, 4).toggleOnFalse(new Endgame(swerveSubsystem, () -> xbox.getLeftY()));
-    // to deploy endgame
-    /* !!! TEST !!! */ new JoystickButton(xbox, 1).onTrue(new Rotate180(swerveSubsystem,
-        () -> -xbox.getLeftY() * 0.75,
-        () -> -xbox.getLeftX() * 0.75));
 
     // FOR TESTING
     new JoystickButton(xbox, 7).onTrue(new InstantCommand(() -> swerveSubsystem.resetNavx()));
@@ -106,8 +105,10 @@ public class RobotContainer {
   }
 
   public void selectAuto() {
-    autoChooser.addOption("Hybrid", hybrid);
+    //autoChooser.addOption("Hybrid", hybrid);
     autoChooser.addOption("High", high);
+    autoChooser.addOption("Rotate", rotation);
+    autoChooser.addOption("Backwards", back);
 
     SmartDashboard.putData(autoChooser);
   }
