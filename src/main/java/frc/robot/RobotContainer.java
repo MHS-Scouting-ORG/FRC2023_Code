@@ -10,6 +10,7 @@ import frc.robot.commands.PivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
 import frc.robot.commands.MovementCommands.DriveBackwardCommand;
 import frc.robot.commands.MovementCommands.RotateLeftCommand;
+import frc.robot.commands.MovementCommands.RotateRightCommand;
 import frc.robot.commands.MovementCommands.RotateToAngle;
 import frc.robot.subsystems.*;
 
@@ -35,8 +36,8 @@ public class RobotContainer {
 
   //private final Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private final Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private Command rotation = new RotateLeftCommand(swerveSubsystem, 90);
-  private Command back = new DriveBackwardCommand(swerveSubsystem, 54);
+  private Command rotation = new RotateRightCommand(swerveSubsystem, 90);
+  private Command back = new DriveBackwardCommand(swerveSubsystem, 324);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {

@@ -67,6 +67,10 @@ public class SwerveSubsystem extends SubsystemBase {
         backRight.resetEncoders();
     }
 
+    public double encoderMultiplier(double x){
+        return 18*x;
+    }
+
     public double getLeftEncoder(){
         return frontLeft.getDrivePosition();
     }
@@ -177,13 +181,13 @@ public class SwerveSubsystem extends SubsystemBase {
 
     public void rotateLeft(double speed) {
         SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS
-                .toSwerveModuleStates(new ChassisSpeeds(0, 0, -speed));
+                .toSwerveModuleStates(new ChassisSpeeds(0, 0, speed));
         setModuleStates(moduleStates);
     }
 
     public void rotateRight(double speed) {
         SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS
-                .toSwerveModuleStates(new ChassisSpeeds(0, 0, speed));
+                .toSwerveModuleStates(new ChassisSpeeds(0, 0, -speed));
         setModuleStates(moduleStates);
     }
 

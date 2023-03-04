@@ -7,24 +7,21 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 public class RotateRightCommand extends CommandBase {
   private final SwerveSubsystem swerve; 
-  private double desiredAngle; 
+  private double desiredAngle;
 
-  public RotateRightCommand(SwerveSubsystem newSwerve, double newDesiredAngle) {
+  public RotateRightCommand(SwerveSubsystem newSwerve, double angle) {
     swerve = newSwerve;
-    desiredAngle = -newDesiredAngle; 
-
+    desiredAngle = angle;
     addRequirements(swerve);
   }
 
   @Override
   public void initialize() {
-    swerve.resetAutoYaw();
   }
 
   @Override
   public void execute() {
-    SmartDashboard.putString("Current Command", getName());
-    swerve.rotateRight(AutoConsts.DRIVE_TRANSLATION_SPEED);
+    swerve.rotateRight(AutoConsts.DRIVE_ROTATION_SPEED);
   }
 
   @Override
@@ -34,6 +31,6 @@ public class RotateRightCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return (swerve.getAutoYaw() >= desiredAngle-2) && (swerve.getAutoYaw() <= desiredAngle+2); 
+    return desiredAngle-2 < swerve.getYaw() && swerve.getYaw() < desiredAngle + 2; 
   }
 }
