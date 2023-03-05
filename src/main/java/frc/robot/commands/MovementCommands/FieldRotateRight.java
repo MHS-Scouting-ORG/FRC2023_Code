@@ -24,14 +24,14 @@ public class FieldRotateRight extends CommandBase{
 
     @Override
     public void initialize(){
-        swerve.resetEnc();
     }
 
     @Override
     public void execute(){
         SmartDashboard.putString("CurrentCommand", getName());
+        SmartDashboard.putBoolean("rotating", true);
 
-        double turningSpeed = Math.abs(turningPID.calculate(swerve.getYaw(), desiredAngle));
+        double turningSpeed = turningPID.calculate(swerve.getYaw(), desiredAngle);
 
         SmartDashboard.putNumber("Turning Speed", turningSpeed);
 
@@ -46,7 +46,7 @@ public class FieldRotateRight extends CommandBase{
 
     @Override
     public void end(boolean interrupted){
-        SmartDashboard.putBoolean("drive fwd", false); 
+        SmartDashboard.putBoolean("rotating", false); 
         swerve.stopModules();
     }
 
