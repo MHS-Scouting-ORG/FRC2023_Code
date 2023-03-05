@@ -22,7 +22,8 @@ public class HighMobility extends SequentialCommandGroup {
 
       new DriveBackwardCommand(swerve, 230), 
 
-      new RotateLeftCommand(swerve, 180)
+      new RotateLeftCommand(swerve, 160)
+      
     );
   }
 }

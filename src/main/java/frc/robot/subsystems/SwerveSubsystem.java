@@ -244,7 +244,7 @@ public class SwerveSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("[S] Yaw", getYawAngle());
-        SmartDashboard.putNumber("[S] Yaw", getAutoYaw());
+        SmartDashboard.putNumber("[R] Yaw", getYaw());
         SmartDashboard.putNumber("[S] Yaw Offset", yawOffset);
         SmartDashboard.putNumber("[S] Encoder", getLeftEncoder());
         SmartDashboard.putNumber("[S] Pitch", getPitch());

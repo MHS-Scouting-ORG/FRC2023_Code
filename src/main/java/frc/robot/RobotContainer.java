@@ -112,7 +112,7 @@ public class RobotContainer {
     autoChooser.addOption("High", high);
     autoChooser.addOption("Hybrid", hybrid);
     autoChooser.addOption("Launchinator", fieldForward);
-    autoChooser.addOption("FieldRotateRight", fieldRotateRight);
+    autoChooser.addOption("Field Rotate Right", fieldRotateRight);
     autoChooser.addOption("Hybrid Mobility", hybridMobility);
     autoChooser.addOption("Hybrid Balance", hybridBal);
 
