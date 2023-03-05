@@ -31,8 +31,6 @@ public class SwerveSubsystem extends SubsystemBase {
 
     private double yawOffset; 
 
-    private Timer timer; 
-
     public SwerveSubsystem() {
         frontLeft = new SwerveModule(SwerveConsts.FL_TURN_PORT, SwerveConsts.FL_DRIVE_PORT,
                 SwerveConsts.FL_ABSOLUTE_ENCODER_PORT, SwerveConsts.FL_OFFSET, false, true, true);
@@ -55,8 +53,6 @@ public class SwerveSubsystem extends SubsystemBase {
         wheelinator = new CANSparkMax(LandingGearConsts.LANDING_GEAR_MOTOR_PORT, MotorType.kBrushless);
 
         landinator.set(Value.kReverse);
-
-        timer = new Timer(); 
 
         straightenWheels();
 
