@@ -229,14 +229,14 @@ public class SwerveSubsystem extends SubsystemBase {
 
     }
 
-    public void straightenAngles(double vz){
-        SwerveModuleState fl = new SwerveModuleState();
+    // public void straightenAngles(double vz){
+    //     SwerveModuleState fl = new SwerveModuleState();
 
-        frontLeft.straightenAngle();
-        backLeft.straightenAngle();
-        frontRight.straightenAngle();
-        backRight.straightenAngle();
-    }
+    //     frontLeft.straightenAngle();
+    //     backLeft.straightenAngle();
+    //     frontRight.straightenAngle();
+    //     backRight.straightenAngle();
+    // }
 
     // PERIODIC - runs repeatedly (like periodic from timed robot)
     @Override
