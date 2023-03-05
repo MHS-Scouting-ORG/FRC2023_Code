@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if(Timer.getMatchTime() <= 15){
-      RobotContainer.lights.red();
+      RobotContainer.lights.poppy();
     }
   }
 
