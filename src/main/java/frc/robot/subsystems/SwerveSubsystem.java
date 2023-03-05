@@ -221,18 +221,11 @@ public class SwerveSubsystem extends SubsystemBase {
         SwerveModuleState br = new SwerveModuleState(speed, new Rotation2d(Math.toRadians(90)));
         SwerveModuleState fr = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(-45)));
 
-        // wheelinator.set(speed*1.25);
-
-        if(fl.speedMetersPerSecond>0.1){
-            frontLeft.setAngle(fl);
-            backLeft.setDesiredState(bl);
-            backRight.setDesiredState(br);
-            frontRight.setAngle(fr);
-            wheelinator.set(backLeft.getDriveSpeed() * 1.5);
-        } else {
-            stopModules();
-            stopWheels();
-        }                                                                                                                                           
+        frontLeft.setAngle(fl);
+        backLeft.setDesiredState(bl);
+        backRight.setDesiredState(br);
+        frontRight.setAngle(fr);
+        wheelinator.set(backLeft.getDriveSpeed() * 2);                                                                                                                                         
 
     }
 

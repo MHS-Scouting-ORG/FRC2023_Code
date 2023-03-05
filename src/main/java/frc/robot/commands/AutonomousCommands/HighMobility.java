@@ -34,7 +34,7 @@ public class HighMobility extends SequentialCommandGroup {
 
       new Claw(claw),
 
-      new Delay(1.0),
+      new Delay(0.5),
 
       new TuckedFromBottom(pivot, elevator)
     );

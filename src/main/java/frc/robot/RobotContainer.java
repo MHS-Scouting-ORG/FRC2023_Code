@@ -8,8 +8,6 @@ import frc.robot.commands.DriveCommands.*;
 import frc.robot.commands.ElevatorCommands.*;
 import frc.robot.commands.PivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
-import frc.robot.commands.MovementCommands.FieldForward;
-import frc.robot.commands.MovementCommands.FieldRotateRight;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -36,18 +34,17 @@ public class RobotContainer {
   private Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command hybridMobility = new HybridMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command hybridBal = new HybridBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command highBal = new HighBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
-  private Command fieldRotateRight = new FieldRotateRight(swerveSubsystem, 90);
-  private Command fieldForward = new FieldForward(swerveSubsystem, 5000);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(new FieldOriented(swerveSubsystem,
-        () -> xbox.getLeftY() * 0.9,
-        () -> xbox.getLeftX() * 0.9,
-        () -> -xbox.getRightX() * 0.9)); // for field oriented drive
+        () -> xbox.getLeftY() * 0.95,
+        () -> xbox.getLeftX() * 0.95,
+        () -> -xbox.getRightX() * 0.95)); // for field oriented drive
 
-    lights.setDefaultCommand(new Off(lights));
+    //lights.setDefaultCommand(new Off(lights));
     selectAuto();
     configureBindings();
   }
@@ -71,8 +68,7 @@ public class RobotContainer {
 
     // FOR TESTING
     new JoystickButton(xbox, 7).onTrue(new InstantCommand(() -> swerveSubsystem.resetNavx()));
-    //new JoystickButton(xbox, 3).onTrue(new LandingGearIn(swerveSubsystem));
-    new JoystickButton(xbox, 3).onTrue(new Launchinator(pivotSubsystem, clawSubsystem));
+    new JoystickButton(xbox, 3).onTrue(new LandingGearIn(swerveSubsystem));
 
     /* CLAW */
     new JoystickButton(xbox, 5).onTrue(new Claw(clawSubsystem));
@@ -111,10 +107,9 @@ public class RobotContainer {
     autoChooser.setDefaultOption("Do Nothing", doNothing);
     autoChooser.addOption("High", high);
     autoChooser.addOption("Hybrid", hybrid);
-    autoChooser.addOption("Launchinator", fieldForward);
-    autoChooser.addOption("Field Rotate Right", fieldRotateRight);
     autoChooser.addOption("Hybrid Mobility", hybridMobility);
     autoChooser.addOption("Hybrid Balance", hybridBal);
+    autoChooser.addOption("High Balance", highBal);
 
     SmartDashboard.putData(autoChooser);
   }
