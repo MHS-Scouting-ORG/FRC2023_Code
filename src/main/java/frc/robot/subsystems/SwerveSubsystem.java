@@ -223,12 +223,12 @@ public class SwerveSubsystem extends SubsystemBase {
 
         // wheelinator.set(speed*1.25);
 
-        if(fl.speedMetersPerSecond>0.1){
+        if(fl.speedMetersPerSecond>0.01){
             frontLeft.setAngle(fl);
             backLeft.setDesiredState(bl);
             backRight.setDesiredState(br);
             frontRight.setAngle(fr);
-            wheelinator.set(backLeft.getDriveSpeed() * 1.5);
+            wheelinator.set(backLeft.getDriveSpeed() * 1.25);
         } else {
             stopModules();
             stopWheels();

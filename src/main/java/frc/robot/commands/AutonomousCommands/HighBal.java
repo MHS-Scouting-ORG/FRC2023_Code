@@ -2,7 +2,7 @@ package frc.robot.commands.AutonomousCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.PitchBalance;
-import frc.robot.commands.MovementCommands.RotateRightCommand;
+import frc.robot.commands.MovementCommands.FieldRotateRight;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
@@ -17,7 +17,7 @@ public class HighBal extends SequentialCommandGroup {
 
       new High(swerve, claw, pivot, elevator),
 
-      new RotateRightCommand(swerve, 90), 
+      new FieldRotateRight(swerve, 90), 
 
       new PitchBalance(swerve)
 
