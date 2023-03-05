@@ -31,7 +31,7 @@ public class FieldRotateLeft extends CommandBase{
     public void execute(){
         SmartDashboard.putString("CurrentCommand", getName());
 
-        double turningSpeed = -Math.abs(turningPID.calculate(swerve.getYaw(), desiredAngle));
+        double turningSpeed = turningPID.calculate(swerve.getYaw(), desiredAngle);
 
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, turningSpeed, swerve.getRotation2d());
 
@@ -50,7 +50,7 @@ public class FieldRotateLeft extends CommandBase{
 
     @Override
     public boolean isFinished(){
-        return turningPID.getPositionError() < 2;
+        return Math.abs(desiredAngle - swerve.getYaw()) < 2;
     }
 
 }
