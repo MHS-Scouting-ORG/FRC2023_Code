@@ -42,11 +42,11 @@ public class RobotContainer {
 
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(new FieldOriented(swerveSubsystem,
-        () -> xbox.getLeftY() * 0.9,
-        () -> xbox.getLeftX() * 0.9,
-        () -> -xbox.getRightX() * 0.9)); // for field oriented drive
+        () -> xbox.getLeftY() * 0.95,
+        () -> xbox.getLeftX() * 0.95,
+        () -> -xbox.getRightX() * 0.95)); // for field oriented drive
 
-    lights.setDefaultCommand(new Off(lights));
+    //lights.setDefaultCommand(new Off(lights));
     selectAuto();
     configureBindings();
   }

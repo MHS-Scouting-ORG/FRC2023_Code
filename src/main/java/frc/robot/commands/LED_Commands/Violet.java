@@ -23,6 +23,7 @@ public class Violet extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    lights.off();
   }
 
   @Override

@@ -43,6 +43,13 @@ public class Lights extends SubsystemBase {
     lights.setData(buff);
   }
 
+  public void poppy(){
+    for(int i=0; i<buff.getLength(); i++){
+      buff.setRGB(i, 255, 0, 0);
+    }
+    lights.setData(buff);
+  }
+
   public void potOfGold(){
     for(int i=0; i<buff.getLength(); i+=6){
       buff.setRGB(i, 255, 0, 0);
