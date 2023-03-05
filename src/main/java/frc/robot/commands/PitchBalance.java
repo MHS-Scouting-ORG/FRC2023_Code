@@ -36,7 +36,7 @@ public class PitchBalance extends CommandBase {
     display();
 
     // Strafes right onto charge station
-    swerve.strafeRight(AutoConsts.DRIVE_TRANSLATION_SPEED);
+    swerve.strafeRight(AutoConsts.DRIVE_TRANSLATION_SPEED * 0.8);
     
     // Checks if pitch is greater than -13.5
     if (swerve.getPitch() < -11){
