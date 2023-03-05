@@ -5,7 +5,11 @@
 package frc.robot.commands.AutonomousCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.ClawCommands.Claw;
+import frc.robot.commands.CommandGroups.LowPickUp;
+import frc.robot.commands.CommandGroups.TuckedFromBottom;
 import frc.robot.commands.MovementCommands.DriveBackwardCommand;
+import frc.robot.commands.MovementCommands.DriveForwardCommand;
 import frc.robot.commands.MovementCommands.RotateLeftCommand;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -22,8 +26,17 @@ public class HighMobility extends SequentialCommandGroup {
 
       new DriveBackwardCommand(swerve, 230), 
 
-      new RotateLeftCommand(swerve, 160)
-      
+      new RotateLeftCommand(swerve, 163),
+
+      new LowPickUp(pivot, elevator),
+
+      new DriveForwardCommand(swerve, 18),
+
+      new Claw(claw),
+
+      new Delay(1.0),
+
+      new TuckedFromBottom(pivot, elevator)
     );
   }
 }
