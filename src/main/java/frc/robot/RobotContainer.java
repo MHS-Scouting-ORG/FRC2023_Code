@@ -34,6 +34,7 @@ public class RobotContainer {
   private Command hybridMobility = new HybridMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command hybridBal = new HybridBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command highBal = new HighBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command highMobileTracking = new HighMobilityTracking(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
@@ -41,9 +42,8 @@ public class RobotContainer {
     swerveSubsystem.setDefaultCommand(new FieldOriented(swerveSubsystem,
         () -> xbox.getLeftY() * 0.95,
         () -> xbox.getLeftX() * 0.95,
-        () -> -xbox.getRightX() * 0.95)); // for field oriented drive
+        () -> -xbox.getRightX() * 0.95));
 
-    //lights.setDefaultCommand(new Off(lights));
     selectAuto();
     configureBindings();
   }
@@ -62,7 +62,7 @@ public class RobotContainer {
             () -> -xbox.getLeftY() * 0.75,
             () -> -xbox.getLeftX() * 0.75,
             () -> -xbox.getRightX() * 0.75));
-    new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem)); // to lock in place :: Button B
+    new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem));
     new JoystickButton(xbox, 4).toggleOnFalse(new Endgame(swerveSubsystem, () -> xbox.getLeftY()));
 
     // FOR TESTING
@@ -97,13 +97,11 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return autoChooser.getSelected();
-    // return new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem,
-    // elevatorSubsystem);
   }
 
   public void selectAuto() {
-    //autoChooser.addOption("Hybrid", hybrid);
     autoChooser.setDefaultOption("Do Nothing", doNothing);
+    autoChooser.setDefaultOption("TEST** New High Mobility", highMobileTracking);
     autoChooser.addOption("High Mobility", highMobility);
     autoChooser.addOption("Hybrid Mobility", hybridMobility);
     autoChooser.addOption("High Balance", highBal);

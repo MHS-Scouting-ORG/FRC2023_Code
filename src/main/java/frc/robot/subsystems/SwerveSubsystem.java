@@ -29,8 +29,6 @@ public class SwerveSubsystem extends SubsystemBase {
     private DoubleSolenoid landinator;
     private CANSparkMax wheelinator;
 
-    private double yawOffset; 
-
     public SwerveSubsystem() {
         frontLeft = new SwerveModule(SwerveConsts.FL_TURN_PORT, SwerveConsts.FL_DRIVE_PORT,
                 SwerveConsts.FL_ABSOLUTE_ENCODER_PORT, SwerveConsts.FL_OFFSET, false, true, true);
@@ -54,8 +52,6 @@ public class SwerveSubsystem extends SubsystemBase {
 
         landinator.set(Value.kReverse);
 
-        yawOffset = 0; 
-
     }
 
     public void resetEnc() {
@@ -65,21 +61,14 @@ public class SwerveSubsystem extends SubsystemBase {
         backRight.resetEncoders();
     }
 
-    public double encoderMultiplier(double x){
+    public double feetToEncCounts(double x){
         return 18*x;
-    }
-
-    public double getLeftEncoder(){
-        return frontLeft.getDrivePosition();
     }
 
     public void resetNavx() {
         navx.zeroYaw();
     }
 
-    public void resetAutoYaw() {
-        yawOffset = navx.getYaw();
-    }
 
     public double getYawAngle() {
         return ( /* navx.getYaw() */ Math.abs(navx.getAngle()) % 360 /* 360-navx.getYaw() */ );
@@ -87,10 +76,6 @@ public class SwerveSubsystem extends SubsystemBase {
 
     public double getYaw(){
         return navx.getYaw();
-    }
-
-    public double getAutoYaw() {
-        return Math.abs(getYawAngle() - yawOffset); 
     }
 
     public double getRoll(){
@@ -103,11 +88,6 @@ public class SwerveSubsystem extends SubsystemBase {
 
     public double getDriveEnc() {
         return frontLeft.getDrivePosition();
-    }
-
-
-    public Rotation2d getRobotRotation() {
-        return new Rotation2d(Math.toRadians(navx.getYaw()));
     }
 
     public Rotation2d getRotation2d() {
@@ -230,7 +210,7 @@ public class SwerveSubsystem extends SubsystemBase {
     // PERIODIC - runs repeatedly (like periodic from timed robot)
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("[R] Yaw", getYaw());
+        SmartDashboard.putNumber("[S] Yaw", getYaw());
         SmartDashboard.putNumber("[S] Pitch", getPitch());
         SmartDashboard.putNumber("[S] Timer Class", Timer.getMatchTime());
     }
