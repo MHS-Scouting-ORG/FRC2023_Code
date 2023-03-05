@@ -157,6 +157,14 @@ public class SwerveModule extends SubsystemBase{
         //SmartDashboard.putString("Swerve["+absoluteEncoder.getDeviceID()+"] state", state.toString());  
     }
 
+    public void straightenAngle(SwerveModuleState state){
+
+        state = SwerveModuleState.optimize(state, getState().angle);
+
+        drivingMotor.set(state.speedMetersPerSecond);
+        turningMotor.set(turningPID.calculate(getAbsoluteEncoder(), state.angle.getRadians()));
+    }
+
     //stop modules 
     public void stop(){
         drivingMotor.set(0);
