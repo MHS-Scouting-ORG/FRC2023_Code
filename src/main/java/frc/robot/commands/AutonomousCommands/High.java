@@ -31,6 +31,8 @@ public class High extends SequentialCommandGroup {
       // Open claw
       new Claw(claw),
 
+      new Delay(1.0),
+
       new DriveBackwardCommand(swerve, 5),
 
       new ParallelCommandGroup(

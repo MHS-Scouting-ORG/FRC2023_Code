@@ -22,7 +22,7 @@ public class HighMobility extends SequentialCommandGroup {
 
     addCommands(
 
-      new High(swerve, claw, pivot, elevator), 
+      new High(swerve, claw, pivot, elevator),
 
       new DriveBackwardCommand(swerve, 230), 
 
