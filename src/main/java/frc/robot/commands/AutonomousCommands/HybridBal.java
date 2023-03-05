@@ -2,6 +2,7 @@ package frc.robot.commands.AutonomousCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.PitchBalance;
+import frc.robot.commands.DriveCommands.Lock;
 import frc.robot.commands.MovementCommands.DriveBackwardCommand;
 import frc.robot.commands.MovementCommands.FieldRotateRight;
 import frc.robot.subsystems.ClawSubsystem;
@@ -12,9 +13,6 @@ import frc.robot.subsystems.SwerveSubsystem;
 public class HybridBal extends SequentialCommandGroup {
 
   public HybridBal(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator)  {
-    // Timer time = new Timer(); 
-    // time.restart();
-    // time.start();
 
     //SCORE CONE IN HYBRID GOAL 
     addCommands(
@@ -26,7 +24,9 @@ public class HybridBal extends SequentialCommandGroup {
       new FieldRotateRight(swerve, 90),
 
       // Balance on Charge Station 
-      new PitchBalance(swerve/* , time.get() */)
+      new PitchBalance(swerve), 
+
+      new Lock(swerve)
     );
   }
 }
