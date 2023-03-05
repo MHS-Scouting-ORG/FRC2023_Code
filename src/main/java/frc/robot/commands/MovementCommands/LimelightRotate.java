@@ -27,10 +27,10 @@ public class LimelightRotate extends CommandBase{
     public void execute(){
         SmartDashboard.putBoolean("rotating", true);
         
-        if (LimelightHelpers.getTX("limelight") < -1){
+        if (LimelightHelpers.getTX("limelight") < -1.5){
             swerve.rotateLeft(0.1);
         }
-        else if(LimelightHelpers.getTX("limelight") > 1){
+        else if(LimelightHelpers.getTX("limelight") > 1.5){
             swerve.rotateRight(0.1);
         }
     }
@@ -44,7 +44,7 @@ public class LimelightRotate extends CommandBase{
 
     @Override
     public boolean isFinished(){
-        return LimelightHelpers.getTX("limelight") > -1 && LimelightHelpers.getTX("limelight") < 1;
+        return (LimelightHelpers.getTX("limelight") > -1.5 && LimelightHelpers.getTX("limelight") < 1.5) || LimelightHelpers.getTX("limelight") == 0;
     }
 
 }
