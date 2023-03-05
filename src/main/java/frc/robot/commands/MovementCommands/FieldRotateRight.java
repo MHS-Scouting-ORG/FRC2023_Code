@@ -52,7 +52,7 @@ public class FieldRotateRight extends CommandBase{
 
     @Override
     public boolean isFinished(){
-        return turningPID.getPositionError() < 2;
+        return Math.abs(desiredAngle - swerve.getYaw()) < 2;
     }
 
 }
