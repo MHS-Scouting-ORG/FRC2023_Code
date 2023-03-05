@@ -1,7 +1,12 @@
 package frc.robot.commands.AutonomousCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.ClawCommands.Claw;
+import frc.robot.commands.CommandGroups.LowPickUp;
+import frc.robot.commands.CommandGroups.TuckedFromBottom;
 import frc.robot.commands.MovementCommands.DriveBackwardCommand;
+import frc.robot.commands.MovementCommands.DriveForwardCommand;
+import frc.robot.commands.MovementCommands.RotateLeftCommand;
 import frc.robot.commands.MovementCommands.RotateRightCommand;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -17,8 +22,18 @@ public class HybridMobility extends SequentialCommandGroup {
       new Hybrid(swerve, claw, pivot, elevator), 
       
       new DriveBackwardCommand(swerve, 230), 
-      
-      new RotateRightCommand(swerve, 180)
+
+      new RotateLeftCommand(swerve, 163),
+
+      new LowPickUp(pivot, elevator),
+
+      new DriveForwardCommand(swerve, 18),
+
+      new Claw(claw),
+
+      new Delay(0.5),
+
+      new TuckedFromBottom(pivot, elevator)
     );
   }
 }

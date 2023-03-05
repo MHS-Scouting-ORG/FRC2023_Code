@@ -31,7 +31,6 @@ public class StrafeRightCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putString("Current Command", "stop");
     swerve.stopModules();
   }
 

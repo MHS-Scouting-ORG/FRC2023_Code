@@ -16,7 +16,7 @@ public class Lock extends CommandBase{
 
     @Override
     public void initialize(){
-        SmartDashboard.putString("Current Command", "Robot Locked!");
+        SmartDashboard.putString("Current Command", getName());
     }
 
     @Override

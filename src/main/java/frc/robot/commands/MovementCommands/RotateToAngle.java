@@ -1,5 +1,6 @@
 package frc.robot.commands.MovementCommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.AutoConsts;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -20,6 +21,7 @@ public class RotateToAngle extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putString("Current Command", getName());
     if(swerve.getYawAngle() < 180){
       swerve.rotateRight(AutoConsts.DRIVE_ROTATION_SPEED);
     } else{

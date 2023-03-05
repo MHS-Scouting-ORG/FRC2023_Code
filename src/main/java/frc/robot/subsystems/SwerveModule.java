@@ -170,19 +170,9 @@ public class SwerveModule extends SubsystemBase{
 
     @Override
     public void periodic(){
-        // kp = SmartDashboard.getNumber("kP", 0);
-        // SmartDashboard.putNumber("kP", kp);
-        // ki = SmartDashboard.getNumber("kI", 0);
-        // SmartDashboard.putNumber("kI", ki);
-        // kd = SmartDashboard.getNumber("kD", 0);
-        // SmartDashboard.putNumber("kD", kd);
-
-        // turningPID.setPID(kp, ki, kd);
-
-        //SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] turning enc", getTurningPosition());
-        //SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] angle", getAbsoluteEncoder());
-        SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] drive speed", getDriveSpeed());
-        //SmartDashboard.putNumber("Swerve["+absoluteEncoder.getDeviceID()+"] turning speed", getTurningSpeed());
+        SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] DRIVE SPEED", getDriveSpeed());
+        SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] ABS ENC", getAbsoluteEncoder());
+        SmartDashboard.putNumber("S["+absoluteEncoder.getDeviceID()+"] ENCODER", getDrivePosition());
     }
 
 }

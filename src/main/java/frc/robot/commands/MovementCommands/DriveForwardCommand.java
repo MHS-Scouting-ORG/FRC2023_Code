@@ -23,13 +23,12 @@ public class DriveForwardCommand extends CommandBase{
 
     @Override
     public void execute(){
-        SmartDashboard.putString("CurrentCommand", getName());
-        swerve.driveForward(AutoConsts.DRIVE_TRANSLATION_SPEED * 0.8);
+        SmartDashboard.putString("Current Command", getName());
+        swerve.driveForward(AutoConsts.DRIVE_TRANSLATION_SPEED);
     }
 
     @Override
     public void end(boolean interrupted){
-        SmartDashboard.putBoolean("drive fwd", false); 
         swerve.stopModules();
     }
 

@@ -21,7 +21,6 @@ public class PitchBalance extends CommandBase {
 
   public void display() {
     SmartDashboard.putString("Current Command", getName());
-    SmartDashboard.putBoolean("[A] ready to end", readyToEnd);
   }
 
   @Override

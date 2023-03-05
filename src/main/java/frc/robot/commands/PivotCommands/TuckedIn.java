@@ -23,7 +23,7 @@ public class TuckedIn extends CommandBase{
     public void execute(){
         SmartDashboard.putString("Current Command", getName());
 
-        SmartDashboard.putBoolean("tuckedIn", false);
+        SmartDashboard.putBoolean("[P] Tucked In", false);
         if(!p_subs.isTucked()){
         p_subs.newSetpoint(p_subs.getEncoder());
         }
@@ -35,7 +35,7 @@ public class TuckedIn extends CommandBase{
 
     @Override
     public void end(boolean interrupted){
-        SmartDashboard.putBoolean("tuckedIn", true);
+        SmartDashboard.putBoolean("[P] Tucked In", true);
     }
     
     @Override

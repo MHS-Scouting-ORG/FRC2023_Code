@@ -30,10 +30,9 @@ public class FieldForward extends CommandBase{
 
     @Override
     public void execute(){
-        SmartDashboard.putString("CurrentCommand", getName());
+        SmartDashboard.putString("Current Command", getName());
 
         double turningSpeed = turningPID.calculate(swerve.getYaw(), 0);
-        SmartDashboard.putNumber("turning speed", turningSpeed);
 
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(AutoConsts.DRIVE_TRANSLATION_SPEED, 0, turningSpeed, swerve.getRotation2d());
 

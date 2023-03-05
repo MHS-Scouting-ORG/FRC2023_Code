@@ -30,7 +30,7 @@ public class FieldBackward extends CommandBase{
 
     @Override
     public void execute(){
-        SmartDashboard.putString("CurrentCommand", getName());
+        SmartDashboard.putString("Current Command", getName());
 
         double turningSpeed = turningPID.calculate(swerve.getYaw(), 0);
 

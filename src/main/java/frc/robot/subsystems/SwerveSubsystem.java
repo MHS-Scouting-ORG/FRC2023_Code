@@ -54,8 +54,6 @@ public class SwerveSubsystem extends SubsystemBase {
 
         landinator.set(Value.kReverse);
 
-        straightenWheels();
-
         yawOffset = 0; 
 
     }
@@ -232,10 +230,7 @@ public class SwerveSubsystem extends SubsystemBase {
     // PERIODIC - runs repeatedly (like periodic from timed robot)
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("[S] Yaw", getYawAngle());
         SmartDashboard.putNumber("[R] Yaw", getYaw());
-        SmartDashboard.putNumber("[S] Yaw Offset", yawOffset);
-        SmartDashboard.putNumber("[S] Encoder", getLeftEncoder());
         SmartDashboard.putNumber("[S] Pitch", getPitch());
         SmartDashboard.putNumber("[S] Timer Class", Timer.getMatchTime());
     }

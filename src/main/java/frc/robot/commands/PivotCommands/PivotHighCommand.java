@@ -2,6 +2,7 @@
 package frc.robot.commands.PivotCommands;
 
 import frc.robot.subsystems.PivotSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class PivotHighCommand extends CommandBase{
@@ -19,6 +20,7 @@ public class PivotHighCommand extends CommandBase{
 
     @Override
     public void execute(){ // Executes and runs the Pivot Arm PID
+        SmartDashboard.putString("Current Command", getName());
         p_subsystem.newSetpoint(106);
    
     }
