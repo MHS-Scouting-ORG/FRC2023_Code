@@ -44,6 +44,7 @@ public class FieldRotateRight extends CommandBase{
         }
 
         currentError = desiredAngle - swerve.getYaw();
+        SmartDashboard.putNumber("Err", currentError);
 
         if (currentError > 0 && previousError < 0){
             turningPID.reset();
@@ -71,7 +72,7 @@ public class FieldRotateRight extends CommandBase{
 
     @Override
     public boolean isFinished(){
-        return Math.abs(desiredAngle - swerve.getYaw()) < 2;
+        return Math.abs(desiredAngle - swerve.getYaw()) < 5;
     }
 
 }

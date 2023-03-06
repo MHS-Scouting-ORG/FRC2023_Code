@@ -32,11 +32,11 @@ public class HighMobilityTracking extends SequentialCommandGroup {
             new DriveBackwardCommand(swerve, 170),
             new TuckedFromBottom(pivot, elevator)),
 
-        new FieldRotateLeft(swerve, 175),
+        new FieldRotateLeft(swerve, 160),
 
-        new Delay(0.2)
+        new Delay(0.2),
 
-        //new LimelightRotate(swerve)
+        new LimelightRotate(swerve)
 
         // new ParallelCommandGroup(
         //     new DriveForwardCommand(swerve, 230),

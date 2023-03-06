@@ -57,7 +57,7 @@ public class FieldRotateLeft extends CommandBase{
 
         //ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, turningSpeed, swerve.getRotation2d());
 
-        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, 0, -turningSpeed);
+        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, 0, turningSpeed);
         // Convert chassis speeds to individual module states
         SwerveModuleState[] moduleStates = SwerveConsts.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
 
@@ -72,7 +72,7 @@ public class FieldRotateLeft extends CommandBase{
 
     @Override
     public boolean isFinished(){
-        return Math.abs(desiredAngle - swerve.getYaw()) < 2;
+        return Math.abs(desiredAngle - swerve.getYaw()) < 5;
     }
 
 }

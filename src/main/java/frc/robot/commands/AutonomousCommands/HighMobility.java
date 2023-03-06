@@ -11,6 +11,7 @@ import frc.robot.commands.CommandGroups.TuckedFromBottom;
 import frc.robot.commands.MovementCommands.DriveBackwardCommand;
 import frc.robot.commands.MovementCommands.DriveForwardCommand;
 import frc.robot.commands.MovementCommands.FieldRotateLeft;
+import frc.robot.commands.MovementCommands.FieldRotateRight;
 import frc.robot.commands.MovementCommands.RotateLeftCommand;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -27,8 +28,8 @@ public class HighMobility extends SequentialCommandGroup {
 
       new DriveBackwardCommand(swerve, 230), 
 
-      new RotateLeftCommand(swerve, 163),
-      //new FieldRotateLeft(swerve, 180),
+      //new RotateLeftCommand(swerve, 163),
+      new FieldRotateRight(swerve, 178),
 
       new LowPickUp(pivot, elevator),
 
