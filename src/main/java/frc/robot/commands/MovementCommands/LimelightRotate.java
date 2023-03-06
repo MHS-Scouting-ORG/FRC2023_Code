@@ -33,6 +33,8 @@ public class LimelightRotate extends CommandBase{
         else if(LimelightHelpers.getTX("limelight") > 1.5){
             swerve.rotateRight(0.1);
         }
+
+        SmartDashboard.putNumber("x-offset", LimelightHelpers.getTX("limelight"));
     }
 
     @Override

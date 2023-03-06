@@ -30,7 +30,7 @@ public class FieldStrafeRight extends CommandBase{
 
     @Override
     public void execute(){
-        SmartDashboard.putString("CurrentCommand", getName());
+        SmartDashboard.putString("Current Command", getName());
 
         double turningSpeed = turningPID.calculate(swerve.getYaw(), 0);
 
@@ -45,7 +45,6 @@ public class FieldStrafeRight extends CommandBase{
 
     @Override
     public void end(boolean interrupted){
-        SmartDashboard.putBoolean("drive fwd", false); 
         swerve.stopModules();
     }
 

@@ -4,6 +4,7 @@
 
 package frc.robot.commands.AutonomousCommands;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.ClawCommands.Claw;
 import frc.robot.commands.CommandGroups.LowPickUp;
@@ -11,34 +12,41 @@ import frc.robot.commands.CommandGroups.TuckedFromBottom;
 import frc.robot.commands.MovementCommands.DriveBackwardCommand;
 import frc.robot.commands.MovementCommands.DriveForwardCommand;
 import frc.robot.commands.MovementCommands.FieldRotateLeft;
+import frc.robot.commands.MovementCommands.LimelightRotate;
 import frc.robot.commands.MovementCommands.RotateLeftCommand;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
-public class HighMobility extends SequentialCommandGroup {
-  //SCORE ON HIGH, MOBILITY
-  public HighMobility(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator) {
+public class HighMobilityTracking extends SequentialCommandGroup {
+  // SCORE ON HIGH, MOBILITY
+  public HighMobilityTracking(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot,
+      ElevatorSubsystem elevator) {
 
     addCommands(
 
-      new High(swerve, claw, pivot, elevator),
+        new High20(swerve, claw, pivot, elevator),
 
-      new DriveBackwardCommand(swerve, 230), 
+        new ParallelCommandGroup(
+            new DriveBackwardCommand(swerve, 170),
+            new TuckedFromBottom(pivot, elevator)),
 
-      new RotateLeftCommand(swerve, 163),
-      //new FieldRotateLeft(swerve, 180),
+        new FieldRotateLeft(swerve, 170),
 
-      new LowPickUp(pivot, elevator),
+        new Delay(0.2)
 
-      new DriveForwardCommand(swerve, 18),
+        //new LimelightRotate(swerve)
 
-      new Claw(claw),
+        // new ParallelCommandGroup(
+        //     new DriveForwardCommand(swerve, 230),
+        //     new LowPickUp(pivot, elevator)),
 
-      new Delay(0.5),
+        // new Claw(claw),
 
-      new TuckedFromBottom(pivot, elevator)
-    );
+        // new Delay(0.5),
+
+        // new TuckedFromBottom(pivot, elevator)
+        );
   }
 }

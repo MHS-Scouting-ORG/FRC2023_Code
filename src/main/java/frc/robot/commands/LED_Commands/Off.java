@@ -1,5 +1,6 @@
 package frc.robot.commands.LED_Commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Lights;
 
@@ -16,6 +17,7 @@ public class Off extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putString("Current Command", getName());
     lights.off();
   }
 

@@ -34,11 +34,11 @@ public class RobotContainer {
   private Joystick joystick = new Joystick(DriverControlConsts.JOYSTICK_PORT);
 
   //AUTONOMOUS CHOICES 
-  private Command high = new HighMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private Command hybrid = new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command highMobility = new HighMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command hybridMobility = new HybridMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command hybridBal = new HybridBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command highBal = new HighBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command highMobileTracking = new HighMobilityTracking(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
   private Command fieldForward = new FieldForward(swerveSubsystem, 5000);
   private Command mobilityTest = new MobilityPID(swerveSubsystem, 5000, 180);
@@ -49,9 +49,8 @@ public class RobotContainer {
     swerveSubsystem.setDefaultCommand(new FieldOriented(swerveSubsystem,
         () -> xbox.getLeftY() * 0.95,
         () -> xbox.getLeftX() * 0.95,
-        () -> -xbox.getRightX() * 0.95)); // for field oriented drive
+        () -> -xbox.getRightX() * 0.95));
 
-    //lights.setDefaultCommand(new Off(lights));
     selectAuto();
     configureBindings();
   }
@@ -70,7 +69,7 @@ public class RobotContainer {
             () -> -xbox.getLeftY() * 0.75,
             () -> -xbox.getLeftX() * 0.75,
             () -> -xbox.getRightX() * 0.75));
-    new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem)); // to lock in place :: Button B
+    new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem));
     new JoystickButton(xbox, 4).toggleOnFalse(new Endgame(swerveSubsystem, () -> xbox.getLeftY()));
 
     // FOR TESTING
@@ -105,21 +104,18 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return autoChooser.getSelected();
-    // return new Hybrid(swerveSubsystem, clawSubsystem, pivotSubsystem,
-    // elevatorSubsystem);
   }
 
   public void selectAuto() {
-    //autoChooser.addOption("Hybrid", hybrid);
     autoChooser.setDefaultOption("Do Nothing", doNothing);
-    autoChooser.addOption("High", high);
-    autoChooser.addOption("Hybrid", hybrid);
+    autoChooser.setDefaultOption("TEST** New High Mobility", highMobileTracking);
+    autoChooser.addOption("High Mobility", highMobility);
     autoChooser.addOption("Hybrid Mobility", hybridMobility);
-    autoChooser.addOption("Hybrid Balance", hybridBal);
     autoChooser.addOption("High Balance", highBal);
     autoChooser.addOption("Straighten", fieldForward);
     autoChooser.addOption("MobilityPID Test", mobilityTest);
     autoChooser.addOption("limelight Tracker", limelightTrack);
+    autoChooser.addOption("Hybrid Balance", hybridBal);
 
     SmartDashboard.putData(autoChooser);
   }

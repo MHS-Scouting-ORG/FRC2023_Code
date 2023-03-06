@@ -4,6 +4,7 @@
 
 package frc.robot.commands.ElevatorCommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ElevatorSubsystem;
 
@@ -29,7 +30,9 @@ public class  ElevatorTest extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    SmartDashboard.putString("Current Command", getName());
+  }
 
   // Called once the command ends or is interrupted.
   @Override

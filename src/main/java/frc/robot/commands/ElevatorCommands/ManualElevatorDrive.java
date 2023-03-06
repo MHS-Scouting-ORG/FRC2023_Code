@@ -2,6 +2,7 @@
 package frc.robot.commands.ElevatorCommands;
 
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ElevatorSubsystem;
 public class ManualElevatorDrive extends CommandBase {
@@ -20,6 +21,7 @@ public class ManualElevatorDrive extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putString("Current Command", getName());
     elevatorSubsystem.setManualSpeed(speed);
   }
 

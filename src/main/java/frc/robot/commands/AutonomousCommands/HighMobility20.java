@@ -4,33 +4,37 @@
 
 package frc.robot.commands.AutonomousCommands;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.ClawCommands.Claw;
 import frc.robot.commands.CommandGroups.LowPickUp;
 import frc.robot.commands.CommandGroups.TuckedFromBottom;
 import frc.robot.commands.MovementCommands.DriveBackwardCommand;
 import frc.robot.commands.MovementCommands.DriveForwardCommand;
-import frc.robot.commands.MovementCommands.FieldRotateLeft;
 import frc.robot.commands.MovementCommands.RotateLeftCommand;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
-public class HighMobility extends SequentialCommandGroup {
+public class HighMobility20 extends SequentialCommandGroup {
   //SCORE ON HIGH, MOBILITY
-  public HighMobility(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator) {
+  public HighMobility20(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator) {
 
     addCommands(
 
-      new High(swerve, claw, pivot, elevator),
+      new High20(swerve, claw, pivot, elevator),
 
-      new DriveBackwardCommand(swerve, 230), 
+      new ParallelCommandGroup(
+        new DriveBackwardCommand(swerve, 257),
+        new TuckedFromBottom(pivot, elevator)
+      ),
 
-      new RotateLeftCommand(swerve, 163),
-      //new FieldRotateLeft(swerve, 180),
-
-      new LowPickUp(pivot, elevator),
+      new ParallelCommandGroup(
+        new RotateLeftCommand(swerve, 163),
+        //new FieldRotateLeft(swerve, 180),
+        new LowPickUp(pivot, elevator)
+      ),
 
       new DriveForwardCommand(swerve, 18),
 

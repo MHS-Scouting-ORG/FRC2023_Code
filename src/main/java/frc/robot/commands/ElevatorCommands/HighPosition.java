@@ -22,12 +22,13 @@ public class HighPosition extends CommandBase {
 
   @Override
   public void execute(){
+    SmartDashboard.putString("Current Command", getName());
+    
     if(elevSub.topPressed()){
       elevSub.changeSetpoint(elevSub.getEncoder() - 10);
     }
 
     elevSub.changeSetpoint(setPoint);
-    SmartDashboard.putString("Position:", "High");
   }
 
   @Override

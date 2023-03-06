@@ -24,7 +24,7 @@ public class DriveBackwardCommand extends CommandBase {
   @Override
   public void execute() {
     SmartDashboard.putString("Current Command", getName());
-    swerve.driveBackward(AutoConsts.DRIVE_TRANSLATION_SPEED);
+    swerve.driveBackward(AutoConsts.DRIVE_TRANSLATION_SPEED * 1.5);
   }
 
   @Override
