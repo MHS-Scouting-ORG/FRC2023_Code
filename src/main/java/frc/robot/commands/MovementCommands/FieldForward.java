@@ -11,9 +11,9 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 public class FieldForward extends CommandBase{
     private final SwerveSubsystem swerve;
-    private double desiredEnc; 
-    private PIDController turningPID; 
-
+    private final PIDController turningPID; 
+    private double desiredEnc;
+    
     public FieldForward(SwerveSubsystem newSwerve, double newDesiredEnc){
         swerve = newSwerve;
         desiredEnc = newDesiredEnc; 

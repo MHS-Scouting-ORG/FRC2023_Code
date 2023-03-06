@@ -8,6 +8,10 @@ import frc.robot.commands.DriveCommands.*;
 import frc.robot.commands.ElevatorCommands.*;
 import frc.robot.commands.PivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
+import frc.robot.commands.MovementCommands.FieldForward;
+import frc.robot.commands.MovementCommands.LimelightRotate;
+import frc.robot.commands.MovementCommands.LimelightRotatePID;
+import frc.robot.commands.MovementCommands.MobilityPID;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -37,6 +41,9 @@ public class RobotContainer {
   private Command highMobility20 = new HighMobility20(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   //private Command highMobileTracking = new HighMobilityTracking(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
+  private Command fieldForward = new FieldForward(swerveSubsystem, 5000);
+  private Command mobilityTest = new MobilityPID(swerveSubsystem, 5000, 180);
+  private Command limelightTrack = new LimelightRotate(swerveSubsystem);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
@@ -107,6 +114,9 @@ public class RobotContainer {
     autoChooser.addOption("High Mobility", highMobility);
     autoChooser.addOption("Hybrid Mobility", hybridMobility);
     autoChooser.addOption("High Balance", highBal);
+    autoChooser.addOption("Straighten", fieldForward);
+    autoChooser.addOption("MobilityPID Test", mobilityTest);
+    autoChooser.addOption("limelight Tracker", limelightTrack);
     autoChooser.addOption("Hybrid Balance", hybridBal);
 
     SmartDashboard.putData(autoChooser);
