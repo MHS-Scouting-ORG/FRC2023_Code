@@ -56,6 +56,6 @@ public class PitchBalance extends CommandBase {
   public boolean isFinished() {
     // Checks a second time if pitch is greater than -13.5, ends if true
     //return (readyToEnd && swerve.getPitch() > -13 || Timer.getMatchTime() < 1)/*  || time > 14 */;
-    return (readyToEnd && swerve.getPitch() > -10) || Timer.getMatchTime()<1.5; //|| (-5<swerve.getPitch() && swerve.getPitch()<5 && Timer.getMatchTime() < 1);
+    return (readyToEnd && swerve.getPitch() > -12) || Timer.getMatchTime()<1.5; //|| (-5<swerve.getPitch() && swerve.getPitch()<5 && Timer.getMatchTime() < 1);
   }
 }
