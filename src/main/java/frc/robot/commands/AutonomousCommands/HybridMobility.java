@@ -7,7 +7,6 @@ import frc.robot.commands.CommandGroups.TuckedFromBottom;
 import frc.robot.commands.MovementCommands.DriveBackwardCommand;
 import frc.robot.commands.MovementCommands.DriveForwardCommand;
 import frc.robot.commands.MovementCommands.RotateLeftCommand;
-import frc.robot.commands.MovementCommands.RotateRightCommand;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PivotSubsystem;

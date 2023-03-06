@@ -1,6 +1,5 @@
 package frc.robot.commands.AutonomousCommands;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.CommandGroups.*;
 import frc.robot.commands.ClawCommands.Claw;
