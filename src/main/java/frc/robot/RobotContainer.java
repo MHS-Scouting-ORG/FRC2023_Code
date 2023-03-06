@@ -34,7 +34,8 @@ public class RobotContainer {
   private Command hybridMobility = new HybridMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command hybridBal = new HybridBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command highBal = new HighBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private Command highMobileTracking = new HighMobilityTracking(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command highMobility20 = new HighMobility20(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  //private Command highMobileTracking = new HighMobilityTracking(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
@@ -101,7 +102,8 @@ public class RobotContainer {
 
   public void selectAuto() {
     autoChooser.setDefaultOption("Do Nothing", doNothing);
-    autoChooser.setDefaultOption("TEST** New High Mobility", highMobileTracking);
+    autoChooser.addOption("High Mobility 20", highMobility20);
+    //autoChooser.setDefaultOption("TEST** New High Mobility", highMobileTracking);
     autoChooser.addOption("High Mobility", highMobility);
     autoChooser.addOption("Hybrid Mobility", hybridMobility);
     autoChooser.addOption("High Balance", highBal);
