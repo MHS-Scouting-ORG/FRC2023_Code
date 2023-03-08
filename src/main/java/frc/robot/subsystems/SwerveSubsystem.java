@@ -207,6 +207,20 @@ public class SwerveSubsystem extends SubsystemBase {
 
     }
 
+    public void setEndgame(double lspeed, double rspeed){
+        SwerveModuleState fl = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(45)));
+        SwerveModuleState bl = new SwerveModuleState(lspeed, new Rotation2d(Math.toRadians(90)));
+        SwerveModuleState br = new SwerveModuleState(lspeed, new Rotation2d(Math.toRadians(90)));
+        SwerveModuleState fr = new SwerveModuleState(0.0, new Rotation2d(Math.toRadians(-45)));
+
+        frontLeft.setAngle(fl);
+        backLeft.setDesiredState(bl);
+        backRight.setDesiredState(br);
+        frontRight.setAngle(fr);
+        wheelinator.set(rspeed);
+    }
+
+
     // PERIODIC - runs repeatedly (like periodic from timed robot)
     @Override
     public void periodic() {

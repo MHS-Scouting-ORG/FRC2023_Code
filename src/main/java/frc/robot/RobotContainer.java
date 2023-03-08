@@ -63,7 +63,8 @@ public class RobotContainer {
             () -> -xbox.getLeftX() * 0.75,
             () -> -xbox.getRightX() * 0.75));
     new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem));
-    new JoystickButton(xbox, 4).toggleOnFalse(new Endgame(swerveSubsystem, () -> xbox.getLeftY()));
+    // new JoystickButton(xbox, 4).toggleOnTrue(new Endgame(swerveSubsystem, () -> xbox.getLeftY()));
+    new JoystickButton(xbox, 4).toggleOnTrue(new TankEndgame(swerveSubsystem, () -> xbox.getLeftY(), () -> xbox.getRightY()));
 
     // FOR TESTING
     new JoystickButton(xbox, 7).onTrue(new InstantCommand(() -> swerveSubsystem.resetNavx()));
