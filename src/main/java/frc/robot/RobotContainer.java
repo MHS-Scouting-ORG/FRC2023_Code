@@ -53,7 +53,7 @@ public class RobotContainer {
 
     /* SWERVE */
     new JoystickButton(xbox, 1).toggleOnTrue(
-        new DriverControl(swerveSubsystem,
+        new FieldOriented(swerveSubsystem,
             () -> -xbox.getLeftY() * 0.35,
             () -> -xbox.getLeftX() * 0.35,
             () -> -xbox.getRightX() * 0.35));
