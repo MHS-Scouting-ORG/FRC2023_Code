@@ -36,6 +36,7 @@ public class RobotContainer {
   private Command highBal = new HighBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command highMobility20 = new HighMobility20(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
+  private Command highBalEnc = new HighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
@@ -52,16 +53,19 @@ public class RobotContainer {
   private void configureBindings() {
 
     /* SWERVE */
-    new JoystickButton(xbox, 1).toggleOnTrue(
+
+    // NORMAN SAID NO NEED
+    /*new JoystickButton(xbox, 1).toggleOnTrue(
         new FieldOriented(swerveSubsystem,
-            () -> -xbox.getLeftY() * 0.35,
-            () -> -xbox.getLeftX() * 0.35,
+            () -> xbox.getLeftY() * 0.35,
+            () -> xbox.getLeftX() * 0.35,
             () -> -xbox.getRightX() * 0.35));
     new JoystickButton(xbox, 6).toggleOnTrue(
         new DriverControl(swerveSubsystem,
             () -> -xbox.getLeftY() * 0.75,
             () -> -xbox.getLeftX() * 0.75,
             () -> -xbox.getRightX() * 0.75));
+    */
     new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem));
     // new JoystickButton(xbox, 4).toggleOnTrue(new Endgame(swerveSubsystem, () -> xbox.getLeftY()));
     new JoystickButton(xbox, 4).toggleOnTrue(new TankEndgame(swerveSubsystem, () -> xbox.getLeftY(), () -> xbox.getRightY()));
@@ -108,6 +112,7 @@ public class RobotContainer {
     autoChooser.addOption("Hybrid Mobility", hybridMobility);
     autoChooser.addOption("High Balance", highBal);
     autoChooser.addOption("Hybrid Balance", hybridBal);
+    autoChooser.addOption("High Balance Encoder", highBalEnc);
 
     SmartDashboard.putData(autoChooser);
   }
