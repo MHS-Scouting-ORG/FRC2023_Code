@@ -15,7 +15,11 @@ public class Hybrid extends SequentialCommandGroup {
     //SCORE CONE IN HYBRID GOAL 
     addCommands(
 
-      //new Launchinator(pivot, claw),
+      new Claw(claw), 
+
+      new Delay(0.5),
+      
+      new TuckedFromBottom(pivot, elevator),
 
       // Arm in hybrid goal position (pivot out, elevator down) 
       new LowPickUp(pivot, elevator),

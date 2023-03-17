@@ -18,7 +18,9 @@ public class High extends SequentialCommandGroup {
 
     addCommands(
 
-      //new Launchinator(pivot, claw),
+      new Claw(claw),
+
+      new Delay(0.5),
 
       new TuckedFromBottom(pivot, elevator),
 

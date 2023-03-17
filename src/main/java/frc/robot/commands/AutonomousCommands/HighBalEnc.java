@@ -5,6 +5,9 @@
 package frc.robot.commands.AutonomousCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.DriveCommands.Lock;
+import frc.robot.commands.MovementCommands.DriveBackwardCommand;
+import frc.robot.commands.MovementCommands.DriveForwardCommand;
 import frc.robot.commands.MovementCommands.FieldRotateRight;
 import frc.robot.commands.MovementCommands.StrafeRightCommand;
 import frc.robot.subsystems.ClawSubsystem;
@@ -22,10 +25,15 @@ public class HighBalEnc extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new High(swerve, claw, pivot, elevator),
+      new DriveForwardCommand(swerve, 15),
+      new Delay(0.5),
+      //new DriveBackwardCommand(swerve, 145)
 
       new FieldRotateRight(swerve, 90), 
 
-      new StrafeRightCommand(swerve, 40) //FIXME 40 is guessing 
+      new StrafeRightCommand(swerve, 164),
+
+      new Lock(swerve)
     );
   }
 }

@@ -41,9 +41,9 @@ public class RobotContainer {
 
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(new FieldOriented(swerveSubsystem,
-        () -> xbox.getLeftY() * 0.95,
-        () -> xbox.getLeftX() * 0.95,
-        () -> -xbox.getRightX() * 0.95));
+        () -> xbox.getLeftY() * 0.85,
+        () -> xbox.getLeftX() * 0.85,
+        () -> -xbox.getRightX() * 0.85));
 
     selectAuto();
     configureBindings();
@@ -93,6 +93,8 @@ public class RobotContainer {
     /* ELEVATOR */
     new POVButton(joystick, 0).whileTrue(new ManualElevatorDrive(elevatorSubsystem, 0.75));
     new POVButton(joystick, 180).whileTrue(new ManualElevatorDrive(elevatorSubsystem, -0.75));
+
+    new JoystickButton(xbox, 6).onTrue(new LowPosition(elevatorSubsystem));
 
     /* LIGHTS */
     new JoystickButton(joystick, 6).toggleOnTrue(new Yellow(lights));

@@ -225,6 +225,7 @@ public class SwerveSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("[S] Yaw", getYaw());
+        SmartDashboard.putBoolean("connection", navx.isConnected());
         SmartDashboard.putNumber("[S] Pitch", getPitch());
         SmartDashboard.putNumber("[S] Timer Class", Timer.getMatchTime());
     }
