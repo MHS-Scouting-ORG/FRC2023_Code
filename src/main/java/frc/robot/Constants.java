@@ -36,25 +36,25 @@ public final class Constants {
     public static final int FL_DRIVE_PORT = 1;
     public static final int FL_TURN_PORT = 5;
     public static final int FL_ABSOLUTE_ENCODER_PORT = 9;
-    public static final double FL_OFFSET = -Math.toRadians(3.234);
+    public static final double FL_OFFSET = -Math.toRadians(3.174);
 
     /* * * BACK LEFT * * */
     public static final int BL_DRIVE_PORT = 2;
     public static final int BL_TURN_PORT = 6;
     public static final int BL_ABSOLUTE_ENCODER_PORT = 10;
-    public static final double BL_OFFSET = -Math.toRadians(3.195);
+    public static final double BL_OFFSET = -Math.toRadians(3.120);
 
     /* * * BACK RIGHT * * */
     public static final int BR_DRIVE_PORT = 3;
     public static final int BR_TURN_PORT = 7;
     public static final int BR_ABSOLUTE_ENCODER_PORT = 11;
-    public static final double BR_OFFSET = -Math.toRadians(3.124);
+    public static final double BR_OFFSET = -Math.toRadians(3.106);
 
     /* * * FRONT RIGHT * * */
     public static final int FR_DRIVE_PORT = 8;
     public static final int FR_TURN_PORT = 4;
     public static final int FR_ABSOLUTE_ENCODER_PORT = 12;
-    public static final double FR_OFFSET = -Math.toRadians(3.145  );
+    public static final double FR_OFFSET = -Math.toRadians(3.042);
 
     /* * * CONVERSIONS FOR ENCODERS * * */
     public static final double DRIVE_ENCODER_ROTATION_CONVERSION = GEAR_RATIO * Math.PI * WHEEL_DIAMETER;

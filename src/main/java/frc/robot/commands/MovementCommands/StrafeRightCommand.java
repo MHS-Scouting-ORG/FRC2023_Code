@@ -9,10 +9,12 @@ import frc.robot.subsystems.SwerveSubsystem;
 public class StrafeRightCommand extends CommandBase {
   private final SwerveSubsystem swerve; 
   private double desiredEnc; 
+  private double multiplier;
 
-  public StrafeRightCommand(SwerveSubsystem newSwerve, double newDesiredEnc) {
+  public StrafeRightCommand(SwerveSubsystem newSwerve, double newDesiredEnc, double multiplier) {
     swerve = newSwerve; 
     desiredEnc = newDesiredEnc; 
+    this.multiplier = multiplier;
 
     addRequirements(swerve);
   }
@@ -26,7 +28,7 @@ public class StrafeRightCommand extends CommandBase {
   public void execute() {
     SmartDashboard.putString("Current Command", getName());
 
-    swerve.strafeRight(AutoConsts.DRIVE_TRANSLATION_SPEED);
+    swerve.strafeRight(AutoConsts.DRIVE_TRANSLATION_SPEED*multiplier);
   }
 
   @Override

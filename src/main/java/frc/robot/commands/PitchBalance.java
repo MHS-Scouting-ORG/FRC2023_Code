@@ -39,7 +39,7 @@ public class PitchBalance extends CommandBase {
     swerve.strafeRight(AutoConsts.DRIVE_TRANSLATION_SPEED * 0.8);
     
     // Checks if pitch is greater than -13.5
-    if (swerve.getPitch() < -11){
+    if (swerve.getPitch() < -15){
       readyToEnd = true;
     }
   }
@@ -48,14 +48,14 @@ public class PitchBalance extends CommandBase {
   public void end(boolean interrupted) {
     SmartDashboard.putString("Current Command", "Lock");
     // Stop then lock drive
-    swerve.stopModules();
     swerve.lock();
+    //swerve.stopModules();
   }
 
   @Override
   public boolean isFinished() {
     // Checks a second time if pitch is greater than -13.5, ends if true
     //return (readyToEnd && swerve.getPitch() > -13 || Timer.getMatchTime() < 1)/*  || time > 14 */;
-    return (readyToEnd && swerve.getPitch() > -12) || Timer.getMatchTime()<1.5; //|| (-5<swerve.getPitch() && swerve.getPitch()<5 && Timer.getMatchTime() < 1);
+    return (readyToEnd && swerve.getPitch() > -11); //|| Timer.getMatchTime()<1.5; //|| (-5<swerve.getPitch() && swerve.getPitch()<5 && Timer.getMatchTime() < 1);
   }
 }

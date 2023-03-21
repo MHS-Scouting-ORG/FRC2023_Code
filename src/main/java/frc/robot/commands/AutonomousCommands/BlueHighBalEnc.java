@@ -18,9 +18,9 @@ import frc.robot.subsystems.SwerveSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class HighBalEnc extends SequentialCommandGroup {
+public class BlueHighBalEnc extends SequentialCommandGroup {
   /** Creates a new HighBalEnc. */
-  public HighBalEnc(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator) {
+  public BlueHighBalEnc(SwerveSubsystem swerve, ClawSubsystem claw, PivotSubsystem pivot, ElevatorSubsystem elevator) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
@@ -31,7 +31,7 @@ public class HighBalEnc extends SequentialCommandGroup {
 
       new FieldRotateRight(swerve, 90), 
 
-      new StrafeRightCommand(swerve, 161, 0.8),
+      new StrafeRightCommand(swerve, 163.5, 0.8),
 
       new Lock(swerve)
     );

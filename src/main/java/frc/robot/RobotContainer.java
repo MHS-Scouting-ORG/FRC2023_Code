@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.Constants.DriverControlConsts;
+import frc.robot.commands.PitchBalance;
 import frc.robot.commands.AutonomousCommands.*;
 import frc.robot.commands.ClawCommands.*;
 import frc.robot.commands.CommandGroups.*;
@@ -9,6 +10,9 @@ import frc.robot.commands.ElevatorCommands.*;
 import frc.robot.commands.PivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
 import frc.robot.subsystems.*;
+
+import javax.print.attribute.standard.Copies;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -31,19 +35,23 @@ public class RobotContainer {
 
   //AUTONOMOUS CHOICES 
   private Command highMobility = new HighMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private Command hybridMobility = new HybridMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private Command hybridBal = new HybridBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  // private Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  // private Command hybridMobility = new HybridMobility(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  // private Command hybridBal = new HybridBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command highBal = new HighBal(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private Command highMobility20 = new HighMobility20(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command high = new High(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  // private Command highMobility20 = new HighMobility20(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
-  private Command highBalEnc = new HighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  //private Command highBalEnc = new HighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command redHighBalEnc = new RedHighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem); 
+  private Command blueHighBalEnc = new BlueHighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(new FieldOriented(swerveSubsystem,
-        () -> xbox.getLeftY() * 0.85,
-        () -> xbox.getLeftX() * 0.85,
-        () -> -xbox.getRightX() * 0.85));
+        () -> xbox.getLeftY() * 0.95,
+        () -> xbox.getLeftX() * 0.95,
+        () -> -xbox.getRightX() * 0.95));
 
     selectAuto();
     configureBindings();
@@ -68,7 +76,7 @@ public class RobotContainer {
     */
     new JoystickButton(xbox, 2).toggleOnTrue(new Lock(swerveSubsystem));
     // new JoystickButton(xbox, 4).toggleOnTrue(new Endgame(swerveSubsystem, () -> xbox.getLeftY()));
-    new JoystickButton(xbox, 4).toggleOnTrue(new TankEndgame(swerveSubsystem, () -> xbox.getLeftY(), () -> xbox.getRightY()));
+    new JoystickButton(xbox, 4).toggleOnTrue(new TankEndgame(swerveSubsystem, () -> xbox.getLeftY(), () -> -xbox.getRightY()));
 
     // FOR TESTING
     new JoystickButton(xbox, 7).onTrue(new InstantCommand(() -> swerveSubsystem.resetNavx()));
@@ -94,7 +102,7 @@ public class RobotContainer {
     new POVButton(joystick, 0).whileTrue(new ManualElevatorDrive(elevatorSubsystem, 0.75));
     new POVButton(joystick, 180).whileTrue(new ManualElevatorDrive(elevatorSubsystem, -0.75));
 
-    new JoystickButton(xbox, 6).onTrue(new LowPosition(elevatorSubsystem));
+    // new JoystickButton(joystick, 3).onTrue(new LowPosition(elevatorSubsystem));
 
     /* LIGHTS */
     new JoystickButton(joystick, 6).toggleOnTrue(new Yellow(lights));
@@ -108,13 +116,19 @@ public class RobotContainer {
 
   public void selectAuto() {
     autoChooser.setDefaultOption("Do Nothing", doNothing);
-    autoChooser.addOption("High Mobility 20", highMobility20);
+    // autoChooser.addOption("High Mobility 20", highMobility20);
     //autoChooser.setDefaultOption("TEST** New High Mobility", highMobileTracking);
     autoChooser.addOption("High Mobility", highMobility);
-    autoChooser.addOption("Hybrid Mobility", hybridMobility);
+    // autoChooser.addOption("Hybrid Mobility", hybridMobility);
     autoChooser.addOption("High Balance", highBal);
-    autoChooser.addOption("Hybrid Balance", hybridBal);
-    autoChooser.addOption("High Balance Encoder", highBalEnc);
+    // autoChooser.addOption("Hybrid Balance", hybridBal);
+    // autoChooser.addOption("High Balance Encoder", highBalEnc);
+    // autoChooser.addOption("High", high);
+    autoChooser.addOption("Red High Balance", redHighBalEnc);
+    autoChooser.addOption("Blue High Balance", blueHighBalEnc);
+    autoChooser.addOption("High ONLY", high);
+    // autoChooser.addOption("Pitch Balance", pitchBalance);
+    // autoChooser.addOption("Mixed Balance", mixedBalance);
 
     SmartDashboard.putData(autoChooser);
   }
