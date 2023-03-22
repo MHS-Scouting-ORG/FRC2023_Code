@@ -777,4 +777,18 @@ public class LimelightHelpers {
 
         return results;
     }
+
+    public static void align(){
+        double kp = 0.0125;
+        double minspeed = 0.1;
+        double error = getTX("limelight");
+
+        setCameraMode_Processor("limelight");
+
+        if(error > 0.75){
+            RobotContainer.swerveSubsystem.rotateLeft((kp * error) + minspeed);
+        } else if(error < -0.75){
+            RobotContainer.swerveSubsystem.rotateRight((kp * error) - minspeed);
+        }
+    }
 }
