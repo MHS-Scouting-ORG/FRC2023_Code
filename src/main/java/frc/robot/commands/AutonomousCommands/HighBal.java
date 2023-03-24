@@ -1,5 +1,7 @@
 package frc.robot.commands.AutonomousCommands;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.ProxyCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.DriveCommands.Lock;
 import frc.robot.commands.MovementCommands.FieldRotateRight;
@@ -24,5 +26,7 @@ public class HighBal extends SequentialCommandGroup {
       new Lock(swerve)
 
     );
+
+  
   }
 }

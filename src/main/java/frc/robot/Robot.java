@@ -24,6 +24,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   private Compressor compressor;
+  //private Camera wideview;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -36,6 +37,9 @@ public class Robot extends TimedRobot {
     compressor = new Compressor(PneumaticsModuleType.REVPH);
     compressor.enableDigital();
     m_robotContainer = new RobotContainer();
+
+    // wideview = new Camera();
+    // wideview.init();
   }
 
   /**
@@ -82,7 +86,8 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+  }
 
   @Override
   public void teleopInit() {
