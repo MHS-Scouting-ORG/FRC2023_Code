@@ -1,7 +1,6 @@
 package frc.robot;
 
 import frc.robot.Constants.DriverControlConsts;
-import frc.robot.commands.PitchBalance;
 import frc.robot.commands.AutonomousCommands.*;
 import frc.robot.commands.ClawCommands.*;
 import frc.robot.commands.CommandGroups.*;
@@ -10,8 +9,6 @@ import frc.robot.commands.ElevatorCommands.*;
 import frc.robot.commands.PivotCommands.*;
 import frc.robot.commands.LED_Commands.*;
 import frc.robot.subsystems.*;
-
-import javax.print.attribute.standard.Copies;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
