@@ -20,7 +20,7 @@ public class High extends SequentialCommandGroup {
 
       new Claw(claw),
 
-      new Delay(0.5),
+      new Delay(0.15),
 
       new TuckedFromBottom(pivot, elevator),
 
@@ -33,7 +33,7 @@ public class High extends SequentialCommandGroup {
       // Open claw
       new Claw(claw),
 
-      new Delay(0.5),
+      new Delay(0.15),
 
       new DriveBackwardCommand(swerve, 5),
 

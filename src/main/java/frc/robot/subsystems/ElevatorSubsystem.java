@@ -117,8 +117,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     if(calcSpeed > .9){ // IF SPEED CALCULATED IS GREATER THAN 1, SETS MAX SPEED TO 1
       calcSpeed = .9;
     }
-    else if(calcSpeed < -0.6){ // IF SPEED CALCULATED IS LESS THAN -1, SETS MAX SPEED TO -1
-      calcSpeed = -0.6; 
+    else if(calcSpeed < -0.7){ // IF SPEED CALCULATED IS LESS THAN -1, SETS MAX SPEED TO -1
+      calcSpeed = -0.7; 
     }
 
     if(topPressed() && calcSpeed > 0){

@@ -43,8 +43,9 @@ public class RobotContainer {
   // private Command highMobility20 = new HighMobility20(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command doNothing = new DoNothing();
   //private Command highBalEnc = new HighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
-  private Command redHighBalEnc = new RedHighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem); 
-  private Command blueHighBalEnc = new BlueHighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  // private Command redHighBalEnc = new RedHighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem); 
+  // private Command blueHighBalEnc = new BlueHighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
+  private Command mixedBalance = new MixedBalance(swerveSubsystem);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
@@ -124,11 +125,12 @@ public class RobotContainer {
     // autoChooser.addOption("Hybrid Balance", hybridBal);
     // autoChooser.addOption("High Balance Encoder", highBalEnc);
     // autoChooser.addOption("High", high);
-    autoChooser.addOption("Red High Balance", redHighBalEnc);
-    autoChooser.addOption("Blue High Balance", blueHighBalEnc);
+    // autoChooser.addOption("Red High Balance", redHighBalEnc);
+    // autoChooser.addOption("Blue High Balance", blueHighBalEnc);
     autoChooser.addOption("High ONLY", high);
     // autoChooser.addOption("Pitch Balance", pitchBalance);
     // autoChooser.addOption("Mixed Balance", mixedBalance);
+     autoChooser.addOption("Mixed Balance ONLY", mixedBalance);
 
     SmartDashboard.putData(autoChooser);
   }

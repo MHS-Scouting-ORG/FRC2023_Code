@@ -11,7 +11,7 @@ public class HighPosition extends CommandBase {
   // ELEV TO HIGH POSITION 
   public HighPosition(ElevatorSubsystem elevSubystem) {
     elevSub = elevSubystem;
-    setPoint = 180;
+    setPoint = 175;
     addRequirements(elevSub);
   }
 

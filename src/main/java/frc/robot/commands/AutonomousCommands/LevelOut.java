@@ -19,8 +19,8 @@ public class LevelOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(swerve.getPitch() < 1){
-      swerve.strafeRight(0.05);
+    if(swerve.getPitch() < 1.8){
+      swerve.strafeRight(0.1);
     }
   }
 
@@ -34,6 +34,6 @@ public class LevelOut extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return swerve.getPitch() > 4;//Timer.getMatchTime()<1.0;
+    return swerve.getPitch() > 2.3; // 2.2
   }
 }

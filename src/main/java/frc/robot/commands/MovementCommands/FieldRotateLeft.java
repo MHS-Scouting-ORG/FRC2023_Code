@@ -18,7 +18,7 @@ public class FieldRotateLeft extends CommandBase{
     public FieldRotateLeft(SwerveSubsystem newSwerve, double newDesiredAngle){
         swerve = newSwerve;
         desiredAngle = -newDesiredAngle; 
-        turningPID = new PIDController(0.01, 0.01,0.002);
+        turningPID = new PIDController(0.01, 0.01,0.0);
         // turningPID.enableContinuousInput(-180, 180); // System is circular;  Goes from -Math.PI to 0 to Math.PI
 
         addRequirements(swerve);
@@ -34,7 +34,7 @@ public class FieldRotateLeft extends CommandBase{
 
         double currentYaw = swerve.getYaw();
 
-        double turningSpeed = -turningPID.calculate(currentYaw, desiredAngle);
+        double turningSpeed = turningPID.calculate(currentYaw, desiredAngle);
 
         if (turningSpeed > 0.5){
             turningSpeed = 0.5;

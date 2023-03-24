@@ -20,7 +20,7 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
     private final CANSparkMax canspark = new CANSparkMax(14, MotorType.kBrushless);
     private final DigitalInput limitSwitch = new DigitalInput(2);
     private final RelativeEncoder rEnc;
-    private final PIDController pid = new PIDController(0.1, 0, 0);
+    private final PIDController pid = new PIDController(0.1, 0.01, 0.01);
     private double before;
     private double setpoint;
     private boolean pidOn = true;
@@ -199,8 +199,8 @@ public class PivotSubsystem extends SubsystemBase{ // Pivot Arm Subsystem
         if(calcSpeed > .7){ 
           calcSpeed = .7;
         }
-        else if(calcSpeed < -0.4){ 
-          calcSpeed = -0.5;
+        else if(calcSpeed < -0.55){ 
+          calcSpeed = -0.55;
         }
         canspark.set(calcSpeed);
 
