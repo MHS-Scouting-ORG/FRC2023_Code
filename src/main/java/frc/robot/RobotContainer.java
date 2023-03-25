@@ -38,6 +38,7 @@ public class RobotContainer {
   private Command redHighBalEnc = new RedHighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem); 
   private Command blueHighBalEnc = new BlueHighBalEnc(swerveSubsystem, clawSubsystem, pivotSubsystem, elevatorSubsystem);
   private Command mixedBalance = new MixedBalance(swerveSubsystem);
+  private Command swerveLock = new Lock(swerveSubsystem);
   public SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
@@ -107,6 +108,10 @@ public class RobotContainer {
     return autoChooser.getSelected();
   }
 
+  public Command getSwerveLock(){
+    return swerveLock;
+  }
+
   public void selectAuto() {
     autoChooser.setDefaultOption("Do Nothing", doNothing);
     autoChooser.addOption("High Mobility", highMobility);
@@ -114,7 +119,7 @@ public class RobotContainer {
     autoChooser.addOption("Red High Balance", redHighBalEnc);
     autoChooser.addOption("Blue High Balance", blueHighBalEnc);
     autoChooser.addOption("High ONLY", high);
-     autoChooser.addOption("Mixed Balance ONLY", mixedBalance);
+    autoChooser.addOption("Mixed Balance ONLY", mixedBalance);
 
     SmartDashboard.putData(autoChooser);
   }
