@@ -22,7 +22,6 @@ public class Lock extends CommandBase{
     public void execute(){
         SmartDashboard.putString("Current Command", getName());
         swerve.lock();
-        
     }
 
     @Override

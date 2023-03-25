@@ -28,14 +28,14 @@ public class HighMobility extends SequentialCommandGroup {
       new DriveBackwardCommand(swerve, 230), 
 
       // new RotateLeftCommand(swerve, 175),
-      new FieldRotateRight(swerve, 178),
+      // new FieldRotateRight(swerve, 178),
 
-      new ParallelCommandGroup(
-        new LowPickUp(pivot, elevator),
-        new DriveForwardCommand(swerve, 18)
-      ),
+      // new ParallelCommandGroup(
+      //   new LowPickUp(pivot, elevator),
+      //   new DriveForwardCommand(swerve, 18)
+      // ),
 
-      new Claw(claw),
+      // new Claw(claw),
 
       new Delay(0.5),
 

@@ -38,6 +38,7 @@ public class Robot extends TimedRobot {
     compressor = new Compressor(PneumaticsModuleType.REVPH);
     compressor.enableDigital();
     m_robotContainer = new RobotContainer();
+    lockSwerveCommand =  m_robotContainer.getSwerveLock();
 
     // wideview = new Camera();
     // wideview.init();
@@ -78,7 +79,6 @@ public class Robot extends TimedRobot {
     LimelightHelpers.setCameraMode_Processor("limelight");
     LimelightHelpers.setPipelineIndex("limelight", 7);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    lockSwerveCommand = m_robotContainer.getSwerveLock();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -90,6 +90,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     if(Timer.getMatchTime() < 0.75){
+      m_autonomousCommand.cancel();
       lockSwerveCommand.schedule();
     }
   }
@@ -104,6 +105,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    lockSwerveCommand.cancel();
   }
 
   /** This function is called periodically during operator control. */
