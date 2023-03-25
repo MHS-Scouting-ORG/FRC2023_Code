@@ -19,7 +19,7 @@ public class HighBal extends SequentialCommandGroup {
 
       new High(swerve, claw, pivot, elevator),
 
-      new FieldRotateRight(swerve, 90), 
+      new FieldRotateRight(swerve, 88), 
 
       new MixedBalance(swerve), 
 

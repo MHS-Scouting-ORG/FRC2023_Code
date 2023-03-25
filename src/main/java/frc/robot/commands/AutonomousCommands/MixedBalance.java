@@ -11,11 +11,12 @@ public class MixedBalance extends SequentialCommandGroup {
   public MixedBalance(SwerveSubsystem swerve) {
 
     addCommands(
-      new StrafeRightCommand(swerve, 18 * 4.5, 1.3),
+      new StrafeLeftCommand(swerve, 6, 1.0),
+      new StrafeRightCommand(swerve, 140, 1.3),
       new Delay(0.15),
       new LevelOut(swerve),
-      new Delay(0.15),
-      new StrafeLeftCommand(swerve, 35.5, 0.4),
+      new Delay(0.5),
+      new StrafeLeftCommand(swerve, 17, 0.3),
       new Lock(swerve)
     );
   }
